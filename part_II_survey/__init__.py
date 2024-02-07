@@ -1,0 +1,257 @@
+from otree.api import *
+
+c = cu
+
+doc = ''
+
+
+def read_csv_stimuli():
+    import csv
+
+    f = open(__name__ + '/stimuli.csv', encoding='utf-8-sig')
+    rows = [row for row in csv.DictReader(f)]
+    for row in rows:
+        # all values in CSV are string unless you convert them
+        row['loss'] = cu(row['loss'])
+    return rows
+
+
+# define constants here, in all-caps
+class C(BaseConstants):
+    NAME_IN_URL = 'part_II_survey'
+    PLAYERS_PER_GROUP = None
+    NUM_ROUNDS = 1
+    LOSS = read_csv_stimuli()
+    GAIN = cu(6)
+
+
+class Subsession(BaseSubsession):
+    pass
+
+
+class Group(BaseGroup):
+    pass
+
+
+# define the questions a player must answer here
+class Player(BasePlayer):
+    ### MODELS/FUNCTIONS
+
+    pref_decision = models.LongStringField(
+        label='1. Wie haben Sie Ihre Entscheidung über die Präferenzlisten getroffen?')
+    truth_telling_decision = models.StringField(choices=[['yes',
+                                                          'Ja, ich habe meine Präferenzlisten so erstellt, dass sie der Reihenfolge der Werte aus der Wertetabelle entsprachen.'],
+                                                         ['no',
+                                                          'Nein, ich habe meine Präferenzlisten nicht so erstellt.']],
+                                                label='2. Haben Sie Ihre Präferenzlisten meistens oder immer so erstellt, dass sie der Reihenfolge der Werte aus der Wertetabelle entsprachen?',
+                                                widget=widgets.RadioSelect)
+    explanation_tt_yes = models.LongStringField(
+        label='Warum haben Sie Ihre Präferenzliste so erstellt, dass Sie der Reihenfolge der Werte aus der Wertetabelle entsprachen?', blank=True)
+    explanation_tt_no = models.LongStringField(
+        label='Warum haben Sie Ihre Präferenzliste nicht so erstellt, dass Sie der Reihenfolge der Werte aus der Wertetabelle entsprachen?', blank = True)
+    mechanism_fair = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''3. ... für fair?'''
+    )
+    mechanism_efficient = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''4. ... für effizient?'''
+    )
+    mechanism_comprehensive = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''5. ... für verständlich?'''
+    )
+    trust_general = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''6. Solange ich nicht vom Gegenteil überzeugt bin, gehe ich davon aus, dass Menschen nur die besten
+        Absichten haben.'''
+    )
+    trust_mechanism = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''7. Ich bin davon überzeugt, dass das Zuteilungs-Verfahren aus dem ersten Teil gut funktioniert.'''
+    )
+    trust_institutions_gvmnt = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''8. Im Allgemeinen habe ich Vertrauen in die Regierung.'''
+    )
+    trust_institutions_city = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''9. Im Allgemeinen habe ich Vertrauen in städtischen Behörden.'''
+    )
+    trust_institutions_educ = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''10. Im Allgemeinen habe ich Vertrauen in Bildungsbehörden.'''
+    )
+
+    gender = models.StringField(choices=[['female', 'Weiblich'], ['male', 'Männlich'], ['diverse', 'Divers'],
+                                         ['no_gender', 'Ich identifiziere mich mit keinem Geschlecht']],
+                                label='Mit welchem Geschlecht identifizieren Sie sich?',
+                                widget=widgets.RadioSelect)
+    age = models.IntegerField(label='Wie alt sind Sie?', max=125, min=13)
+    # crt_bat = models.IntegerField(label='A bat and a ball cost 22 dollars in total The bat costs 20 dollars more than the ball How many dollars does the ball cost')
+    # crt_widget = models.IntegerField(label='If it takes 5 machines 5 minutes to make 5 widgets how many minutes would it take 100 machines to make 100 widgets')
+    # crt_lake = models.IntegerField(label='In a lake there is a patch of lily pads Every day the patch doubles in size If it takes 48 days for the patch to cover the entire lake how many days would it take for the patch to cover half of the lake')
+    studying_currently = models.StringField(
+        label="Studieren Sie derzeit oder haben Sie ein Studium abgeschlossen?",
+        widget=widgets.RadioSelect,
+        choices=[
+            ['1 - currently student', "Ich studiere derzeit."],
+            ['2 - currently doctoral student', "Ich promoviere."],
+            ['3 - has graduated from university', "Ich habe ein Studium abgeschlossen."],
+            ['0 - no university education', "Nein."],
+        ]
+    )
+    study_field = models.StringField(
+        label="In welchem Studiengang studieren Sie bzw. haben Sie studiert?",
+        choices=[
+            ['Humanities',
+             "Geisteswissenschaften (z. B. Sprachen, Medienwissenschaften, Philosophie, Kunstgeschichte)"],
+            ['Art and music', "Kunst und Musik"],
+            ['Mathematics', "Mathematik, Informatik, Technik oder Ingenieurwissenschaften"],
+            ['Natural sciences', "Naturwissenschaften (z. B. Biologie, Chemie, Physik, Agrarwissenschaften)"],
+            ['Medicine', "Medizin"],
+            ['Psychology', "Psychologie"],
+            ['Law', "Rechtswissenschaft"],
+            ['Social sciences',
+             "Sozial- oder Kulturwissenschaften (inkl. z. B. Politikwissenschaft, Anthropologie, Geschichte)"],
+            ['Economic sciences',
+             "Wirtschaftswissenschaften (BWL, VWL, Wirtschaftsingenieurwesen, Wirtschaftsmathematik)"],
+            ['Other', "Anderer Studiengang"]
+        ]
+    )
+    current_occupation = models.StringField(
+        label="Welcher Beschäftigung gehen Sie derzeit nach?",
+        choices=[
+            ['Occupied', "Ich bin erwerbstätig."],
+            ['Jobless', "Ich bin arbeitslos."],
+            ['Retired', "Ich bin im Ruhestand."],
+            ['Parental leave', "Ich befinde mich in Elternzeit."],
+            ['Student', "Ich studiere."],
+            ['Apprentice', "Ich absolviere eine Ausbildung."],
+            ['Sabbatical', "Ich mache ein Sabbatical."],
+            ['Other', "Sonstiges."],
+        ]
+    )
+    # subject = models.LongStringField(label='In welchem Studienfach sind Sie (hauptsächlich) eingeschrieben?')
+    semester = models.StringField(choices=[['semester_1', '1. Fachsemester'], ['semester_2', '2. Fachsemester'],
+                                           ['semester_3', '3. Fachsemester'], ['semester_4', '4. Fachsemester'],
+                                           ['semester_5', '5. Fachsemester'], ['semester_6', '6. Fachsemester'],
+                                           ['semester_7', '7. Fachsemester'], ['semester_8', '8. Fachsemester'],
+                                           ['semester_9', '9. Fachsemester'], ['semester_10', '10. Fachsemester'],
+                                           ['semester_11', '11. Fachsemester'], ['semester_12', '12. Fachsemester'],
+                                           ['semester_13', '13. Fachsemester'], ['semester_14', '14. Fachsemester'],
+                                           ['semester_15', '15. Fachsemester'], ['semester_16', '16. Fachsemester'],
+                                           ['semester_17', '17. Fachsemester'], ['semester_18', '18. Fachsemester'],
+                                           ['semester_19', '19. Fachsemester'], ['semester_20', '20. Fachsemester']],
+                                  label='In welchem Fachsemester sind Sie eingeschrieben?')
+    math_grade = models.FloatField(label='Was war Ihre letzte Mathenote?')
+    abi_grade = models.FloatField(label='Mit welcher Note haben Sie Ihr Abitur abgeschlossen?')
+    risk = models.IntegerField(
+        choices=list(range(11)),
+        widget=widgets.RadioSelectHorizontal,
+        label='''
+        Wie nehmen Sie sich selbst wahr? 
+        Sind Sie generell ein Mensch, der voll und ganz bereit ist, Risiken einzugehen, oder versuchen Sie eher, Risiken zu vermeiden?
+        
+        Bitte kreuzen Sie ein Kästchen auf der Skala an, wobei der Wert 0 bedeutet: "nicht bereit, Risiken einzugehen" und der 
+        Wert 10 bedeutet: "voll und ganz bereit, Risiken einzugehen".''')
+
+    def make_field(number):
+        return models.StringField(
+            choices=[[float(C.LOSS[number]['loss']), C.LOSS[number]['loss']], ['toss', C.GAIN]],
+            # label='',  # f"{C.GAIN} right now or {C.LOSS[number]['loss']} in ",
+            widget=widgets.RadioSelect
+        )
+
+    # delay = models.LongStringField(initial=C.DELAY_JSON)
+    q1 = make_field(0)
+    q2 = make_field(1)
+    q3 = make_field(2)
+    q4 = make_field(3)
+    q5 = make_field(4)
+    q6 = make_field(5)
+
+
+#  def form_fields(player):
+#     if player.truth_telling_decision == 'yes':
+#        return ['explanation_tt_yes']  # display explanation_tt_yes if truth_telling_decision has answer 'yes'
+#   else:
+#      return ['explanation_tt_no']
+# return ['truth_telling_decision']  # display q1 by default
+
+
+### PAGES
+
+class SurveyStart(Page):
+    form_model = 'player'  # tells me which model I use from above (player)
+
+
+class SurveyStrategies(Page):
+    form_model = 'player'
+    form_fields = ['pref_decision', 'truth_telling_decision', 'explanation_tt_yes', 'explanation_tt_no']
+
+    def error_message(self, values):
+        if values['truth_telling_decision'] == 'yes' and not values['explanation_tt_yes']:
+            return 'Please fill in the explanation for your YES decision.'
+        elif values['truth_telling_decision'] == 'no' and not values['explanation_tt_no']:
+            return 'Please fill in the explanation for your NO decision.'
+
+
+class SurveyMechanism(Page):
+    form_model = 'player'
+    form_fields = ['mechanism_fair', 'mechanism_efficient', 'mechanism_comprehensive']
+
+
+class SurveyTrust(Page):
+    form_model = 'player'
+    form_fields = ['trust_general', 'trust_mechanism', 'trust_institutions_gvmnt', 'trust_institutions_city', 'trust_institutions_educ']
+
+class SurveyEconPrefsLoss(Page):
+    form_model = 'player'
+    #    @staticmethod
+    #   def get_form_fields(player: Player):
+    form_fields = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6']  # tells me which field I want the input from
+    #      return form_fields
+
+
+class SurveyEconPrefsRisk(Page):
+    form_model = 'player'
+    form_fields = ['risk']
+
+
+class SurveyDemographics(Page):
+    form_model = 'player'
+    form_fields = ['gender', 'age', 'studying_currently', 'study_field', 'current_occupation', 'semester', 'math_grade',
+                   'abi_grade']
+
+
+page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics]
+
+# class LossAversion(Page):
+# form_model = 'player'
+#  @staticmethod ## I think this is for the results after people made a choice
+#   def get_form_fields(player: Player):
+
+#     import random
+
+#     form_fields = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6']
+#    random.shuffle(form_fields)
+#   return form_fields
+
+# def form_fields(player):
+#    if player.truth_telling_decision == 'no':
+#       return ['explanation_tt_no']  # display explanation_tt_yes if truth_telling_decision has answer 'yes'
+#  return ['truth_telling_decision']  # display q1 by default
+
+#  def before_next_page(request):
+#     if 'truth_telling_decision' in form_fields and 'truth_telling_decision' in request.POST:
+#        player.truth_telling_decision_yes = request.POST[
+#           'truth_telling_decision']  # store answer truth_telling decision in player model

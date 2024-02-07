@@ -1,0 +1,158 @@
+{% extends 'global/Page.html' %}
+{% block title %}Beispiel Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>Zum besseren Verständnis des oben beschriebenen Zulassungsverfahrens schauen Sie sich folgendes Beispiel an.
+    In dem Beispiel bewerben sich ebenfalls vier Schüler:innen auf vier Schulen mit jeweils einem Platz. Genau wie in der
+    Beschreibung, werden den Schüler:innen außerdem per Zufall Schulen zugewiesen, an denen sie vorläufig zugelassen werden,
+    sowie Lotterienummern, die bestimmen, nach welcher Reihenfolge die Bewerbungen an den Schulen berücksichtigt werden.
+    Die Schüler:innen haben folgende Präferenzlisten an die zentrale Zulassungsstelle übermittelt:</p>
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Vorläufige Schule</th>
+                <th>Lotterienummer</th>
+                <th>Erste Präferenz</th>
+                <th>Zweite Präferenz</th>
+                <th>Dritte Präferenz</th>
+                <th>Vierte Präferenz</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td><b>C</b></td>
+                <td><b>3</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td><b>D</b></td>
+                <td><b>4</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td><b>A</b></td>
+                <td><b>1</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td><b>B</b></td>
+                <td><b>2</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+                <td><b>C</b></td>
+                <td><b>B</b></td>            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    <p>Die Tabelle wird wie folgt gelesen: Der oder die Schüler:in mit der Farbe <b><span style="color:rebeccapurple;">lila</span></b> hat
+    die Schule <b>A</b> als erste Präferenz gelistet, Schule <b>D</b> als zweite Präferenz, Schule <b>C</b> als dritte
+    Präferenz und Schule <b>B</b> als vierte Präferenz. Schule <b>A</b> ist die erste Präferenz für die Schüler:innen mit
+    der Farbe <b><span style="color: rgb(13,50,176);">blau</span></b>, <b><span style="color:rgb(230,126,34);">orange</span></b> und <b><span style="color:rebeccapurple;">lila</span></b>
+    und Schule <b>B</b> ist die erste Präferenz für den oder die Schüler:in mit der Farbe <b><span style="color: rgb(241,196,15);">gelb</span></b>
+    (Spalte "Erste Präferenz").</p>
+
+    <ul>
+    <li>Schüler:in <b><span style="color: rgb(13,50,176);">blau</span></b> wurde vorläufig der Schule <b>C</b> zugeteilt,
+    Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> der Schule <b>D</b>, Schüler:in <b><span style="color:rgb(230,126,34);">orange</span></b>
+    der Schule <b>A</b> und Schüler:in <b><span style="color:rebeccapurple;">lila</span></b> der Schule <b>B</b>. Alle
+    zugeteilten Schulplätze können noch getauscht werden.</li>
+    <li>Die vier Schüler:innen werden gemäß der Lotterie in einer Warteschlange geordnet.</li>
+    <li>Schüler:in <b><span style="color:rgb(230,126,34);">orange</span></b> hat die niedrigste Lotterienummer, sodass seine oder ihre Bewerbung an die erste Präferenz,
+    Schule <b>A</b> geschickt wird. Schüler:in <b><span style="color:rgb(230,126,34);">orange</span></b> wurde der Schule <b>A</b> vorläufig zugeteilt, sodass die vorläufige
+    zu einer endgültigen Zulassung wird. Schüler:in <b><span style="color:rgb(230,126,34);">orange</span></b> und Schule <b>A</b> werden aus dem weiteren erfahren herausgenommen.</li>
+    <li>Als Nächstes wird die Bewerbung von Schüler:in <b><span style="color:rebeccapurple;">lila</span></b> an die zweite Präferenz, Schule <b>D</b>, geschickt, da Schule
+    <b>A</b> (erste Präferenz) nicht mehr im Verfahren ist. Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> wurde der Schule <b>D</b> vorläufig zugeteilt
+    und wrd daher an den Anfang der Warteschlange gesetzt.</li>
+    <li>Da nun Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> am Anfang der Warteschlange ist, wird seine oder ihre Bewerbung an die erste Präferenz, Schule
+    <b>B</b>, geschickt. Schüler:in <b><span style="color:rebeccapurple;">lila</span></b> wurde der Schule <b>B</b> vorläufig zugeteilt. So entsteht ein Tausch zum beiderseitigem
+    Vorteil: Schüler:in <b><span style="color:rebeccapurple;">lila</span></b> wurde an Schule <b>B</b> zugelassen und bewirbt sich an Schule <b>D</b> und Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> wurde an Schule
+    <b>D</b> zugelassen und bewirbt sich an Schule <b>B</b>. Der Tausch wird abgeschlossen und die Schüler:innen <b><span style="color:rebeccapurple;">lila</span></b> und
+    <b><span style="color: rgb(241,196,15);">gelb</span></b> sowie die Schulen B und D werden aus dem Verfahren herausgenommen.</li>
+    <li>Schüler:in <b><span style="color: rgb(13,50,176);">blau</span></b> befindet sich nun am Anfang der Warteschlange und seine oder ihre Bewerbung wird an die dritte Präferenz,
+    Schule <b>C</b>, geschickt (da die ersten beiden Präferenzen nicht mehr im Verfahren sind). Schüler:in <b><span style="color: rgb(13,50,176);">blau</span></b> wurde der
+    Schule <b>C</b> vorläufig zugeteilt, sodass die vorläufige zu einer endgültigen Zulassung wird. Schüler:in <b><span style="color: rgb(13,50,176);">blau</span></b> und
+    Schule <b>C</b> werden aus dem Verfahren genommen.</li>
+    <li>Alle Schüler:innen wurden an einer Schule zugelassen und es gibt keinen weiteren Tausch zum beiderseitigem Vorteil mehr.
+    Das Verfahren wird beendet.</li>
+    </ul>
+
+    <p>Die endgültige Zulassung sieht wie folgt aus:</p>
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Schule</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td><b>C</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td><b>B</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td><b>A</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td><b>D</b></td>
+            </tr>
+        </table>
+    </body>
+
+    <br>
+
+
+{% next_button %}
+
+
+{% endblock %}

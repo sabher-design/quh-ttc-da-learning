@@ -1,0 +1,37 @@
+{{ extends 'global/Page.html' }}
+{{ block title }}Teil II - Umfrage
+{{ endblock }}
+
+{{ block content }}
+
+<p>
+    Bitte beantworten Sie die folgende Frage.
+</p>
+
+
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Ich möchte die Münze nicht werfen.</th>
+            <th>Ich möchte die Münze werfen.</th>
+        </tr>
+        {{ for field in form }}
+            <tr>
+                <td>Wenn die Münze Kopf zeigt, verlieren<b> Sie
+                {{ for choice in field }}
+                    {{ choice.label }}</b>; wenn die Münze Zahl zeigt, <b>gewinnen Sie
+                        {{ C.GAIN }}</b>.
+                </td>
+                <td>{{ choice }}</td>
+                {{ endfor }}
+            </tr>
+        {{ endfor }}
+    </table>
+
+{{ next_button }}
+
+{{ endblock }}
+
+
+
+
