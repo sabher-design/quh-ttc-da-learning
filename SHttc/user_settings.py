@@ -97,7 +97,7 @@ class Constants(BaseConstants):
     #   Should a results screen be included? The results screen shows a summary of results of the   #
     #   market (i.e., preferences submitted, bids made, clearing bids, allotted resources), and the #
     #   final payoff for the player.                                                                #
-    results = False
+    results = True
 
     # ============================================================================================================= #
     #                                                                                                               #

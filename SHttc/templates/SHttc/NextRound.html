@@ -11,7 +11,7 @@
 {# ============================================================================================= #}
 {% block styles %}
 
-    <link href="{% static 'SHttc/css/style.css' %}" rel="stylesheet"/>
+    <link href="{% static 'SHttc_roundtry1/css/style.css' %}" rel="stylesheet"/>
 
 {% endblock %}
 
@@ -21,9 +21,9 @@
 {# ============================================================================================= #}
 {% block title %}
 
-        {% trans "Click next to proceed to next page" %}
+        {% trans "Thank you for participating in today's experiment!" %}
 
- {% endblock %}
+{% endblock %}
 
 
 {# ============================================================================================= #}
@@ -31,7 +31,8 @@
 {# ============================================================================================= #}
 {% block content %}
 
-{% next_button %}
-
+<p class="heading">
+    {% trans "Please wait for further instructions!" %}
+</p>
 
 {% endblock %}
