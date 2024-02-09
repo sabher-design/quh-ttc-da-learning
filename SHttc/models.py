@@ -2,7 +2,7 @@
 from otree.api import *
 import csv
 import os
-c = cu
+import pandas as pd
 from itertools import chain
 
 from SHttc.user_settings import *
@@ -60,6 +60,34 @@ class Subsession(BaseSubsession):
             p.participant.vars['priorities'] = []
             for i in Constants.priorities:
                 p.participant.vars['priorities'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
+
+        # Load valuations from CSV for the current round
+        round_number = self.round_number
+        valuations_filename = f'SHttc/static/SHttc/csv/valuations{round_number}.csv'
+        valuations = self.load_valuations_from_csv(valuations_filename)
+        print(f"Loaded valuations from {valuations_filename}: {valuations}")
+
+        for player in self.get_players():
+            player_type = 't' + str((player.id_in_group - 1) % Constants.players_per_group + 1)
+            if player_type in valuations:
+                player.participant.vars['valuations'] = valuations[player_type]
+            else:
+                # Handle error or set default valuations
+                player.participant.vars['valuations'] = [0] * Constants.nr_courses
+
+    @staticmethod
+    def load_valuations_from_csv(filename):
+        try:
+            df = pd.read_csv(filename, index_col='student', delimiter=';')
+            valuations = df.to_dict('index')  # Transforms the CSV into a dict of dicts
+            for key in valuations.keys():
+                valuations[key] = list(valuations[key].values())
+            return valuations
+            print(f"Loaded valuations from {filename}: {valuations}")
+        except Exception as e:
+            # Handle file not found or parsing error
+            print(f"Error loading valuations from {filename}: {e}")
+            return {}
 
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
