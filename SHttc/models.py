@@ -2,7 +2,6 @@
 from otree.api import *
 import csv
 import os
-c = cu
 from itertools import chain
 
 from SHttc.user_settings import *
@@ -27,9 +26,19 @@ class Subsession(BaseSubsession):
     # THINGS TO DO BEFORE THE SESSION STARTS  =================================================== #
     # =========================================================================================== #
     def creating_session(self):
+        print(f"Starting session for SHttc: {self.__class__.__name__}")
+
+        # Reset other participant.vars as needed
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
+
+        #self.group_randomly() dont do that, this leads to weird color assigment
+
+        for p in players:
+            p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
+        print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
+
 
         # CREATE FORM TEMPLATES FOR DECISION.HTML  ============================================== #
         form_fields = ['pref_c' + str(j) for j in indices]
@@ -38,6 +47,7 @@ class Subsession(BaseSubsession):
             p.participant.vars['form_fields_plus_index'] = list(zip(indices, form_fields))
             p.participant.vars['player_prefs'] = [None for n in indices]
             p.participant.vars['successful'] = [False for n in indices]
+            #p.participant.vars['role'] = p.role()
 
         # ALLOCATE THE CORRECT VALUATIONS VECTOR TO PLAYER (DEPENDING ON TYPE) ================== #
         # AND GET OTHER PLAYERS' VALUATIONS AND TYPES TO DISPLAY IF DESIRED                       #
@@ -64,6 +74,7 @@ class Subsession(BaseSubsession):
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
     # =========================================================================================== #
+
     def vars_for_admin_report(self):
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
@@ -247,7 +258,6 @@ class Player(BasePlayer):
         for i in range(0, len(type_matrix)):
             if self.id_in_group == type_matrix[i][0]:
                 return 'Type ' + str(type_matrix[i][1])
-
 
     # DYNAMICALLY CREATE N FORM TEMPLATES FOR PREFS ============================================= #
     for j in range(1, Constants.nr_courses + 1):

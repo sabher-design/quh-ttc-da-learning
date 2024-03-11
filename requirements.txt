@@ -3,5 +3,6 @@
 # otherwise, oTree will automatically overwrite it.
 otree==3.3.11
 psycopg2-binary>=2.8,<2.9
-sentry-sdk>=0.7.9
+sentry-sdk==0.7.9
 pandas>=1.1.5
+#Django~=2.2.12

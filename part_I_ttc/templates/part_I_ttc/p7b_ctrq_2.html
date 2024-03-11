@@ -1,0 +1,128 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>Um herauszufinden, ob Sie das Zulassungsverfahren und die Entscheidungen, die Sie treffen werden, verstanden haben,
+    bitten wir Sie, die folgenden Fragen zu beantworten:</p>
+
+    <p>3. Schauen Sie sich bitte die folgende Situation an: Vier Schüler:innen bewerben sich an vier Schulen mit jeweils
+    einem Platz. Sie übermitteln folgende Präferenzlisten an die zentrale Zulassungsstelle:</p>
+
+        <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Vorläufige Schule</th>
+                <th>Lotterienummer</th>
+                <th>Erste Präferenz</th>
+                <th>Zweite Präferenz</th>
+                <th>Dritte Präferenz</th>
+                <th>Vierte Präferenz</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td><b>B</b></td>
+                <td><b>1</b></td>
+                <td><b>C</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+                <td><b>B</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td><b>C</b></td>
+                <td><b>3</b></td>
+                <td><b>C</b></td>
+                <td><b>B</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td><b>D</b></td>
+                <td><b>4</b></td>
+                <td><b>B</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+                <td><b>C</b></td>            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td><b>A</b></td>
+                <td><b>2</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    <p>
+        Wie sieht die finale Zuteilung aus? Sie haben 5 Minuten Zeit, die Aufgabe zu lösen.
+    </p>
+
+    <p><i>Ihre Antwort:</i></p>
+
+        <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Schule</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td> <div>  <b> {% formfield player.ctrq3_ttc_blue %} </b> </div></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td> <div>  <b> {% formfield player.ctrq3_ttc_yellow %} </b> </div></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td> <div>  <b> {% formfield player.ctrq3_ttc_orange %} </b></div></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td> <div>  <b> {% formfield player.ctrq3_ttc_purple %} </b></div></td>
+            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    {% next_button %}
+{% endblock %}

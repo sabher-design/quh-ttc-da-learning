@@ -1,0 +1,157 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Beispiel Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>Zum besseren Verständnis des oben beschriebenen Zulassungsverfahrens schauen Sie sich folgendes Beispiel an.
+    In dem Beispiel bewerben sich ebenfalls vier Schüler:innen auf vier Schulen mit jeweils einem Platz. Genau wie in der
+    Beschreibung, werden den Schüler:innen außerdem per Zufall die Lotterienummern zugewiesen, die bestimmen, nach welcher
+    Reihenfolge die Schüler:innen an den Schulen priorisiert werden. Die Schüler:innen haben folgende Präferenzlisten
+    an die zentrale Zulassungsstelle übermittelt:</p>
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Lotterienummer</th>
+                <th>Erste Präferenz</th>
+                <th>Zweite Präferenz</th>
+                <th>Dritte Präferenz</th>
+                <th>Vierte Präferenz</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td><b>3</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td><b>4</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td><b>1</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td><b>2</b></td>
+                <td><b>A</b></td>
+                <td><b>D</b></td>
+                <td><b>C</b></td>
+                <td><b>B</b></td>            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    <p>Die Tabelle wird wie folgt gelesen: Der oder die Schüler:in mit der Farbe <b><span style="color:rebeccapurple;">lila</span></b> hat
+    die Schule <b>A</b> als erste Präferenz gelistet, Schule <b>D</b> als zweite Präferenz, Schule <b>C</b> als dritte
+    Präferenz und Schule <b>B</b> als vierte Präferenz. Schule <b>A</b> ist die erste Präferenz für die Schüler:innen mit
+    der Farbe <b><span style="color: rgb(13,50,176);">blau</span></b>, <b><span style="color:rgb(230,126,34);">orange</span></b> und <b><span style="color:rebeccapurple;">lila</span></b>
+    und Schule <b>B</b> ist die erste Präferenz für den oder die Schüler:in mit der Farbe <b><span style="color: rgb(241,196,15);">gelb</span></b>
+    (Spalte "Erste Präferenz").</p>
+
+    <ul>
+    <li>Die Schüler:innen <b><span style="color: rgb(13,50,176);">blau</span></b>, <b><span style="color:rgb(230,126,34);">orange</span></b>
+    und <b><span style="color:rebeccapurple;">lila</span></b> bewerben sich bei ihrer ersten Präferenz, Schule <b>A</b>. Der oder die
+    Schüler:in mit der niedrigsten Lotterienummer (<b><span style="color:rgb(230,126,34);">orange</span></b>) wird an
+    Schule <b>A</b> vorläufig angenommen. Die Schüler:innen <b><span style="color: rgb(13,50,176);">blau</span></b> und
+    <b><span style="color:rebeccapurple;">lila</span></b> erhalten keinen Platz und werden an Schule <b>A</b> endgültig
+    abgelehnt.</li>
+    <li>Der oder die Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> bewirbt sich bei der ersten
+    Präferenz, Schule <b>B</b>. Da es keine weiteren Bewerber:innen an Schule <b>B</b> gibt, wird der oder die Schüler:in
+    <b><span style="color: rgb(241,196,15);">gelb</span></b> an Schule <b>B</b> vorläufig angenommen. Das Zulassungsverfahren
+    geht über in die zweite Phase.</li>
+    <li>Der oder die Schüler:in <b><span style="color: rgb(13,50,176);">blau</span></b> urde noch an keiner Schule angenommen
+    und bewirbt sich bei der zweiten Präferenz, Schule <b>B</b>. Zusammen mit dem oder der Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b>
+    bewerben sich jetzt zwei Schüler:innen an der Schule <b>B</b>. Der oder die Schüler:in mit der niedrigsten Lotterienummer
+    (<b><span style="color: rgb(13,50,176);">blau</span></b>) wird an der Schule <b>B</b> vorläufig angenommen. Der oder
+    die Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> erhält keinen Platz und wird an Schule <b>B</b>
+    endgültig abgelehnt.</li>
+    <li>Der oder die Schüler:in mit der Farbe <b><span style="color:rebeccapurple;">lila</span></b> wurde noch an keiner
+    Schule angenommen und bewirbt sich bei der zweiten Präferenz, Schule <b>D</b>. Da es keine weiteren Bewerber:innen an
+    Schule <b>D</b> gibt, wird der oder die Schüler:in <b><span style="color:rebeccapurple;">lila</span></b> an Schule
+    <b>D</b> vorläufg angenommen. Das Zulassungsverfahren geht über in die dritte Phase.</li>
+    <li>Der oder die Schüler:in <b><span style="color: rgb(241,196,15);">gelb</span></b> bewirbt sich bei der zweiten
+    Präferenz, Schule <b>C</b>. Da es keine weiteren Bewerber:innen an Schule <b>C</b> gibt, wird der oder die Schüler:in
+    <b><span style="color: rgb(241,196,15);">gelb</span></b> an Schule <b>C</b> vorläufig angenommen.</li>
+    <li>Am Ende dieser Phase werden alle Schüler:innen an einer Schule vorläufig angenommen. Das Zulassungsverfahren
+    endet und die vorläufige Zulassung wird eine endgültige Zulassung.</li>
+    </ul>
+
+    <p>Die endgültige Zulassung sieht wie folgt aus:</p>
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                text-align: left;
+                padding: 8px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <th>Schüler:in</th>
+                <th>Schule</th>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td><b>B</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td><b>C</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td><b>A</b></td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td><b>D</b></td>
+            </tr>
+        </table>
+    </body>
+
+    <br>
+
+
+{% next_button %}
+
+
+{% endblock %}

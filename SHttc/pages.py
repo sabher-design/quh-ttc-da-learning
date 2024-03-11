@@ -1,12 +1,16 @@
-from otree.api import Currency as c, currency_range
-from ._builtin import Page, WaitPage
-from .models import Constants
+#from otree.api import Currency as c, currency_range
+#from ._builtin import Page, WaitPage
+#from .models import Constants
 from itertools import chain
-
+from .user_settings import Constants
+from otree.api import *
 
 # METHOD: =================================================================================== #
 # DEFINE VARIABLES USED IN ALL TEMPLATES ==================================================== #
 # =========================================================================================== #
+
+print(f"valuations SHttc: {Constants.valuations}")
+
 def vars_for_all_templates(self):
     return {
         'nr_courses': Constants.nr_courses,
@@ -16,7 +20,8 @@ def vars_for_all_templates(self):
         'valuations_others': zip(self.participant.vars['other_types_names'],
                                  self.participant.vars['valuations_others']),
         'priorities': self.participant.vars['priorities'],
-        'capacities': Constants.capacities
+        'capacities': Constants.capacities,
+        'player.role': self.participant.vars['role']
     }
 
 
@@ -56,7 +61,8 @@ class Decision(Page):
                                      self.participant.vars['valuations_others']),
                 'players_per_group': Constants.players_per_group,
                 'priorities': self.participant.vars['priorities'],
-                'capacities': Constants.capacities
+                'capacities': Constants.capacities,
+                'player.role': self.participant.vars['role']
                 }
 
     # METHOD: =================================================================================== #

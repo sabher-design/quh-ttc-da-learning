@@ -1,6 +1,6 @@
 # coding=utf-8
 from otree.api import *
-c = cu
+#c = cu
 
 class Constants(BaseConstants):
 

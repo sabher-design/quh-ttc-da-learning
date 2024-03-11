@@ -1,0 +1,122 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Entscheidung{% endblock %}
+
+{% block content %}
+
+    <p>In jeder Runde treffen Sie eine Entscheidung darüber, in welcher Reihenfolge Sie sich an den Schulen bewerben
+    möchten. Das heißt, Sie erstellen eine Präferenzliste über die Schulen. Sie müssen alle vier Schulen in der
+    Präferenzliste auflisten. Sie und alle anderen Mitglieder Ihrer Gruppe schicken die Präferenzlisten an eine zentrale
+    Zuteilungsstelle.</p>
+
+    <p><b>Beispiel Präferenzliste:</b></p>
+
+    <p>Sie sind Schüler:in mit der Farbe <b><span style="color:rgb(230,126,34);">orange</span></b>.</p>
+
+    <p>Die folgende Tabelle zeigt Ihnen die Werte, die die Schulen für Sie und die drei anderen Mitglieder in Ihrer Gruppe haben.</p>
+
+        <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+                border: none;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                vertical-align: middle;
+                border: 1px solid grey;
+            }
+
+            .center-header {
+                text-align: center;
+            }
+
+            tr:first-child td:first-child {
+                border-right: none;
+            }
+
+            tr th:first-child, tr td:first-child {
+                 border-left: none;
+            }
+
+            tr th:last-child, tr td:last-child {
+                border-right: none;
+            }
+
+    /* Remove top and bottom borders from the first and last row */
+            tr:first-child th, tr:first-child td {
+                border-top: none;
+            }
+
+            tr:last-child th, tr:last-child td {
+                border-bottom: none;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td></td>
+                <th colspan="4" class="center-header">Schule </th>
+
+            </tr>
+            <tr>
+                <td><b>Schüler:in</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td>18</td>
+                <td>13</td>
+                <td>8</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td>8</td>
+                <td>18</td>
+                <td>3</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td>18</td>
+                <td>13</td>
+                <td>8</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td>18</td>
+                <td>3</td>
+                <td>8</td>
+                <td>13</td>
+            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    <p>Sie erhalten 18 ECU, wenn Sie einen Platz an Schule <b>A</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 8 ECU, wenn Sie einen Platz an Schule <b>B</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 13 ECU, wenn Sie einen Platz an Schule <b>C</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 3 ECU, wenn Sie einen Platz an Schule <b>D</b> zugeteilt bekommen.</p>
+
+    <p>Bitte geben Sie die Reihenfolge an, mit der Sie sich bei den Schulen (<b>A</b> bis <b>D</b>) bewerben (Ihre
+    Präferenzliste). Bitte klicken Sie auf 'Weiter', um Ihre Entscheidung an die zentrale Zuteilungsstelle zu übermitteln.</p>
+
+
+
+
+    {% next_button %}
+
+{% endblock %}

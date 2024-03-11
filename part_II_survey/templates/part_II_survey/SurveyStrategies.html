@@ -1,0 +1,100 @@
+{% extends 'global/Page.html' %}
+{% load otree static%}
+{% block title %}Teil II - Umfrage: Strategien{% endblock %}
+
+{% block content %}
+
+<div class="questionnaire_header">
+    <div class="questionnaire_subheader">
+        <div>
+            <style>
+                #id_pref_decision {
+                    width: 500px;
+                    height: 100px;
+                }
+            </style>
+
+            {% formfield player.pref_decision %}
+            {% formfield player.truth_telling_decision %}
+
+            <div id="explanation_tt_yes" style="display: none;">
+                <style>
+                    #id_explanation_tt_yes {
+                        width: 500px;
+                        height: 100px;
+                    }
+                </style>
+
+                {% formfield player.explanation_tt_yes %}
+            </div>
+
+            <div id="explanation_tt_no" style="display: none;">
+                <style>
+                    #id_explanation_tt_no {
+                        width: 500px;
+                        height: 100px;
+                    }
+                </style>
+
+                {% formfield player.explanation_tt_no %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% next_button %}
+
+{% endblock %}
+
+
+{# ============================================================================================= #}
+{# JAVASCRIPTS ================================================================================= #}
+{# ============================================================================================= #}
+
+{% block scripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let yesRadio = document.getElementById('id_truth_telling_decision_0');
+        let noRadio = document.getElementById('id_truth_telling_decision_1');
+        let explanationYesInput = document.getElementById('id_explanation_tt_yes');
+        let explanationNoInput = document.getElementById('id_explanation_tt_no');
+
+        function showExplanation() {
+            let explanationYesDiv = document.getElementById('explanation_tt_yes');
+            let explanationNoDiv = document.getElementById('explanation_tt_no');
+
+            if (yesRadio.checked) {
+                explanationYesDiv.style.display = "block";
+                explanationNoDiv.style.display = "none";
+                explanationNoInput.required = false;
+                explanationYesInput.required = true;
+            } else if (noRadio.checked) {
+                explanationNoDiv.style.display = "block";
+                explanationYesDiv.style.display = "none";
+                explanationYesInput.required = false;
+                explanationNoInput.required = true;
+            } else {
+                explanationYesDiv.style.display = "none";
+                explanationNoDiv.style.display = "none";
+                explanationYesInput.required = false;
+                explanationNoInput.required = false;
+            }
+        }
+
+        // Attach event listeners
+        if (yesRadio) {
+            yesRadio.addEventListener('change', showExplanation);
+        }
+        if (noRadio) {
+            noRadio.addEventListener('change', showExplanation);
+        }
+
+        // Initial call to set the correct display on page load
+        showExplanation();
+    });
+</script>
+
+
+
+{% endblock %}

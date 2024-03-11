@@ -1,7 +1,7 @@
 # coding=utf-8
 from otree.api import *
 
-c = cu
+#c = cu
 
 from itertools import chain
 
@@ -34,6 +34,10 @@ class Subsession(BaseSubsession):
 
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
+
+        for p in players:
+            p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
+        print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
 
         # CREATE FORM TEMPLATES FOR DECISION.HTML  ============================================== #
         form_fields = ['pref_c' + str(j) for j in indices]

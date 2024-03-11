@@ -1,9 +1,48 @@
-   # coding=utf-8
+# coding=utf-8
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
 )
 
+import pandas as pd
+import csv
+
+'''def read_csv_stimuli():
+    import csv
+
+    f = open('part_II_survey\static\part_II_survey\stimuli.csv', encoding='utf-8-sig')
+    rows = [row for row in csv.DictReader(f)]
+    for row in rows:
+        # all values in CSV are string unless you convert them
+        row['loss'] = (row['loss'])
+    return rows'''
+
+
+'''class Constants(BaseConstants):
+    name_in_url = 'part_II_survey'
+    players_per_group = None
+    num_rounds = 1
+    loss = [2, 3, 4, 5, 6, 7] #read_csv_stimuli()
+    gain = 6'''
+
+
+'''reader = csv.reader(csvfile, delimiter=';')
+    next(reader)  # Skip the header row
+    for row in reader:
+        student_type = row[0]
+        valuations1 = [int(value) for value in row[1:]]
+        if student_type == 't1':
+            cls.valuations_t1 = valuations1
+        elif student_type == 't2':
+            cls.valuations_t2 = valuations1
+        elif student_type == 't3':
+            cls.valuations_t3 = valuations1
+        elif student_type == 't4':
+            cls.valuations_t4 = valuations1'''
+
+import csv
+
 class Constants(BaseConstants):
+    players_per_group = 4
 
     # ============================================================================================================= #
     #                                                                                                               #
@@ -25,112 +64,127 @@ class Constants(BaseConstants):
     #   This means that if you have 4 players and 2 types, players 1 and 2 are Type1, and           #
     #   players 3 and 4 are Type2.                                                                  #
 
-        # Other constants
-        # ...
-   # student_valuations = valuations
-   # print(f"student_valuations: {student_valuations}")
-
-   # valuation_rounds = {
-    #    1: {'t1': [13, 8, 18, 3], 't2': [18, 13, 3, 8], 't3': [13, 8, 3, 18], 't4': [13, 8, 18, 3]},
-     #   2: {'t1': [18, 13, 8, 3], 't2': [18, 13, 3, 8], 't3': [18, 8, 13, 3], 't4': [13, 18, 8, 3]},
-      #  3: {'t1': [3, 8, 18, 13], 't2': [3, 8, 13, 18], 't3': [3, 8, 13, 18], 't4': [8, 13, 18, 3]}
-        #Add more rounds as needed
-    #}
-
     valuations_t1 = [13, 8, 18, 3]
     valuations_t2 = [18, 13, 3, 8]
     valuations_t3 = [13, 8, 3, 18]
     valuations_t4 = [13, 8, 18, 3]
-   # Set vectors for multiple types in the following way:
-   # valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # valuations_t4 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # ...
 
-    # PRIORITIES OF RESOURCES OVER PARTICIPANTS =================================================== #
-    #   Since this app models only the proposing side as active players, the priorities of the      #
-    #   resources over the players have to be specified. Please assign a priority vector for every  #
-    #   resource. The length of each vector has to be equal to the number of players specified      #
-    #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
+    '''@classmethod
+    def load_valuations(cls, file_path):
+        with open('SHttc/static/SHttc/csv/valuations1.csv', newline='', encoding='utf-8') as csvfile:
+            reader = csv.reader(csvfile, delimiter=';')
+            next(reader)  # Skip the header row
+            for row in reader:
+                student_type = row[0]
+                valuations1 = [int(value) for value in row[1:]]
+                if student_type == 't1':
+                    cls.valuations_t1 = valuations1
+                elif student_type == 't2':
+                    cls.valuations_t2 = valuations1
+                elif student_type == 't3':
+                    cls.valuations_t3 = valuations1
+                elif student_type == 't4':
+                    cls.valuations_t4 = valuations1
+
+
+Constants.load_valuations('SHttc/static/SHttc/csv/valuations1.csv')
+
+# Now, Constants.valuations_t1, etc., will have the values from the CSV
+print(Constants.valuations_t1)
+print(Constants.valuations_t2)
+print(Constants.valuations_t3)
+print(Constants.valuations_t4)'''
+
+# Set vectors for multiple types in the following way:
+# valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# valuations_t4 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# ...
+
+# PRIORITIES OF RESOURCES OVER PARTICIPANTS =================================================== #
+#   Since this app models only the proposing side as active players, the priorities of the      #
+#   resources over the players have to be specified. Please assign a priority vector for every  #
+#   resource. The length of each vector has to be equal to the number of players specified      #
+#   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
     priorities_r1 = [2, 1, 3, 4]
     priorities_r2 = [2, 1, 3, 4]
     priorities_r3 = [2, 1, 3, 4]
     priorities_r4 = [2, 1, 3, 4]
 
-    #   Set vectors for multiple resources in the following way:
-    #       priorities_r2 = [1, 2]
-    #       priorities_r3 = [1, 2]
-    #       ...
+# Set vectors for multiple resources in the following way:
+#       priorities_r2 = [1, 2]
+#       priorities_r3 = [1, 2]
+#       ...
 
-    # RESOURCE CAPACITIES ========================================================================= #
-    #   Set the quota of players that each resource can carry. Fill in as many number as in the     #
-    #   valuation vectors.                                                                          #
+# RESOURCE CAPACITIES ========================================================================= #
+#   Set the quota of players that each resource can carry. Fill in as many number as in the     #
+#   valuation vectors.                                                                          #
     capacities = [1, 1, 1, 1]
 
-    # ============================================================================================================= #
-    #                                                                                                               #
-    #                                                 APPEARANCE SETTINGS                                           #
-    #                                                                                                               #
-    # ============================================================================================================= #
+# ============================================================================================================= #
+#                                                                                                               #
+#                                                 APPEARANCE SETTINGS                                           #
+#                                                                                                               #
+# ============================================================================================================= #
 
-    # FRAMING ===================================================================================== #
-    #   Here you can choose between a neutral framing (participants/resources) and a application    #
-    #   framing (participants/schools).                                                             #
+# FRAMING ===================================================================================== #
+#   Here you can choose between a neutral framing (participants/resources) and a application    #
+#   framing (participants/schools).                                                             #
     application_framing = True
 
-    # SHOW INSTRUCTIONS =========================================================================== #
-    #   Should the instructions for the mechanism be included?                                      #
+# SHOW INSTRUCTIONS =========================================================================== #
+#   Should the instructions for the mechanism be included?                                      #
     instructions = False
 
-    # SHOW EXAMPLE IN INSTRUCTIONS ================================================================ #
-    #   If "instructions = True", should the instructions also include a minimal example of the     #
-    #   mechanism in place?                                                                         #
+# SHOW EXAMPLE IN INSTRUCTIONS ================================================================ #
+#   If "instructions = True", should the instructions also include a minimal example of the     #
+#   mechanism in place?                                                                         #
     instructions_example = False
 
-    # SHOW CONFIRM BUTTON ========================================================================= #
-    #   If "confirm_button" is set to "True", players will have to confirm their inputs made on     #
-    #   Decision.html to. This can be used to avoid accidental submission of the page.              #
+# SHOW CONFIRM BUTTON ========================================================================= #
+#   If "confirm_button" is set to "True", players will have to confirm their inputs made on     #
+#   Decision.html to. This can be used to avoid accidental submission of the page.              #
     confirm_button = False
 
-    # SHOW RESULTS ================================================================================ #
-    #   Should a results screen be included? The results screen shows a summary of results of the   #
-    #   market (i.e., preferences submitted, bids made, clearing bids, allotted resources), and the #
-    #   final payoff for the player.                                                                #
+# SHOW RESULTS ================================================================================ #
+#   Should a results screen be included? The results screen shows a summary of results of the   #
+#   market (i.e., preferences submitted, bids made, clearing bids, allotted resources), and the #
+#   final payoff for the player.                                                                #
     results = True
 
-    # ============================================================================================================= #
-    #                                                                                                               #
-    #                                                 INFORMATION SETTINGS                                          #
-    #                                                                                                               #
-    # ============================================================================================================= #
+# ============================================================================================================= #
+#                                                                                                               #
+#                                                 INFORMATION SETTINGS                                          #
+#                                                                                                               #
+# ============================================================================================================= #
 
-    # SHOW CAPACITIES ============================================================================= #
-    #   If set to "True", the quota specified in "capacities" above will be shown to players on the #
-    #   decision screen and in the instructions.                                                    #
+# SHOW CAPACITIES ============================================================================= #
+#   If set to "True", the quota specified in "capacities" above will be shown to players on the #
+#   decision screen and in the instructions.                                                    #
     show_capacities = False
 
-    # SHOW TYPES ================================================================================== #
-    #   If "show_types" is set to "True", players will have a hint on the decision page and in the  #
-    #   instructions that there are different types of players in the market. Only works if         #
-    #   multiple type vectors have been specified above.                                            #
+# SHOW TYPES ================================================================================== #
+#   If "show_types" is set to "True", players will have a hint on the decision page and in the  #
+#   instructions that there are different types of players in the market. Only works if         #
+#   multiple type vectors have been specified above.                                            #
     show_types = True
 
-    # SHOW OTHERS' VALUATIONS ===================================================================== #
-    #   Should players see the other players' valuation profiles and on the decision page? Only     #
-    #   works if "show_types" has been set to "True" above.                                         #
+# SHOW OTHERS' VALUATIONS ===================================================================== #
+#   Should players see the other players' valuation profiles and on the decision page? Only     #
+#   works if "show_types" has been set to "True" above.                                         #
     show_valuations = True
 
-    # SHOW RESOURCES' PRIORITIES ================================================================== #
-    #   Should a player see the resources' priorities for her in the instructions and on the        #
-    #   decision page?                                                                              #
+# SHOW RESOURCES' PRIORITIES ================================================================== #
+#   Should a player see the resources' priorities for her in the instructions and on the        #
+#   decision page?                                                                              #
     show_priorities = False
 
-    ####################################################################################################################
-    ####################################################################################################################
-    # ------------------------------              DO NOT MODIFY BELOW HERE              ------------------------------ #
-    ####################################################################################################################
-    ####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# ------------------------------              DO NOT MODIFY BELOW HERE              ------------------------------ #
+####################################################################################################################
+####################################################################################################################
 
     capacities = [i for i in capacities if i is not None]
     nr_courses = len(capacities)
@@ -159,4 +213,3 @@ class Constants(BaseConstants):
 
     name_in_url = "SHttc"
     num_rounds = 1
-

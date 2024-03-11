@@ -1,0 +1,16 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>Um herauszufinden, ob Sie das Zulassungsverfahren und die Entscheidungen, die Sie treffen werden, verstanden haben,
+        bitten wir Sie, die folgenden Fragen zu beantworten:</p>
+
+    <div>
+        {% formfield player.ctrq1_da %}
+        {% formfield player.ctrq2_da %}
+    </div>
+
+    {% next_button %}
+{% endblock %}

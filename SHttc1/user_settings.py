@@ -1,11 +1,13 @@
-   # coding=utf-8
+# coding=utf-8
 from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
 )
 
+import pandas as pd
+import csv
+
 
 class Constants(BaseConstants):
-
     # ============================================================================================================= #
     #                                                                                                               #
     #                                                 DESIGN SETUP                                                  #
@@ -26,54 +28,44 @@ class Constants(BaseConstants):
     #   This means that if you have 4 players and 2 types, players 1 and 2 are Type1, and           #
     #   players 3 and 4 are Type2.                                                                  #
 
-        # Other constants
-        # ...
-   # student_valuations = valuations
-   # print(f"student_valuations: {student_valuations}")
+    valuations_t1 = [13, 18, 8, 3]
+    valuations_t2 = [13, 18, 3, 8]
+    valuations_t3 = [13, 18, 8, 3]
+    valuations_t4 = [8, 18, 13, 3]
 
-   # valuation_rounds = {
-    #    1: {'t1': [13, 8, 18, 3], 't2': [18, 13, 3, 8], 't3': [13, 8, 3, 18], 't4': [13, 8, 18, 3]},
-     #   2: {'t1': [18, 13, 8, 3], 't2': [18, 13, 3, 8], 't3': [18, 8, 13, 3], 't4': [13, 18, 8, 3]},
-      #  3: {'t1': [3, 8, 18, 13], 't2': [3, 8, 13, 18], 't3': [3, 8, 13, 18], 't4': [8, 13, 18, 3]}
-        #Add more rounds as needed
-    #}
 
-    valuations1_t1 = [13, 8, 18, 3]
-    valuations1_t2 = [18, 13, 3, 8]
-    valuations1_t3 = [13, 8, 3, 18]
-    valuations1_t4 = [13, 8, 18, 3]
-   # Set vectors for multiple types in the following way:
-   # valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # valuations_t4 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
-   # ...
+# Set vectors for multiple types in the following way:
+# valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# valuations_t4 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
+# ...
 
-    # PRIORITIES OF RESOURCES OVER PARTICIPANTS =================================================== #
-    #   Since this app models only the proposing side as active players, the priorities of the      #
-    #   resources over the players have to be specified. Please assign a priority vector for every  #
-    #   resource. The length of each vector has to be equal to the number of players specified      #
-    #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
+# PRIORITIES OF RESOURCES OVER PARTICIPANTS =================================================== #
+#   Since this app models only the proposing side as active players, the priorities of the      #
+#   resources over the players have to be specified. Please assign a priority vector for every  #
+#   resource. The length of each vector has to be equal to the number of players specified      #
+#   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
-    priorities1_r1 = [2, 1, 3, 4]
-    priorities1_r2 = [2, 1, 3, 4]
-    priorities1_r3 = [2, 1, 3, 4]
-    priorities1_r4 = [2, 1, 3, 4]
+    priorities_r1 = [1, 2, 4, 3]
+    priorities_r2 = [1, 2, 4, 3]
+    priorities_r3 = [1, 2, 4, 3]
+    priorities_r4 = [1, 2, 4, 3]
 
-    #   Set vectors for multiple resources in the following way:
-    #       priorities_r2 = [1, 2]
-    #       priorities_r3 = [1, 2]
-    #       ...
+# Set vectors for multiple resources in the following way:
+#       priorities_r2 = [1, 2]
+#       priorities_r3 = [1, 2]
+#       ...
 
-    # RESOURCE CAPACITIES ========================================================================= #
-    #   Set the quota of players that each resource can carry. Fill in as many number as in the     #
-    #   valuation vectors.                                                                          #
+# RESOURCE CAPACITIES ========================================================================= #
+#   Set the quota of players that each resource can carry. Fill in as many number as in the     #
+#   valuation vectors.                                                                          #
     capacities = [1, 1, 1, 1]
 
-    # ============================================================================================================= #
-    #                                                                                                               #
-    #                                                 APPEARANCE SETTINGS                                           #
-    #                                                                                                               #
-    # ============================================================================================================= #
+# ============================================================================================================= #
+#                                                                                                               #
+#                                                 APPEARANCE SETTINGS                                           #
+#                                                                                                               #
+# ============================================================================================================= #
 
     # FRAMING ===================================================================================== #
     #   Here you can choose between a neutral framing (participants/resources) and a application    #
@@ -100,11 +92,11 @@ class Constants(BaseConstants):
     #   final payoff for the player.                                                                #
     results = True
 
-    # ============================================================================================================= #
-    #                                                                                                               #
-    #                                                 INFORMATION SETTINGS                                          #
-    #                                                                                                               #
-    # ============================================================================================================= #
+# ============================================================================================================= #
+#                                                                                                               #
+#                                                 INFORMATION SETTINGS                                          #
+#                                                                                                               #
+# ============================================================================================================= #
 
     # SHOW CAPACITIES ============================================================================= #
     #   If set to "True", the quota specified in "capacities" above will be shown to players on the #
@@ -127,37 +119,36 @@ class Constants(BaseConstants):
     #   decision page?                                                                              #
     show_priorities = False
 
-    ####################################################################################################################
-    ####################################################################################################################
-    # ------------------------------              DO NOT MODIFY BELOW HERE              ------------------------------ #
-    ####################################################################################################################
-    ####################################################################################################################
+####################################################################################################################
+####################################################################################################################
+# ------------------------------              DO NOT MODIFY BELOW HERE              ------------------------------ #
+####################################################################################################################
+####################################################################################################################
 
     capacities = [i for i in capacities if i is not None]
     nr_courses = len(capacities)
 
-    valuations1_list = ["valuations1_t" + str(i) for i in range(1, 11)]
-    valuations1_raw = []
-    for i in valuations1_list:
+    valuations_list = ["valuations_t" + str(i) for i in range(1, 11)]
+    valuations_raw = []
+    for i in valuations_list:
         if i in locals():
-            valuations1_raw.append(locals()[i])
+            valuations_raw.append(locals()[i])
 
-    valuations1 = []
-    for i in valuations1_raw:
-        valuations1.append([j for j in i if j is not None])
+    valuations = []
+    for i in valuations_raw:
+        valuations.append([j for j in i if j is not None])
 
-    priorities1_list = ["priorities1_r" + str(i) for i in range(1, 11)]
-    priorities1_raw = []
-    for i in priorities1_list:
+    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
+    priorities_raw = []
+    for i in priorities_list:
         if i in locals():
-            priorities1_raw.append(locals()[i])
+            priorities_raw.append(locals()[i])
 
-    priorities1 = []
-    for i in priorities1_raw:
-        priorities1.append([j for j in i if j is not None])
+    priorities = []
+    for i in priorities_raw:
+        priorities.append([j for j in i if j is not None])
 
-    nr_types = len(valuations1)
+    nr_types = len(valuations)
 
     name_in_url = "SHttc1"
     num_rounds = 1
-

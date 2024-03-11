@@ -1,0 +1,21 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>Bevor als Nächstes die Entscheidungsrunden beginnen, beantworten Sie bitte noch die folgenden Multiple-Choice-Fragen
+        zum Zulassungsverfahren:</p>
+
+    <div>
+        <label for="id_mc1_ttc">1. Bei der Entscheidung, welche Präferenzliste man an die zentrale Zulassungsstelle übermittelt, sollte man darauf achten, dass man sich <u>nicht</u> bei der beliebtesten Schule zuerst bewirbt.</label>
+    <br>
+        {{ form.mc1_ttc }}
+    <br>
+        {% formfield player.mc2_ttc %}
+        {% formfield player.mc3_ttc %}
+        {% formfield player.mc4_ttc %}
+    </div>
+
+    {% next_button %}
+{% endblock %}
