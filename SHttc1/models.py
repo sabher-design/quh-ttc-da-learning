@@ -46,7 +46,7 @@ class Subsession(BaseSubsession):
         for p in players:
             p.participant.vars['form_fields_plus_index'] = list(zip(indices, form_fields))
             p.participant.vars['player_prefs'] = [None for n in indices]
-            p.participant.vars['successful'] = [False for n in indices]
+            p.participant.vars['success1'] = [False for n in indices]
             #p.participant.vars['role'] = p.role()
 
         # ALLOCATE THE CORRECT VALUATIONS VECTOR TO PLAYER (DEPENDING ON TYPE) ================== #
@@ -54,17 +54,17 @@ class Subsession(BaseSubsession):
         type_names = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
 
         for p in players:
-            p.participant.vars['valuations_others'] = []
+            p.participant.vars['val1_others'] = []
             p.participant.vars['other_types_names'] = []
             for t in type_names:
                 if p.role() == t:
-                    p.participant.vars['valuations'] = Constants.valuations[type_names.index(t)]
+                    p.participant.vars['val1'] = Constants.val1[type_names.index(t)]
                 else:
                     if Constants.nr_types > 1:
-                        p.participant.vars['valuations_others'].append(Constants.valuations[type_names.index(t)])
+                        p.participant.vars['val1_others'].append(Constants.val1[type_names.index(t)])
                         p.participant.vars['other_types_names'] = [t for t in type_names if p.role() != t]
-        print(f"others' vals: {p.participant.vars['valuations_others']}")
-        print(f"own vals: {p.participant.vars['valuations']}")
+        print(f"others' vals: {p.participant.vars['val1_others']}")
+        print(f"own vals: {p.participant.vars['val1']}")
         # ALLOCATE THE CORRECT PRIORITIES VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
         for p in players:
             p.participant.vars['priorities'] = []
@@ -83,18 +83,18 @@ class Subsession(BaseSubsession):
         table_nr_tds_priorities = Constants.nr_courses + 1
         player_prefs = [p.participant.vars['player_prefs'] for p in players]
         last_player_per_group = [i[-1] for i in self.get_group_matrix()]
-        player_valuations = [p.participant.vars['valuations'] for p in players]
+        player_val1 = [p.participant.vars['val1'] for p in players]
         player_priorities = [p.participant.vars['priorities'] for p in players]
         types = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
-        valuations = [i for i in Constants.valuations]
+        val1 = [i for i in Constants.val1]
         capacities = [i for i in Constants.capacities]
         decisions = zip(players, player_prefs)
-        successful = [p.participant.vars['successful'] for p in players]
-        successful_with_id = zip(players, successful)
-        valuations_all_types = zip(types, valuations)
+        success1 = [p.participant.vars['success1'] for p in players]
+        success1_with_id = zip(players, success1)
+        val1_all_types = zip(types, val1)
         priorities_all_players = zip(players, player_priorities)
 
-        data_all = zip(players, player_valuations, player_prefs, successful)
+        data_all = zip(players, player_val1, player_prefs, success1)
 
         return {
             'indices': indices,
@@ -106,9 +106,9 @@ class Subsession(BaseSubsession):
             'player_priorities': player_priorities,
             'capacities': capacities,
             'decisions': decisions,
-            'successful': successful,
-            'successful_with_id': successful_with_id,
-            'valuations_all_types': valuations_all_types,
+            'success1': success1,
+            'success1_with_id': success1_with_id,
+            'val1_all_types': val1_all_types,
             'priorities_all_players': priorities_all_players,
 
             'data_all': data_all
@@ -238,10 +238,10 @@ class Group(BaseGroup):
             print(f"Player {p.id_in_group} is matched with resource: {p.participant.vars['player_resource']}")
             # Assuming the second element in player_resource is the course number
             matched_course = p.participant.vars['player_resource'][1]
-            p.payoff = p.participant.vars['valuations'][matched_course - 1]
-            p.participant.vars['successful'][matched_course - 1] = True
+            p.payoff = p.participant.vars['val1'][matched_course - 1]
+            p.participant.vars['success1'][matched_course - 1] = True
             print(
-                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. Successful: {p.participant.vars['successful'][matched_course - 1]}")
+                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. success1: {p.participant.vars['success1'][matched_course - 1]}")
 
 
 class Player(BasePlayer):

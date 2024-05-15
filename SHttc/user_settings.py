@@ -1,49 +1,13 @@
 # coding=utf-8
 from otree.api import (
-    models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
-)
+    BaseConstants, )
 
-import pandas as pd
-import csv
+#from preloaded_valuations import valuations
+#import pandas as pd
+#import csv
 
-'''def read_csv_stimuli():
-    import csv
-
-    f = open('part_II_survey\static\part_II_survey\stimuli.csv', encoding='utf-8-sig')
-    rows = [row for row in csv.DictReader(f)]
-    for row in rows:
-        # all values in CSV are string unless you convert them
-        row['loss'] = (row['loss'])
-    return rows'''
-
-
-'''class Constants(BaseConstants):
-    name_in_url = 'part_II_survey'
-    players_per_group = None
-    num_rounds = 1
-    loss = [2, 3, 4, 5, 6, 7] #read_csv_stimuli()
-    gain = 6'''
-
-
-'''reader = csv.reader(csvfile, delimiter=';')
-    next(reader)  # Skip the header row
-    for row in reader:
-        student_type = row[0]
-        valuations1 = [int(value) for value in row[1:]]
-        if student_type == 't1':
-            cls.valuations_t1 = valuations1
-        elif student_type == 't2':
-            cls.valuations_t2 = valuations1
-        elif student_type == 't3':
-            cls.valuations_t3 = valuations1
-        elif student_type == 't4':
-            cls.valuations_t4 = valuations1'''
-
-import csv
 
 class Constants(BaseConstants):
-    players_per_group = 4
-
     # ============================================================================================================= #
     #                                                                                                               #
     #                                                 DESIGN SETUP                                                  #
@@ -64,14 +28,18 @@ class Constants(BaseConstants):
     #   This means that if you have 4 players and 2 types, players 1 and 2 are Type1, and           #
     #   players 3 and 4 are Type2.                                                                  #
 
+    #valuations_t1 = valuations.get('t1', [])
+    #valuations_t2 = valuations.get('t2', [])
+    #valuations_t3 = valuations.get('t3', [])
+    #valuations_t4 = valuations.get('t4', [])
+
     valuations_t1 = [13, 8, 18, 3]
     valuations_t2 = [18, 13, 3, 8]
     valuations_t3 = [13, 8, 3, 18]
     valuations_t4 = [13, 8, 18, 3]
-
     '''@classmethod
     def load_valuations(cls, file_path):
-        with open('SHttc/static/SHttc/csv/valuations1.csv', newline='', encoding='utf-8') as csvfile:
+        with open(file_path, newline='', encoding='utf-8') as csvfile:
             reader = csv.reader(csvfile, delimiter=';')
             next(reader)  # Skip the header row
             for row in reader:
@@ -84,16 +52,7 @@ class Constants(BaseConstants):
                 elif student_type == 't3':
                     cls.valuations_t3 = valuations1
                 elif student_type == 't4':
-                    cls.valuations_t4 = valuations1
-
-
-Constants.load_valuations('SHttc/static/SHttc/csv/valuations1.csv')
-
-# Now, Constants.valuations_t1, etc., will have the values from the CSV
-print(Constants.valuations_t1)
-print(Constants.valuations_t2)
-print(Constants.valuations_t3)
-print(Constants.valuations_t4)'''
+                    cls.valuations_t4 = valuations1'''
 
 # Set vectors for multiple types in the following way:
 # valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
@@ -122,7 +81,7 @@ print(Constants.valuations_t4)'''
 #   valuation vectors.                                                                          #
     capacities = [1, 1, 1, 1]
 
-# ============================================================================================================= #
+    # ============================================================================================================= #
 #                                                                                                               #
 #                                                 APPEARANCE SETTINGS                                           #
 #                                                                                                               #
@@ -213,3 +172,4 @@ print(Constants.valuations_t4)'''
 
     name_in_url = "SHttc"
     num_rounds = 1
+

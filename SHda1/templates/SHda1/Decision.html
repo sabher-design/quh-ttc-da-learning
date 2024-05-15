@@ -92,7 +92,7 @@
                 <br/>({% trans "Sie sind Schüler:in"  %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>)
                 {% endif %}
             </th>
-            {% for i in valuations %}
+            {% for i in val1 %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
@@ -127,7 +127,7 @@
     </table>
 </div>
 
-{% if Constants.show_valuations and Constants.show_types and Constants.nr_types > 1 %}
+{% if Constants.show_val1 and Constants.show_types and Constants.nr_types > 1 %}
 <p class="justify">
     {% blocktrans trimmed %}
         <br>
@@ -155,11 +155,11 @@
         </tr>
         </thead>
         <tbody>
-            {% for type, valuations in valuations_others %}
+            {% for type, val1 in val1_others %}
 
             <tr>
                 <th>{% trans "Wert der Schule<br/>für Schüler:in" %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ type }}'])</script></span></th>
-                {% for v in valuations %}
+                {% for v in val1 %}
                 <td>{{ v|c }}</td>
                 {% endfor %}
             </tr>

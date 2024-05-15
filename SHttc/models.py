@@ -19,7 +19,6 @@ t.b.d.
 
 """
 
-
 class Subsession(BaseSubsession):
 
     # METHOD: =================================================================================== #
@@ -240,7 +239,7 @@ class Group(BaseGroup):
             p.payoff = p.participant.vars['valuations'][matched_course - 1]
             p.participant.vars['successful'][matched_course - 1] = True
             print(
-                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. Successful: {p.participant.vars['successful'][matched_course - 1]}")
+                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. successful: {p.participant.vars['successful'][matched_course - 1]}")
 
 
 class Player(BasePlayer):

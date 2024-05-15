@@ -14,9 +14,9 @@ def vars_for_all_templates(self):
         'nr_courses': Constants.nr_courses,
         'players_per_group': Constants.players_per_group,
         'indices': [j for j in range(1, Constants.nr_courses + 1)],
-        'valuations': self.participant.vars['valuations'],
-        'valuations_others': zip(self.participant.vars['other_types_names'],
-                                 self.participant.vars['valuations_others']),
+        'val1': self.participant.vars['val1'],
+        'val1_others': zip(self.participant.vars['other_types_names'],
+                                 self.participant.vars['val1_others']),
         'priorities': self.participant.vars['priorities'],
         'capacities': Constants.capacities,
         'player.role': self.participant.vars['role']
@@ -54,9 +54,9 @@ class Decision(Page):
                 'form_fields': form_fields,
                 'nr_courses': Constants.nr_courses,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'valuations': self.participant.vars['valuations'],
-                'valuations_others': zip(self.participant.vars['other_types_names'],
-                                     self.participant.vars['valuations_others'])
+                'val1': self.participant.vars['val1'],
+                'val1_others': zip(self.participant.vars['other_types_names'],
+                                     self.participant.vars['val1_others'])
                 }
 
     # METHOD: =================================================================================== #
@@ -104,13 +104,13 @@ class Results(Page):
     # =========================================================================================== #
     def vars_for_template(self):
         player_prefs = [i for i in self.participant.vars['player_prefs']]
-        successful = [i for i in self.participant.vars['successful']]
+        success1 = [i for i in self.participant.vars['success1']]
 
         return {
                 'player_prefs': player_prefs,
-                'successful': successful,
+                'success1': success1,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'valuations': self.participant.vars['valuations']
+                'val1': self.participant.vars['val1']
                 }
 
 

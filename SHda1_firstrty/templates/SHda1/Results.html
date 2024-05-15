@@ -68,7 +68,7 @@
                 <br/>({% trans "Sie sind Schüler:in"  %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>)
                 {% endif %}
             </th>
-            {% for i in val1 %}
+            {% for i in valuations %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
@@ -84,7 +84,7 @@
             {% else %}
             <th>{% trans "Your resource:" %}</th>
             {% endif %}
-            {% for i in success1 %}
+            {% for i in successful %}
             <td>{% if i == True %} X {% else %} {% endif %}</td>
             {% endfor %}
         </tr>

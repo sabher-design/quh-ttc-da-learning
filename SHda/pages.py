@@ -121,7 +121,7 @@ class Thanks(Page):
 page_sequence = [
     Decision,
     ResultsWaitPage,
-    Thanks,
+    Results,
 ]
 
 if Constants.application_framing:

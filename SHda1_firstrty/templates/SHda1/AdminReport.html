@@ -10,7 +10,7 @@
 {# ============================================================================================= #}
 {% block styles %}
 
-    <link href="{% static 'SHttc1/css/style.css' %}" rel="stylesheet"/>
+    <link href="{% static 'SHda1/css/style.css' %}" rel="stylesheet"/>
 
 {% endblock %}
 
@@ -44,7 +44,7 @@
         <table class="instr-table">
             <thead>
             <tr>
-                <th colspan="{{ Constants.nr_courses }}">Resource Val1:</th>
+                <th colspan="{{ Constants.nr_courses }}">Resource Valuations:</th>
             </tr>
             <tr>
                 {% for i in indices %}
@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for type, val1 in val1_all_types %}
+            {% for type, valuations in valuations_all_types %}
             <tr>
                 <td colspan="{{ Constants.nr_courses }}"><b>{{ type }} -
                     Player(s):</b>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                {% for v in val1 %}
+                {% for v in valuations %}
                 <td>{{ v }}</td>
                 {% endfor %}
             </tr>
@@ -122,7 +122,6 @@
                 <td>{{ c }}</td>
                 {% endfor %}
             </tr>
-
             </tbody>
         </table>
     </div>
@@ -227,7 +226,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for p, val1, prefs, successful in data_all %}
+        {% for p, valuations, prefs, successful in data_all %}
         <tr>
             <td>{{ p.id_in_subsession }}</td>
 
@@ -235,7 +234,7 @@
 
             <td>{{ p.role }}</td>
 
-            {% for v in val1 %}
+            {% for v in valuations %}
             <td>{{ v }}</td>
             {% endfor %}
 

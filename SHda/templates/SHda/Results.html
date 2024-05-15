@@ -96,6 +96,22 @@
     {% trans "Wenn diese Runde für die Auszahlung ausgewählt wird, erhalten Sie:" %} {{ player.payoff|c }}.
 </p>
 
-{% next_button %}
+    {% next_button %}
+
+
+{# ============================================================================================= #}
+{# JAVASCRIPTS ================================================================================= #}
+{# ============================================================================================= #}
+{% block scripts %}
+
+<script>
+     function showhide()
+     {
+           var div = document.getElementById("confirm_next");
+            div.style.display = "block";
+     }
+</script>
 
 {% endblock %}
+
+

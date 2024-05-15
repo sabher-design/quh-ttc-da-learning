@@ -44,7 +44,7 @@
         <table class="instr-table">
             <thead>
             <tr>
-                <th colspan="{{ Constants.nr_courses }}">Resource Valuations:</th>
+                <th colspan="{{ Constants.nr_courses }}">Resource val1:</th>
             </tr>
             <tr>
                 {% for i in indices %}
@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for type, valuations in valuations_all_types %}
+            {% for type, val1 in val1_all_types %}
             <tr>
                 <td colspan="{{ Constants.nr_courses }}"><b>{{ type }} -
                     Player(s):</b>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                {% for v in valuations %}
+                {% for v in val1 %}
                 <td>{{ v }}</td>
                 {% endfor %}
             </tr>
@@ -182,7 +182,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for p, success in successful_with_id %}
+            {% for p, success in success1_with_id %}
             <tr>
                 <td>{{ p.id_in_subsession }}</td>
                 <td>{{ p.id_in_group }}</td>
@@ -221,12 +221,12 @@
             {% endfor %}
 
             {% for i in indices %}
-            <th>successful_r{{ i }}</th>
+            <th>success1_r{{ i }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for p, valuations, prefs, successful in data_all %}
+        {% for p, val1, prefs, success1 in data_all %}
         <tr>
             <td>{{ p.id_in_subsession }}</td>
 
@@ -234,7 +234,7 @@
 
             <td>{{ p.role }}</td>
 
-            {% for v in valuations %}
+            {% for v in val1 %}
             <td>{{ v }}</td>
             {% endfor %}
 
@@ -242,7 +242,7 @@
             <td>{{ b }}</td>
             {% endfor %}
 
-            {% for b in successful %}
+            {% for b in success1 %}
             <td>{{ b }}</td>
             {% endfor %}
         </tr>

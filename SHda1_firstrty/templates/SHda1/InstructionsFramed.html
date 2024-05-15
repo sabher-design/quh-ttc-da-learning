@@ -32,23 +32,23 @@
 {% block content %}
 
 <p class="heading">
-    {% trans "Preferences for resource allocation" %}
+    {% trans "Preferences for school choice" %}
 </p>
 
 <p class="justify">
     {% blocktrans trimmed %}
-        In this experiment, you take part in a resource allocation exercise. In groups of {{ players_per_group }}
-        participants, you are to submit preferences over a selection of resources. You can choose over
-        {{ nr_courses }} resources in total. Also, each resource has a different capacity of participants. However,
-        not only the members of your group submit their preferences for the resources, but also the resources have
-        priorities over the members of your group, which are given by the experimenter.
+        In this experiment, you take part in a school choice exercise. In groups of {{ players_per_group }}
+        participants, you are to submit preferences over a selection of schools. You can choose over
+        {{ nr_courses }} schools in total. Also, each school has a different capacity of participants. However,
+        not only the members of your group submit their preferences for the schools, but also the schools have
+        priorities over the members of your group.
     {% endblocktrans %}
 </p>
 
 <p class="justify">
     {% blocktrans trimmed %}
-        Every available resource is linked to a potential payoff. These payoffs can vary within the group. Imagine the
-        payoff as a representation of you much you enjoy being allocated with a certain resource. In this experiment, the
+        Every available school is linked to a potential payoff. These payoffs can vary within the group. Imagine the
+        payoff as a representation of you much you enjoy being allocated with a certain school. In this experiment, the
         payoffs - and therefore you personal joy - are given by the experimenter.
     {% endblocktrans %}
 </p>
@@ -66,7 +66,7 @@
         <tr>
             <th>{% trans "Index" %}</th>
             {% for i in indices %}
-            <td>{% trans "R" %}<sub>{{ i }}</sub></td>
+            <td>{% trans "S" %}<sub>{{ i }}</sub></td>
             {% endfor %}
         </tr>
         </thead>
@@ -78,13 +78,13 @@
                 <br/>({% trans "You are"  %} {{ player.role }})
                 {% endif %}
             </th>
-            {% for i in val1 %}
+            {% for i in valuations %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
         {% if Constants.show_priorities %}
         <tr>
-            <th>{% trans "Resources' priorities<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Schools' priorities<br/>(... out of" %} {{ players_per_group }})</th>
             {% for i in priorities %}
             <td>{{ i }}</td>
             {% endfor %}
@@ -103,16 +103,16 @@
 </div>
 
 <p class="heading">
-    {% trans "How are resources allocated?" %}
+    {% trans "How are schools allocated?" %}
 </p>
 
 <p class="justify">
     {% blocktrans trimmed %}
-        In the first step, every participant applies to the resource stated as his/her top preference. Each resource then
+        In the first step, every participant applies to the school stated as his/her top preference. Each school then
         reviews all applications of participants and <i>tentatively</i> assigns the participants to it in the order of its'
         priority list until either its' capacity is full or there are no applications left.
-        Every participant that was rejected in the previous step applies to the resource stated as his/her second highest
-        preference. Each resource then reviews all applications of participants in this and in the previous rounds and
+        Every participant that was rejected in the previous step applies to the school stated as his/her second highest
+        preference. Each school then reviews all applications of participants in this and in the previous rounds and
         <i>tentatively</i> assigns the participant to it in the order of its' priority list until either its' capacity is full
         or there are no applications left. The algorithm terminates after no application is rejected in a step or after
         there are no applications left to consider in the participants' preference lists.
@@ -126,9 +126,9 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        Suppose that there are <b>eight</b> participants and <b>four</b> resources. Resources 1 and 2 have a capacity of
-        <b>two</b> participants each. Resources 3 and 4 have a capacity of <b>three</b> participants each. Further suppose
-        that the participants' preferences and the resources' priorities are as follows:
+        Suppose that there are <b>eight</b> participants and <b>four</b> schools. Schools 1 and 2 have a capacity of
+        <b>two</b> participants each. Schools 3 and 4 have a capacity of <b>three</b> participants each. Further suppose
+        that the participants' preferences and the schools' priorities are as follows:
     {% endblocktrans %}
 </p>
 
@@ -149,7 +149,7 @@
       </thead>
       <tbody>
       <tr>
-        <td>{% trans "Resource" %} 1</td>
+        <td>{% trans "School" %} 1</td>
         <td>2</td>
         <td>1</td>
         <td>3</td>
@@ -160,7 +160,7 @@
         <td>1</td>
       </tr>
       <tr>
-        <td>{% trans "Resource" %} 2</td>
+        <td>{% trans "School" %} 2</td>
         <td>1</td>
         <td>2</td>
         <td>2</td>
@@ -171,7 +171,7 @@
         <td>2</td>
       </tr>
       <tr>
-        <td>{% trans "Resource" %} 3</td>
+        <td>{% trans "School" %} 3</td>
         <td>3</td>
         <td>3</td>
         <td>1</td>
@@ -182,7 +182,7 @@
         <td>4</td>
       </tr>
       <tr>
-        <td>{% trans "Resource" %} 4</td>
+        <td>{% trans "School" %} 4</td>
         <td>4</td>
         <td>4</td>
         <td>4</td>
@@ -201,10 +201,10 @@
       <thead>
       <tr>
         <th></th>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>
@@ -272,9 +272,9 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        <b>Step 1:</b> P<sub>2</sub>, P<sub>5</sub>, P<sub>7</sub>, and P<sub>8</sub> apply for R<sub>1</sub>.
-        P<sub>1</sub> applies for R<sub>2</sub>. P<sub>3</sub> and P<sub>4</sub> apply for R<sub>3</sub>.
-        P<sub>6</sub> applies for R<sub>4</sub>. The requested resources review all applications and rank them
+        <b>Step 1:</b> P<sub>2</sub>, P<sub>5</sub>, P<sub>7</sub>, and P<sub>8</sub> apply for S<sub>1</sub>.
+        P<sub>1</sub> applies for S<sub>2</sub>. P<sub>3</sub> and P<sub>4</sub> apply for S<sub>3</sub>.
+        P<sub>6</sub> applies for S<sub>4</sub>. The requested schools review all applications and rank them
         according to their priority order:
     {% endblocktrans %}
 </p>
@@ -283,10 +283,10 @@
     <table class="instr-table">
       <thead>
       <tr>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>
@@ -322,8 +322,8 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        R<sub>1</sub> <i>tentatively</i> accepts P<sub>2</sub> and P<sub>5</sub>, while it declines P<sub>7</sub> and
-        P<sub>8</sub>. All other applications are also <i>tentatively</i> accepted by the respective resources.
+        S<sub>1</sub> <i>tentatively</i> accepts P<sub>2</sub> and P<sub>5</sub>, while it declines P<sub>7</sub> and
+        P<sub>8</sub>. All other applications are also <i>tentatively</i> accepted by the respective schools.
     {% endblocktrans %}
 </p>
 
@@ -332,7 +332,7 @@
 <p class="justify">
     {% blocktrans trimmed %}
         <b>Step 2:</b> P<sub>7</sub> and P<sub>8</sub>, who have been rejected in the previous step, apply to their
-        second best resource, which is R<sub>2</sub> for both. R<sub>2</sub> now considers the new applicants together
+        second best school, which is S<sub>2</sub> for both. S<sub>2</sub> now considers the new applicants together
         with P<sub>1</sub>, who was <i>tentatively</i> assigned to it in the previous period.
     {% endblocktrans %}
 </p>
@@ -341,10 +341,10 @@
     <table class="instr-table">
       <thead>
       <tr>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>
@@ -374,7 +374,7 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        R<sub>2</sub> declines P<sub>1</sub>. P<sub>7</sub> and P<sub>8</sub> are accepted <i>tentatively</i>.
+        S<sub>2</sub> declines P<sub>1</sub>. P<sub>7</sub> and P<sub>8</sub> are accepted <i>tentatively</i>.
     {% endblocktrans %}
 </p>
 
@@ -382,7 +382,7 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        <b>Step 3:</b> Only P<sub>1</sub> is left and applies R<sub>1</sub>. The requested resource reviews
+        <b>Step 3:</b> Only P<sub>1</sub> is left and applies S<sub>1</sub>. The requested school reviews
         all application from this and the previous rounds:
     {% endblocktrans %}
 </p>
@@ -391,10 +391,10 @@
     <table class="instr-table">
       <thead>
       <tr>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>
@@ -424,13 +424,13 @@
 
 <p>
     {% blocktrans trimmed %}
-        R<sub>1</sub> declines P<sub>5</sub>. P<sub>1</sub> and P<sub>2</sub> are accepted <i>tentatively</i>.
+        S<sub>1</sub> declines P<sub>5</sub>. P<sub>1</sub> and P<sub>2</sub> are accepted <i>tentatively</i>.
     {% endblocktrans %}
 </p>
 <br/>
 <p>
     {% blocktrans trimmed %}
-    <b>Step 4:</b> Only P<sub>5</sub> is left and applies R<sub>3</sub>. The requested resource reviews
+    <b>Step 4:</b> Only P<sub>5</sub> is left and applies S<sub>3</sub>. The requested school reviews
     all application from this and the previous rounds:
     {% endblocktrans %}
 </p>
@@ -439,10 +439,10 @@
     <table class="instr-table">
       <thead>
       <tr>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>
@@ -472,7 +472,7 @@
 
 <p class="justify">
     {% blocktrans trimmed %}
-        R<sub>1</sub> accepts P<sub>5</sub>. The procedure terminates since no application was rejected in this round. The
+        S<sub>1</sub> accepts P<sub>5</sub>. The procedure terminates since no application was rejected in this round. The
         assignment is finalized:
     {% endblocktrans %}
 </p>
@@ -481,10 +481,10 @@
     <table class="instr-table">
       <thead>
       <tr>
-        <th>{% trans "Resource" %} 1</th>
-        <th>{% trans "Resource" %} 2</th>
-        <th>{% trans "Resource" %} 3</th>
-        <th>{% trans "Resource" %} 4</th>
+        <th>{% trans "School" %} 1</th>
+        <th>{% trans "School" %} 2</th>
+        <th>{% trans "School" %} 3</th>
+        <th>{% trans "School" %} 4</th>
       </tr>
       </thead>
       <tbody>

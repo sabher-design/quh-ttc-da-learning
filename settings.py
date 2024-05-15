@@ -4,7 +4,7 @@ SESSION_CONFIGS = [
     dict(
         name='SH',
         num_demo_participants=4,
-        app_sequence=['SHttc', 'SHttc1'],
+        app_sequence=['SHda','SHda1'],
     )
 ]
 # session1 app_sequence=['SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17'

@@ -11,7 +11,7 @@
 {# ============================================================================================= #}
 {% block styles %}
 
-    <link href="{% static 'SHttc1/css/style.css' %}" rel="stylesheet"/>
+    <link href="{% static 'SHda1/css/style.css' %}" rel="stylesheet"/>
 
 {% endblock %}
 
@@ -40,7 +40,6 @@
         // Continue mapping as needed
     };
 </script>
-
 
 {% if Constants.application_framing %}
 <p class="justify">
@@ -93,7 +92,7 @@
                 <br/>({% trans "Sie sind Schüler:in"  %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>)
                 {% endif %}
             </th>
-            {% for i in val1 %}
+            {% for i in valuations %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
@@ -128,12 +127,11 @@
     </table>
 </div>
 
-{% if Constants.show_val1 and Constants.show_types and Constants.nr_types > 1 %}
+{% if Constants.show_valuations and Constants.show_types and Constants.nr_types > 1 %}
 <p class="justify">
     {% blocktrans trimmed %}
         <br>
         Zusätzlich können Sie hier die Werte der Schulen der anderen Schüler:innen aus Ihrer Gruppe sehen:
-        <!-- In addition, you know the val1 of the other Types: -->
     {% endblocktrans %}
 </p>
 
@@ -157,11 +155,11 @@
         </tr>
         </thead>
         <tbody>
-            {% for type, val1 in val1_others %}
+            {% for type, valuations in valuations_others %}
 
             <tr>
                 <th>{% trans "Wert der Schule<br/>für Schüler:in" %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ type }}'])</script></span></th>
-                {% for v in val1 %}
+                {% for v in valuations %}
                 <td>{{ v|c }}</td>
                 {% endfor %}
             </tr>
@@ -169,7 +167,7 @@
         </tbody>
     </table>
 </div>
-<br>
+<br/>
 <br>
 <p> Bitte klicken Sie auf 'Weiter', um Ihre Präferenzliste an die zentrale Zulassungsstelle zu übermitteln. </p>
 {% endif %}
