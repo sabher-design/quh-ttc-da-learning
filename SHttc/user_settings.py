@@ -33,10 +33,10 @@ class Constants(BaseConstants):
     #valuations_t3 = valuations.get('t3', [])
     #valuations_t4 = valuations.get('t4', [])
 
-    valuations_t1 = [13, 8, 18, 3]
-    valuations_t2 = [18, 13, 3, 8]
-    valuations_t3 = [13, 8, 3, 18]
-    valuations_t4 = [13, 8, 18, 3]
+    valuations_t1 = [18, 13, 8, 3]
+    valuations_t2 = [8, 18, 3, 13]
+    valuations_t3 = [18, 13, 8, 3]
+    valuations_t4 = [18, 3, 8, 13]
     '''@classmethod
     def load_valuations(cls, file_path):
         with open(file_path, newline='', encoding='utf-8') as csvfile:

@@ -16,10 +16,10 @@ class Player(BasePlayer):
     ctrq1_ttc = models.IntegerField(label='1. Wie viele Schüler:innen bewerben sich für einen Schulplatz?', min=0)
     ctrq2_ttc = models.IntegerField(
         label='2. Sobald alle Schüler:innen an einer Schule zugelassen wurden, wie viele Plätze bleiben übrig?', min=0)
-    ctrq3_ttc_blue = models.StringField(choices=['A', 'B', 'C', 'D'], label=' ')
-    ctrq3_ttc_yellow = models.StringField(choices=['A', 'B', 'C', 'D'], label=' ')
-    ctrq3_ttc_orange = models.StringField(choices=['A', 'B', 'C', 'D'], label=' ')
-    ctrq3_ttc_purple = models.StringField(choices=['A', 'B', 'C', 'D'], label=' ')
+    ctrq3_ttc_blue = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
+    ctrq3_ttc_yellow = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
+    ctrq3_ttc_orange = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
+    ctrq3_ttc_purple = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
     mc1_ttc = models.StringField(choices=['Richtig', 'Falsch'],
                                 label='1. Bei der Entscheidung, welche Präferenzliste man an die zentrale Zulassungsstelle übermittelt, sollte man darauf achten, dass man sich nicht bei der beliebtesten Schule zuerst bewirbt.')
     mc2_ttc = models.StringField(choices=['Richtig', 'Falsch'],

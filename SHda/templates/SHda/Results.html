@@ -31,7 +31,7 @@
 {# ============================================================================================= #}
 {% block content %}
 
-<script type="text/javascript">
+    <script type="text/javascript">
     var typeMapping = {
         'Type 1': '<b><span style="color: rgb(13,50,176);">blau</span></b>',
         'Type 2': '<b><span style="color: rgb(241,196,15);">gelb</span></b>',
@@ -96,21 +96,8 @@
     {% trans "Wenn diese Runde für die Auszahlung ausgewählt wird, erhalten Sie:" %} {{ player.payoff|c }}.
 </p>
 
-    {% next_button %}
+{% next_button %}
 
-
-{# ============================================================================================= #}
-{# JAVASCRIPTS ================================================================================= #}
-{# ============================================================================================= #}
-{% block scripts %}
-
-<script>
-     function showhide()
-     {
-           var div = document.getElementById("confirm_next");
-            div.style.display = "block";
-     }
-</script>
 
 {% endblock %}
 

@@ -121,19 +121,19 @@ class Thanks(Page):
 page_sequence = [
     Decision,
     ResultsWaitPage,
-    Results,
+    Results
 ]
 
-if Constants.application_framing:
-    if Constants.instructions:
-        page_sequence.insert(0, InstructionsFramed)
+#if Constants.application_framing:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, InstructionsFramed)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)
 
-else:
-    if Constants.instructions:
-        page_sequence.insert(0, Instructions)
+#else:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, Instructions)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)

@@ -19,7 +19,7 @@ def vars_for_all_templates(self):
         'val1': self.participant.vars['val1'],
         'val1_others': zip(self.participant.vars['other_types_names'],
                                  self.participant.vars['val1_others']),
-        'priorities': self.participant.vars['priorities'],
+        'prio1': self.participant.vars['prio1'],
         'capacities': Constants.capacities
     }
 
@@ -59,7 +59,7 @@ class Decision(Page):
                 'val1_others': zip(self.participant.vars['other_types_names'],
                                      self.participant.vars['val1_others']),
                 'players_per_group': Constants.players_per_group,
-                'priorities': self.participant.vars['priorities'],
+                'prio1': self.participant.vars['prio1'],
                 'capacities': Constants.capacities,
                 'player.role': self.participant.vars['role']
                 }
@@ -126,16 +126,16 @@ page_sequence = [
     Results,
 ]
 
-if Constants.application_framing:
-    if Constants.instructions:
-        page_sequence.insert(0, InstructionsFramed)
+#if Constants.application_framing:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, InstructionsFramed)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)
 
-else:
-    if Constants.instructions:
-        page_sequence.insert(0, Instructions)
+#else:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, Instructions)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)

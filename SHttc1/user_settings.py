@@ -46,10 +46,10 @@ class Constants(BaseConstants):
 #   resource. The length of each vector has to be equal to the number of players specified      #
 #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
-    priorities_r1 = [1, 2, 4, 3]
-    priorities_r2 = [1, 2, 4, 3]
-    priorities_r3 = [1, 2, 4, 3]
-    priorities_r4 = [1, 2, 4, 3]
+    prio1_r1 = [1, 2, 4, 3]
+    prio1_r2 = [1, 2, 4, 3]
+    prio1_r3 = [1, 2, 4, 3]
+    prio1_r4 = [1, 2, 4, 3]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]
@@ -117,7 +117,7 @@ class Constants(BaseConstants):
     # SHOW RESOURCES' PRIORITIES ================================================================== #
     #   Should a player see the resources' priorities for her in the instructions and on the        #
     #   decision page?                                                                              #
-    show_priorities = False
+    show_prio1 = False
 
 ####################################################################################################################
 ####################################################################################################################
@@ -138,15 +138,15 @@ class Constants(BaseConstants):
     for i in val1_raw:
         val1.append([j for j in i if j is not None])
 
-    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
-    priorities_raw = []
-    for i in priorities_list:
+    prio1_list = ["prio1_r" + str(i) for i in range(1, 11)]
+    prio1_raw = []
+    for i in prio1_list:
         if i in locals():
-            priorities_raw.append(locals()[i])
+            prio1_raw.append(locals()[i])
 
-    priorities = []
-    for i in priorities_raw:
-        priorities.append([j for j in i if j is not None])
+    prio1 = []
+    for i in prio1_raw:
+        prio1.append([j for j in i if j is not None])
 
     nr_types = len(val1)
 

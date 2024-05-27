@@ -73,9 +73,9 @@ class SurveyDemographics(Page):
                    'abi_grade']
 
 
-page_sequence = [SurveyEconPrefsLoss]
+#page_sequence = [SurveyEconPrefsLoss]
 
-#page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics]
+page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics]
 
 
 # class LossAversion(Page):

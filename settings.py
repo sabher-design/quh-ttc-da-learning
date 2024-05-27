@@ -2,10 +2,18 @@ from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=0)
 SESSION_CONFIGS = [
     dict(
-        name='SH',
-        num_demo_participants=4,
-        app_sequence=['SHda','SHda1'],
-    )
+        name='SH_ttc',
+        num_demo_participants=16,
+        #app_sequence=['SHttc_test', 'SHttc_test2']
+       # app_sequence=['part_0_intro', 'part_I_ttc', 'part_I_da']
+        app_sequence=['SHttc', 'SHttc1', 'part_II_survey']
+
+    )#,
+    #dict(
+     #   name='SH_da',
+      #  num_demo_participants=16,
+       # app_sequene=['part_0_intro', 'part_I_da', 'SHda', 'SHda1', 'part_II_survey']
+    #)
 ]
 # session1 app_sequence=['SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17'
 # 'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8']

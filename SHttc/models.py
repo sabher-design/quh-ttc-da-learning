@@ -2,6 +2,7 @@
 from otree.api import *
 import csv
 import os
+import random
 from itertools import chain
 
 from SHttc.user_settings import *
@@ -29,14 +30,45 @@ class Subsession(BaseSubsession):
 
         # Reset other participant.vars as needed
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
-        indices = [j for j in range(1, Constants.nr_courses + 1)]
+       # indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
+        num_players = len(players)
+
+        # Debugging: Print number of players
+        print(f"Number of players: {num_players}")
+
+        group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
+        self.set_group_matrix(group_matrix)
+
+        for group in self.get_groups():
+            players_in_group = group.get_players()
+            for p in players_in_group:
+                p.participant.vars['role'] = p.role()
+                # Other participant vars as needed
+
+                # Store group ID in participant vars
+                p.participant.vars['group_id'] = group.id
+
+                print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
+                print(f"Player {p.id_in_group} is in group {group.id}")
+
+        indices = [j for j in range(1, Constants.nr_courses + 1)]
+
+        # Shuffle the list of players for random grouping
+        #random.shuffle(players)
+
+        # Create groups of 4
+        #group_structure = [players[i:i + 4] for i in range(0, num_players, 4)]
+
+        # Set the group matrix with the newly formed groups
+        #self.set_group_matrix(group_structure)
+
 
         #self.group_randomly() dont do that, this leads to weird color assigment
 
-        for p in players:
-            p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
-        print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
+       # for p in players:
+        #    p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
+        #print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
 
 
         # CREATE FORM TEMPLATES FOR DECISION.HTML  ============================================== #
@@ -166,6 +198,7 @@ class Group(BaseGroup):
             print(f"top_preferences_in_round: {top_prefs_in_round}")
             # DETERMINE THE TOP PRIORITIES IN THIS ROUND ======================================== #
             top_priorities_in_round = []
+            print(f"priorities left: {priorities_left}")
             for i, j in zip(indices, priorities_left):
                 if seats_left[i - 1] > 0:
                     top_priorities_in_round.append([i, j[0]])
@@ -262,3 +295,5 @@ class Player(BasePlayer):
     for j in range(1, Constants.nr_courses + 1):
         locals()['pref_c' + str(j)] = models.IntegerField()
     del j
+
+    group_membership = models.IntegerField()

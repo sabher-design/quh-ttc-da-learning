@@ -30,7 +30,7 @@ class Subsession(BaseSubsession):
     def creating_session(self):
         print(f"Starting session for SHttc2 {self.__class__.__name__}")
 
-            # Reset other participant.vars as needed
+        # Reset other participant.vars as needed
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
