@@ -66,10 +66,25 @@ class Constants(BaseConstants):
 #   resource. The length of each vector has to be equal to the number of players specified      #
 #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
-    priorities_r1 = [1, 2, 3, 4]
-    priorities_r2 = [1, 2, 3, 4]
-    priorities_r3 = [1, 2, 3, 4]
-    priorities_r4 = [1, 2, 3, 4]
+    priorities_g1_r1 = [2, 1, 3, 4]
+    priorities_g1_r2 = [2, 1, 3, 4]
+    priorities_g1_r3 = [2, 1, 3, 4]
+    priorities_g1_r4 = [2, 1, 3, 4]
+
+    priorities_g2_r1 = [2, 1, 3, 4]
+    priorities_g2_r2 = [2, 1, 3, 4]
+    priorities_g2_r3 = [2, 1, 3, 4]
+    priorities_g2_r4 = [2, 1, 3, 4]
+
+    priorities_g3_r1 = [2, 1, 3, 4]
+    priorities_g3_r2 = [2, 1, 3, 4]
+    priorities_g3_r3 = [2, 1, 3, 4]
+    priorities_g3_r4 = [2, 1, 3, 4]
+
+    priorities_g4_r1 = [2, 1, 3, 4]
+    priorities_g4_r2 = [2, 1, 3, 4]
+    priorities_g4_r3 = [2, 1, 3, 4]
+    priorities_g4_r4 = [2, 1, 3, 4]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]
@@ -158,23 +173,48 @@ class Constants(BaseConstants):
     for i in valuations_raw:
         valuations.append([j for j in i if j is not None])
 
-    # this line creates a list of strings:
-    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
-    # this is a list of lists:
-    priorities_raw = []
-    for i in priorities_list:
+    priorities_g1_list = ["priorities_g1_r" + str(i) for i in range(1, 11)]
+    priorities_g1_raw = []
+    for i in priorities_g1_list:
         if i in locals():
-            priorities_raw.append(locals()[i])
+            priorities_g1_raw.append(locals()[i])
 
-    # this is a list of lists, where each inner list is intended to contain filtered priorities
-    priorities = []
-    # this loop iterates over each list in priorities_raw. for each list it creates a new list that only includes elements that are not 'None'
-    for i in priorities_raw:
-        priorities.append([j for j in i if j is not None])
-    print(f"priorities how they look like in the beginning: {priorities}")
+    priorities_g1 = []
+    for i in priorities_g1_raw:
+        priorities_g1.append([j for j in i if j is not None])
+
+    priorities_g2_list = ["priorities_g2_r" + str(i) for i in range(1, 11)]
+    priorities_g2_raw = []
+    for i in priorities_g2_list:
+        if i in locals():
+            priorities_g2_raw.append(locals()[i])
+
+    priorities_g2 = []
+    for i in priorities_g2_raw:
+        priorities_g2.append([j for j in i if j is not None])
+
+    priorities_g3_list = ["priorities_g3_r" + str(i) for i in range(1, 11)]
+    priorities_g3_raw = []
+    for i in priorities_g3_list:
+        if i in locals():
+            priorities_g3_raw.append(locals()[i])
+
+    priorities_g3 = []
+    for i in priorities_g3_raw:
+        priorities_g3.append([j for j in i if j is not None])
+
+    priorities_g4_list = ["priorities_g4_r" + str(i) for i in range(1, 11)]
+    priorities_g4_raw = []
+    for i in priorities_g4_list:
+        if i in locals():
+            priorities_g4_raw.append(locals()[i])
+
+    priorities_g4 = []
+    for i in priorities_g4_raw:
+        priorities_g4.append([j for j in i if j is not None])
 
     nr_types = len(valuations)
 
-    name_in_url = "SHttc"
+    name_in_url = "SHttc_groups"
     num_rounds = 1
 

@@ -27,8 +27,8 @@ class Constants(BaseConstants):
     #   players 3 and 4 are Type2.                                                                  #
     valuations_t1 = [10, 20, 30, 40]
     valuations_t2 = [20, 10, 30, 40]
-    valuations_t3 = [30, 20, 10, 40]
-    valuations_t4 = [10, 10, 10, 10]
+    valuations_t3 = [30, 20, 40, 10]
+    valuations_t4 = [20, 40, 30, 10]
     #   Set vectors for multiple types in the following way:
     #       valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
     #       valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
@@ -40,9 +40,11 @@ class Constants(BaseConstants):
     #   resources over the players have to be specified. Please assign a priority vector for every  #
     #   resource. The length of each vector has to be equal to the number of players specified      #
     #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
-    priorities_r1 = [1, 2, 3, 4]
+    priorities_r1 = [2, 1, 3, 4]
     priorities_r2 = [1, 2, 3, 4]
-    priorities_r3 = [1, 2, 3, 4]
+    priorities_r3 = [3, 1, 4, 2]
+    priorities_r4 = [4, 1, 2, 3]
+
 
     #   Set vectors for multiple resources in the following way:
     #       priorities_r2 = [1, 2]

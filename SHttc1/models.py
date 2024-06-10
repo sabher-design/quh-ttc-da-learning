@@ -3,6 +3,7 @@ from otree.api import *
 import random
 #import csv
 #import os
+import copy
 
 
 from itertools import chain
@@ -92,7 +93,7 @@ class Subsession(BaseSubsession):
             p.participant.vars['prio1'] = []
             for i in Constants.prio1:
                 p.participant.vars['prio1'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
-
+        print(f"prio1 in models: {p.participant.vars['prio1']}")
 
 
     # METHOD: =================================================================================== #
@@ -142,6 +143,11 @@ class Group(BaseGroup):
     # METHOD: =================================================================================== #
     # GET ALLOCATION (EXECUTED AFTER ALL PLAYERS SUBMITTED DECISION.HTML ======================== #
     # =========================================================================================== #
+
+    def deep_copy_priorities(self, original):
+        # Manually create a deep copy of a list of lists
+        return [list(sublist) for sublist in original]
+
     def get_allocation(self):
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
         players = self.get_players()
@@ -167,7 +173,12 @@ class Group(BaseGroup):
 
         player_resource = [[] for p in players]
         seats_left = Constants.capacities.copy()
-        prio1_left = Constants.prio1.copy()
+        prio1_left = self.deep_copy_priorities(Constants.prio1)
+        print(f"priorities left first time: {prio1_left}")
+        #prio1_left = Constants.prio1.copy()
+        #print(f"priorities left first time: {prio1_left}")
+
+        #(Constants.prio1.copy())
 
         # IMPLEMENTATION OF THE TTC MECHANISM =================================================== #
         while size_counter <= len(players_in_round) - 1:

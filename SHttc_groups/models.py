@@ -7,7 +7,7 @@ from itertools import chain
 import copy
 from copy import deepcopy
 
-from SHttc.user_settings import *
+from SHttc_groups.user_settings import *
 
 author = 'Benjamin Pichl'
 
@@ -41,7 +41,6 @@ class Subsession(BaseSubsession):
 
         group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
         self.set_group_matrix(group_matrix)
-        print(f"group matrix: {group_matrix}")
 
         for group in self.get_groups():
             players_in_group = group.get_players()
@@ -104,7 +103,7 @@ class Subsession(BaseSubsession):
             p.participant.vars['priorities'] = []
             for i in Constants.priorities:
                 p.participant.vars['priorities'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
-                print(f"priorities in the subession class: {p.participant.vars['priorities']}")
+
 
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
@@ -151,10 +150,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    def deep_copy_priorities(self, original):
-        # Manually create a deep copy of a list of lists
-        return [list(sublist) for sublist in original]
-
     # METHOD: =================================================================================== #
     # GET ALLOCATION (EXECUTED AFTER ALL PLAYERS SUBMITTED DECISION.HTML ======================== #
     # =========================================================================================== #
@@ -183,11 +178,8 @@ class Group(BaseGroup):
 
         player_resource = [[] for p in players]
         seats_left = Constants.capacities.copy()
-        priorities_left = self.deep_copy_priorities(Constants.priorities)
+        priorities_left = Constants.priorities.copy()
         print(f"priorities left first time: {priorities_left}")
-
-        #priorities_left = Constants.priorities.copy()
-        #print(f"priorities left first time: {priorities_left}")
 
 
         # IMPLEMENTATION OF THE TTC MECHANISM =================================================== #

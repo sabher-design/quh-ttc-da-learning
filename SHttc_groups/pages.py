@@ -1,22 +1,24 @@
-from otree.api import *
-#c = cu
-
-from ._builtin import Page, WaitPage
-from .models import Constants
+#from otree.api import Currency as c, currency_range
+#from ._builtin import Page, WaitPage
+#from .models import Constants
 from itertools import chain
-
+from .user_settings import Constants
+from otree.api import *
 
 # METHOD: =================================================================================== #
 # DEFINE VARIABLES USED IN ALL TEMPLATES ==================================================== #
 # =========================================================================================== #
+
+print(f"valuations SHttc: {Constants.valuations}")
+
 def vars_for_all_templates(self):
     return {
         'nr_courses': Constants.nr_courses,
         'players_per_group': Constants.players_per_group,
         'indices': [j for j in range(1, Constants.nr_courses + 1)],
-        'val1': self.participant.vars['val1'],
-        'val1_others': zip(self.participant.vars['other_types_names'],
-                                 self.participant.vars['val1_others']),
+        'valuations': self.participant.vars['valuations'],
+        'valuations_others': zip(self.participant.vars['other_types_names'],
+                                 self.participant.vars['valuations_others']),
         'priorities': self.participant.vars['priorities'],
         'capacities': Constants.capacities,
         'player.role': self.participant.vars['role']
@@ -54,9 +56,13 @@ class Decision(Page):
                 'form_fields': form_fields,
                 'nr_courses': Constants.nr_courses,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'val1': self.participant.vars['val1'],
-                'val1_others': zip(self.participant.vars['other_types_names'],
-                                     self.participant.vars['val1_others'])
+                'valuations': self.participant.vars['valuations'],
+                'valuations_others': zip(self.participant.vars['other_types_names'],
+                                     self.participant.vars['valuations_others']),
+                'players_per_group': Constants.players_per_group,
+                'priorities': self.participant.vars['priorities'],
+                'capacities': Constants.capacities,
+                'player.role': self.participant.vars['role']
                 }
 
     # METHOD: =================================================================================== #
@@ -70,10 +76,7 @@ class Decision(Page):
         # DYNAMICALLY WRITE BACK PLAYER PREFS TO A LIST OF PREFS ================================ #
         for n, pref in zip(indices, form_fields):
             choice_i = getattr(self.player, pref)
-            self.participant.vars['player_prefs'][n - 1] = int(choice_i)
-
-        # PREPARE PREFS FOR THE ALLOCATION ====================================================== #
-        self.player.prepare_decisions()
+            self.participant.vars['player_prefs'][n - 1] = [int(choice_i)]
 
     # METHOD: =================================================================================== #
     # CONTROL PREFS: PREFERENCES MUST BE UNIQUE ================================================= #
@@ -90,7 +93,7 @@ class Decision(Page):
 class ResultsWaitPage(WaitPage):
 
     # METHOD: =================================================================================== #
-    # AFTER ALL PLAYERS HAVE SUBMITTED PREFS: RUN DA MECHANISM AND SET PLAYERS' PAYOFFS ========= #
+    # AFTER ALL PLAYERS HAVE SUBMITTED PREFS: RUN TTC MECHANISM AND SET PLAYERS' PAYOFFS ======== #
     # =========================================================================================== #
     def after_all_players_arrive(self):
         self.group.get_allocation()
@@ -103,14 +106,14 @@ class Results(Page):
     # CREATE VARIABLES TO DISPLAY ON RESULTS.HTML =============================================== #
     # =========================================================================================== #
     def vars_for_template(self):
-        player_prefs = [i for i in self.participant.vars['player_prefs']]
-        success1 = [i for i in self.participant.vars['success1']]
+        player_prefs = [i[0] for i in self.participant.vars['player_prefs']]
+        successful = [i for i in self.participant.vars['successful']]
 
         return {
                 'player_prefs': player_prefs,
-                'success1': success1,
+                'successful': successful,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'val1': self.participant.vars['val1']
+                'valuations': self.participant.vars['valuations']
                 }
 
 
@@ -121,7 +124,7 @@ class Thanks(Page):
 page_sequence = [
     Decision,
     ResultsWaitPage,
-    Results
+    Results,
 ]
 
 #if Constants.application_framing:

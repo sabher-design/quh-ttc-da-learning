@@ -7,7 +7,7 @@ from itertools import chain
 import copy
 from copy import deepcopy
 
-from SHttc.user_settings import *
+from SHttc_flora.user_settings import *
 
 author = 'Benjamin Pichl'
 
@@ -41,7 +41,6 @@ class Subsession(BaseSubsession):
 
         group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
         self.set_group_matrix(group_matrix)
-        print(f"group matrix: {group_matrix}")
 
         for group in self.get_groups():
             players_in_group = group.get_players()
@@ -57,6 +56,31 @@ class Subsession(BaseSubsession):
 
         indices = [j for j in range(1, Constants.nr_courses + 1)]
 
+        priorities_list = [getattr(Constants, f"priorities_r{i}") for i in range(1, 4)]
+        priorities_raw = []
+        for i in priorities_list:
+            if i in locals():
+                priorities_raw.append(locals()[i])
+
+        priorities = []
+        for i in priorities_raw:
+            priorities.append([j for j in i if j is not None])
+        print(f"priorities list: {priorities}")
+
+        #type_names = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
+
+
+        #priorities = [getattr(Constants, f"priorities_r{i}", None) for i in indices if
+         #             getattr(Constants, f"priorities_r{i}", None) is not None]
+
+        # Handling cases where you need to ensure non-null values
+        #for priority in priorities:
+         #   if priority:
+                # Do something with each priority list, for example:
+          #      print(priority)
+
+        #print(f"priorities: {priorities}")
+        #print(f"priority: {priority}")
         # Shuffle the list of players for random grouping
         #random.shuffle(players)
 
@@ -102,9 +126,9 @@ class Subsession(BaseSubsession):
         # ALLOCATE THE CORRECT PRIORITIES VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
         for p in players:
             p.participant.vars['priorities'] = []
-            for i in Constants.priorities:
+            for i in priorities:
                 p.participant.vars['priorities'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
-                print(f"priorities in the subession class: {p.participant.vars['priorities']}")
+
 
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
@@ -151,10 +175,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
 
-    def deep_copy_priorities(self, original):
-        # Manually create a deep copy of a list of lists
-        return [list(sublist) for sublist in original]
-
     # METHOD: =================================================================================== #
     # GET ALLOCATION (EXECUTED AFTER ALL PLAYERS SUBMITTED DECISION.HTML ======================== #
     # =========================================================================================== #
@@ -162,6 +182,19 @@ class Group(BaseGroup):
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
         players = self.get_players()
         indices = [j for j in range(1, Constants.nr_courses + 1)]
+
+
+        # Access priorities from the Subsession instance
+        # This assumes that 'priorities' is accessible as an attribute of the subsession
+        # Modify your subsession class if needed to store the priorities list after creation
+
+        priorities_left = [p.copy() for p in self.session.priorities]
+
+        #if hasattr(self.session, 'priorities'):
+        #    priorities_left = [p.copy() for p in self.session.priorities]
+        #else:
+         #   priorities_left = []
+        print(f"priorities_left first time: {priorities_left}")
 
         # COLLECT PREPARED_LIST FROM ALL PLAYERS AND ORDER THEM IN ONE SINGLE LIST IN =========== #
         # DESCENDING ORDER OF PREFS.                                                              #
@@ -183,10 +216,7 @@ class Group(BaseGroup):
 
         player_resource = [[] for p in players]
         seats_left = Constants.capacities.copy()
-        priorities_left = self.deep_copy_priorities(Constants.priorities)
-        print(f"priorities left first time: {priorities_left}")
-
-        #priorities_left = Constants.priorities.copy()
+        #priorities_left = Subsession.priority.copy()
         #print(f"priorities left first time: {priorities_left}")
 
 

@@ -66,10 +66,10 @@ class Constants(BaseConstants):
 #   resource. The length of each vector has to be equal to the number of players specified      #
 #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
-    priorities_r1 = [1, 2, 3, 4]
-    priorities_r2 = [1, 2, 3, 4]
-    priorities_r3 = [1, 2, 3, 4]
-    priorities_r4 = [1, 2, 3, 4]
+    priorities_r1 = [2, 1, 3, 4]
+    priorities_r2 = [2, 1, 3, 4]
+    priorities_r3 = [2, 1, 3, 4]
+    priorities_r4 = [2, 1, 3, 4]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]
@@ -158,23 +158,8 @@ class Constants(BaseConstants):
     for i in valuations_raw:
         valuations.append([j for j in i if j is not None])
 
-    # this line creates a list of strings:
-    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
-    # this is a list of lists:
-    priorities_raw = []
-    for i in priorities_list:
-        if i in locals():
-            priorities_raw.append(locals()[i])
-
-    # this is a list of lists, where each inner list is intended to contain filtered priorities
-    priorities = []
-    # this loop iterates over each list in priorities_raw. for each list it creates a new list that only includes elements that are not 'None'
-    for i in priorities_raw:
-        priorities.append([j for j in i if j is not None])
-    print(f"priorities how they look like in the beginning: {priorities}")
-
     nr_types = len(valuations)
 
-    name_in_url = "SHttc"
+    name_in_url = "SHttc_flora"
     num_rounds = 1
 

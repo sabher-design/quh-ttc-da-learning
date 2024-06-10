@@ -9,6 +9,7 @@ from otree.api import *
 # DEFINE VARIABLES USED IN ALL TEMPLATES ==================================================== #
 # =========================================================================================== #
 print(f"val1 SHttc1: {Constants.val1}")
+print(f"prio1 SHttc1: {Constants.prio1}")
 
 
 def vars_for_all_templates(self):
