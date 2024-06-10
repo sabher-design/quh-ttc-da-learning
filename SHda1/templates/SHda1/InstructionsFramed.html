@@ -82,10 +82,10 @@
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
-        {% if Constants.show_priorities %}
+        {% if Constants.show_prio1 %}
         <tr>
             <th>{% trans "Schools' priorities<br/>(... out of" %} {{ players_per_group }})</th>
-            {% for i in priorities %}
+            {% for i in prio1 %}
             <td>{{ i }}</td>
             {% endfor %}
         </tr>

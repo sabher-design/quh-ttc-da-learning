@@ -28,11 +28,10 @@ class Constants(BaseConstants):
     #   This means that if you have 4 players and 2 types, players 1 and 2 are Type1, and           #
     #   players 3 and 4 are Type2.                                                                  #
 
-    valuations_t1 = [1, 18, 8, 3]
-    valuations_t2 = [3, 18, 3, 8]
-    valuations_t3 = [3, 18, 8, 3]
-    valuations_t4 = [8, 18, 13, 3]
-
+    val2_t1 = [13, 18, 3, 8]
+    val2_t2 = [3, 18, 8, 13]
+    val2_t3 = [8, 18, 13, 3]
+    val2_t4 = [3, 18, 8, 13]
 
 # Set vectors for multiple types in the following way:
 # valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
@@ -46,10 +45,15 @@ class Constants(BaseConstants):
 #   resource. The length of each vector has to be equal to the number of players specified      #
 #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
 
-    priorities_r1 = [4, 2, 1, 3]
-    priorities_r2 = [4, 2, 1, 3]
-    priorities_r3 = [4, 2, 1, 3]
-    priorities_r4 = [4, 2, 1, 3]
+    #prio2_r1 = [1, 2, 3, 4]
+    #prio2_r2 = [1, 2, 3, 4]
+    #prio2_r3 = [1, 2, 3, 4]
+    #prio2_r4 = [1, 2, 3, 4]
+
+    prio2_r1 = [2, 3, 4, 1]
+    prio2_r2 = [3, 4, 2, 1]
+    prio2_r3 = [4, 1, 3, 2]
+    prio2_r4 = [1, 2, 4, 3]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]
@@ -112,12 +116,12 @@ class Constants(BaseConstants):
     # SHOW OTHERS' VALUATIONS ===================================================================== #
     #   Should players see the other players' valuation profiles and on the decision page? Only     #
     #   works if "show_types" has been set to "True" above.                                         #
-    show_valuations = True
+    show_val2 = True
 
     # SHOW RESOURCES' PRIORITIES ================================================================== #
     #   Should a player see the resources' priorities for her in the instructions and on the        #
     #   decision page?                                                                              #
-    show_priorities = False
+    show_prio2 = False
 
 ####################################################################################################################
 ####################################################################################################################
@@ -128,27 +132,27 @@ class Constants(BaseConstants):
     capacities = [i for i in capacities if i is not None]
     nr_courses = len(capacities)
 
-    valuations_list = ["valuations_t" + str(i) for i in range(1, 11)]
-    valuations_raw = []
-    for i in valuations_list:
+    val2_list = ["val2_t" + str(i) for i in range(1, 11)]
+    val2_raw = []
+    for i in val2_list:
         if i in locals():
-            valuations_raw.append(locals()[i])
+            val2_raw.append(locals()[i])
 
-    valuations = []
-    for i in valuations_raw:
-        valuations.append([j for j in i if j is not None])
+    val2 = []
+    for i in val2_raw:
+        val2.append([j for j in i if j is not None])
 
-    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
-    priorities_raw = []
-    for i in priorities_list:
+    prio2_list = ["prio2_r" + str(i) for i in range(1, 11)]
+    prio2_raw = []
+    for i in prio2_list:
         if i in locals():
-            priorities_raw.append(locals()[i])
+            prio2_raw.append(locals()[i])
 
-    priorities = []
-    for i in priorities_raw:
-        priorities.append([j for j in i if j is not None])
+    prio2 = []
+    for i in prio2_raw:
+        prio2.append([j for j in i if j is not None])
 
-    nr_types = len(valuations)
+    nr_types = len(val2)
 
     name_in_url = "SHttc2"
     num_rounds = 1

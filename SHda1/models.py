@@ -63,11 +63,11 @@ class Subsession(BaseSubsession):
                         p.participant.vars['val1_others'].append(Constants.val1[type_names.index(t)])
                         p.participant.vars['other_types_names'] = [t for t in type_names if p.role() != t]
 
-        # ALLOCATE THE CORRECT PRIORITIES VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
+        # ALLOCATE THE CORRECT prio1 VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
         for p in players:
-            p.participant.vars['priorities'] = []
-            for i in Constants.priorities:
-                p.participant.vars['priorities'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
+            p.participant.vars['prio1'] = []
+            for i in Constants.prio1:
+                p.participant.vars['prio1'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
 
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
@@ -76,11 +76,11 @@ class Subsession(BaseSubsession):
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
         table_nr_tds_decisions = Constants.nr_courses + 2
-        table_nr_tds_priorities = Constants.nr_courses + 1
+        table_nr_tds_prio1 = Constants.nr_courses + 1
         player_prefs = [p.participant.vars['player_prefs'] for p in players]
         last_player_per_group = [i[-1] for i in self.get_group_matrix()]
         player_val1 = [p.participant.vars['val1'] for p in players]
-        player_priorities = [p.participant.vars['priorities'] for p in players]
+        player_prio1 = [p.participant.vars['prio1'] for p in players]
         types = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
         val1 = [i for i in Constants.val1]
         capacities = [i for i in Constants.capacities]
@@ -88,7 +88,7 @@ class Subsession(BaseSubsession):
         success1 = [p.participant.vars['success1'] for p in players]
         success1_with_id = zip(players, success1)
         val1_all_types = zip(types, val1)
-        priorities_all_players = zip(players, player_priorities)
+        prio1_all_players = zip(players, player_prio1)
 
         data_all = zip(players, player_val1, player_prefs, success1)
 
@@ -96,16 +96,16 @@ class Subsession(BaseSubsession):
             'indices': indices,
             'players': players,
             'table_nr_tds_decisions': table_nr_tds_decisions,
-            'table_nr_tds_priorities': table_nr_tds_priorities,
+            'table_nr_tds_prio1': table_nr_tds_prio1,
             'player_prefs': player_prefs,
             'last_player_per_group': last_player_per_group,
-            'player_priorities': player_priorities,
+            'player_prio1': player_prio1,
             'capacities': capacities,
             'decisions': decisions,
             'success1': success1,
             'success1_with_id': success1_with_id,
             'val1_all_types': val1_all_types,
-            'priorities_all_players': priorities_all_players,
+            'prio1_all_players': prio1_all_players,
 
             'data_all': data_all
         }
@@ -204,7 +204,7 @@ class Group(BaseGroup):
                         if iteritem[3] == n:
                             attendants[n - 1].append(iteritem)
 
-                    # Sort and then trim the attendants list for each school based on priorities
+                    # Sort and then trim the attendants list for each school based on prio1
                     for n in indices:
                         # Sort attendants based on the school's preference for students
                         attendants[n - 1].sort(key=lambda sublist: sublist[1], reverse=False)
@@ -283,7 +283,7 @@ class Player(BasePlayer):
 
         self.participant.vars['prepared_list'] = []
 
-        for i in Constants.priorities:
+        for i in Constants.prio1:
             self.participant.vars['prepared_list'].append([(i.index(j) + 1) for j in i if j == self.id_in_group])
 
         for i in self.participant.vars['prepared_list']:

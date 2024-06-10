@@ -6,7 +6,7 @@ SESSION_CONFIGS = [
         num_demo_participants=16,
         #app_sequence=['SHttc_test', 'SHttc_test2']
        # app_sequence=['part_0_intro', 'part_I_ttc', 'part_I_da']
-        app_sequence=['SHttc1']
+        app_sequence=['SHttc2']
 
     )#,
     #dict(

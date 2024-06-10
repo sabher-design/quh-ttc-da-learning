@@ -17,7 +17,7 @@ def vars_for_all_templates(self):
         'val1': self.participant.vars['val1'],
         'val1_others': zip(self.participant.vars['other_types_names'],
                                  self.participant.vars['val1_others']),
-        'priorities': self.participant.vars['priorities'],
+        'prio1': self.participant.vars['prio1'],
         'capacities': Constants.capacities,
         'player.role': self.participant.vars['role']
     }

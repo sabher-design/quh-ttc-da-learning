@@ -34,19 +34,19 @@ class Constants(BaseConstants):
     #       val1_t4 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
     #       ...
 
-    # PRIORITIES OF RESOURCES OVER PARTICIPANTS =================================================== #
-    #   Since this app models only the proposing side as active players, the priorities of the      #
+    # prio1 OF RESOURCES OVER PARTICIPANTS =================================================== #
+    #   Since this app models only the proposing side as active players, the prio1 of the      #
     #   resources over the players have to be specified. Please assign a priority vector for every  #
     #   resource. The length of each vector has to be equal to the number of players specified      #
     #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
-    priorities_r1 = [1, 2, 4, 3]
-    priorities_r2 = [1, 2, 4, 3]
-    priorities_r3 = [1, 2, 4, 3]
-    priorities_r4 = [1, 2, 4, 3]
+    prio1_r1 = [1, 2, 4, 3]
+    prio1_r2 = [2, 3, 4, 1]
+    prio1_r3 = [3, 4, 2, 1]
+    prio1_r4 = [4, 3, 2, 1]
 
     #   Set vectors for multiple resources in the following way:
-    #       priorities_r2 = [1, 2]
-    #       priorities_r3 = [1, 2]
+    #       prio1_r2 = [1, 2]
+    #       prio1_r3 = [1, 2]
     #       ...
 
     # RESOURCE CAPACITIES ========================================================================= #
@@ -107,10 +107,10 @@ class Constants(BaseConstants):
     #   works if "show_types" has been set to "True" above.                                         #
     show_val1 = True
 
-    # SHOW RESOURCES' PRIORITIES ================================================================== #
-    #   Should a player see the resources' priorities for her in the instructions and on the        #
+    # SHOW RESOURCES' prio1 ================================================================== #
+    #   Should a player see the resources' prio1 for her in the instructions and on the        #
     #   decision page?                                                                              #
-    show_priorities = False
+    show_prio1 = False
 
     ####################################################################################################################
     ####################################################################################################################
@@ -131,15 +131,15 @@ class Constants(BaseConstants):
     for i in val1_raw:
         val1.append([j for j in i if j is not None])
 
-    priorities_list = ["priorities_r" + str(i) for i in range(1, 11)]
-    priorities_raw = []
-    for i in priorities_list:
+    prio1_list = ["prio1_r" + str(i) for i in range(1, 11)]
+    prio1_raw = []
+    for i in prio1_list:
         if i in locals():
-            priorities_raw.append(locals()[i])
+            prio1_raw.append(locals()[i])
 
-    priorities = []
-    for i in priorities_raw:
-        priorities.append([j for j in i if j is not None])
+    prio1 = []
+    for i in prio1_raw:
+        prio1.append([j for j in i if j is not None])
 
     nr_types = len(val1)
 

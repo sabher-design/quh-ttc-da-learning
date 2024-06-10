@@ -44,7 +44,7 @@
         <table class="instr-table">
             <thead>
             <tr>
-                <th colspan="{{ Constants.nr_courses }}">Resource Valuations:</th>
+                <th colspan="{{ Constants.nr_courses }}">Resource val2:</th>
             </tr>
             <tr>
                 {% for i in indices %}
@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for type, valuations in valuations_all_types %}
+            {% for type, val2 in val2_all_types %}
             <tr>
                 <td colspan="{{ Constants.nr_courses }}"><b>{{ type }} -
                     Player(s):</b>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                {% for v in valuations %}
+                {% for v in val2 %}
                 <td>{{ v }}</td>
                 {% endfor %}
             </tr>
@@ -78,7 +78,7 @@
         <table class="instr-table">
             <thead>
             <tr>
-                <th colspan="{{ table_nr_tds_priorities }}">Priorities of Resources:</th>
+                <th colspan="{{ table_nr_tds_prio2 }}">prio2 of Resources:</th>
             </tr>
             <tr>
                 <th>Group ID</th>
@@ -89,7 +89,7 @@
             </thead>
             <tbody>
 
-            {% for p, prio in priorities_all_players %}
+            {% for p, prio in prio2_all_players %}
             <tr>
                 <td>{{ p.id_in_group }}</td>
 
@@ -227,7 +227,7 @@
         </tr>
     </thead>
     <tbody>
-        {% for p, valuations, prefs, successful in data_all %}
+        {% for p, val2, prefs, successful in data_all %}
         <tr>
             <td>{{ p.id_in_subsession }}</td>
 
@@ -235,7 +235,7 @@
 
             <td>{{ p.role }}</td>
 
-            {% for v in valuations %}
+            {% for v in val2 %}
             <td>{{ v }}</td>
             {% endfor %}
 

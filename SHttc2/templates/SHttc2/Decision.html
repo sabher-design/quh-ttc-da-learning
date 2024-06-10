@@ -93,18 +93,18 @@
                 <br/>({% trans "Sie sind Schüler:in"  %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>)
                 {% endif %}
             </th>
-            {% for i in valuations %}
+            {% for i in val2 %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
-        {% if Constants.show_priorities %}
+        {% if Constants.show_prio2 %}
         <tr>
             {% if Constants.application_framing %}
-            <th>{% trans "Schools' priorities<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Schools' prio2<br/>(... out of" %} {{ players_per_group }})</th>
             {% else %}
-            <th>{% trans "Resources' priorities<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Resources' prio2<br/>(... out of" %} {{ players_per_group }})</th>
             {% endif %}
-            {% for i in priorities %}
+            {% for i in prio2 %}
             <td>{{ i }}</td>
             {% endfor %}
         </tr>
@@ -128,12 +128,12 @@
     </table>
 </div>
 
-{% if Constants.show_valuations and Constants.show_types and Constants.nr_types > 1 %}
+{% if Constants.show_val2 and Constants.show_types and Constants.nr_types > 1 %}
 <p class="justify">
     {% blocktrans trimmed %}
         <br>
         Zusätzlich können Sie hier die Werte der Schulen der anderen Schüler:innen aus Ihrer Gruppe sehen:
-        <!-- In addition, you know the valuations of the other Types: -->
+        <!-- In addition, you know the val2 of the other Types: -->
     {% endblocktrans %}
 </p>
 
@@ -157,11 +157,11 @@
         </tr>
         </thead>
         <tbody>
-            {% for type, valuations in valuations_others %}
+            {% for type, val2 in val2_others %}
 
             <tr>
                 <th>{% trans "Wert der Schule<br/>für Schüler:in" %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ type }}'])</script></span></th>
-                {% for v in valuations %}
+                {% for v in val2 %}
                 <td>{{ v|c }}</td>
                 {% endfor %}
             </tr>

@@ -41,7 +41,7 @@
         participants, you are to submit preferences over a selection of resources. You can choose over
         {{ nr_courses }} resources in total. Also, each resource has a different capacity of participants. However,
         not only the members of your group submit their preferences for the resources, but also the resources have
-        prio1 over the members of your group, which are given by the experimenter.
+        priorities over the members of your group, which are given by the experimenter.
     {% endblocktrans %}
 </p>
 
@@ -84,7 +84,7 @@
         </tr>
         {% if Constants.show_prio1 %}
         <tr>
-            <th>{% trans "Resources' prio1<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Resources' priorities<br/>(... out of" %} {{ players_per_group }})</th>
             {% for i in prio1 %}
             <td>{{ i }}</td>
             {% endfor %}
@@ -113,7 +113,7 @@
         assigned to the resources they point to. The capacities of all resources in the cycle are reduced by one.
         All participant that were assigned in this step and all resources with depleted capacities are removed.
         The procedure continues with the remaining participant and resources. The procedure terminates when no more
-        cycles are found. In other words, the mechanism at hands trades preferences and prio1 between resources and
+        cycles are found. In other words, the mechanism at hands trades preferences and priorities between resources and
         participants.
     {% endblocktrans %}
 </p>
@@ -127,7 +127,7 @@
     {% blocktrans trimmed %}
         Suppose that there are <b>eight</b> participants and <b>four</b> resources. Resources 1 and 2 have a capacity of
         <b>two</b> participants each. Resources 3 and 4 have a capacity of <b>three</b> participants each. Further suppose
-        that the participants' preferences and the resources' prio1 are as follows:
+        that the participants' preferences and the resources' priorities are as follows:
     {% endblocktrans %}
 </p>
 

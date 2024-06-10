@@ -100,9 +100,9 @@
         {% if Constants.show_prio1 %}
         <tr>
             {% if Constants.application_framing %}
-            <th>{% trans "Schools' prio1<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Schools' priorities<br/>(... out of" %} {{ players_per_group }})</th>
             {% else %}
-            <th>{% trans "Resources' prio1<br/>(... out of" %} {{ players_per_group }})</th>
+            <th>{% trans "Resources' priorities<br/>(... out of" %} {{ players_per_group }})</th>
             {% endif %}
             {% for i in prio1 %}
             <td>{{ i }}</td>

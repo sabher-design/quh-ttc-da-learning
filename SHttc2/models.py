@@ -1,7 +1,9 @@
 # coding=utf-8
 from otree.api import *
+import random
 #import csv
 #import os
+import copy
 
 
 from itertools import chain
@@ -28,16 +30,37 @@ class Subsession(BaseSubsession):
     # THINGS TO DO BEFORE THE SESSION STARTS  =================================================== #
     # =========================================================================================== #
     def creating_session(self):
-        print(f"Starting session for SHttc2 {self.__class__.__name__}")
+        print(f"Starting session for SHttc1: {self.__class__.__name__}")
 
         # Reset other participant.vars as needed
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
-        indices = [j for j in range(1, Constants.nr_courses + 1)]
+        # indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
+        num_players = len(players)
 
-        for p in players:
-            p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
-        print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
+        # Debugging: Print number of players
+        print(f"Number of players: {num_players}")
+
+        group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
+        self.set_group_matrix(group_matrix)
+
+        for group in self.get_groups():
+            players_in_group = group.get_players()
+            for p in players_in_group:
+                p.participant.vars['role'] = p.role()
+                # Other participant vars as needed
+
+                # Store group ID in participant vars
+                p.participant.vars['group_id'] = group.id
+
+                print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
+                print(f"Player {p.id_in_group} is in group {group.id}")
+
+        indices = [j for j in range(1, Constants.nr_courses + 1)]
+
+       # for p in players:
+        #    p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
+        #print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")
 
 
         # CREATE FORM TEMPLATES FOR DECISION.HTML  ============================================== #
@@ -46,7 +69,7 @@ class Subsession(BaseSubsession):
         for p in players:
             p.participant.vars['form_fields_plus_index'] = list(zip(indices, form_fields))
             p.participant.vars['player_prefs'] = [None for n in indices]
-            p.participant.vars['successful'] = [False for n in indices]
+            p.participant.vars['success2'] = [False for n in indices]
             #p.participant.vars['role'] = p.role()
 
         # ALLOCATE THE CORRECT VALUATIONS VECTOR TO PLAYER (DEPENDING ON TYPE) ================== #
@@ -54,23 +77,23 @@ class Subsession(BaseSubsession):
         type_names = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
 
         for p in players:
-            p.participant.vars['valuations_others'] = []
+            p.participant.vars['val2_others'] = []
             p.participant.vars['other_types_names'] = []
             for t in type_names:
                 if p.role() == t:
-                    p.participant.vars['valuations'] = Constants.valuations[type_names.index(t)]
+                    p.participant.vars['val2'] = Constants.val2[type_names.index(t)]
                 else:
                     if Constants.nr_types > 1:
-                        p.participant.vars['valuations_others'].append(Constants.valuations[type_names.index(t)])
+                        p.participant.vars['val2_others'].append(Constants.val2[type_names.index(t)])
                         p.participant.vars['other_types_names'] = [t for t in type_names if p.role() != t]
-        print(f"others' vals: {p.participant.vars['valuations_others']}")
-        print(f"own vals: {p.participant.vars['valuations']}")
-        # ALLOCATE THE CORRECT PRIORITIES VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
+        print(f"others' vals: {p.participant.vars['val2_others']}")
+        print(f"own vals: {p.participant.vars['val2']}")
+        # ALLOCATE THE CORRECT prio2 VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
         for p in players:
-            p.participant.vars['priorities'] = []
-            for i in Constants.priorities:
-                p.participant.vars['priorities'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
-
+            p.participant.vars['prio2'] = []
+            for i in Constants.prio2:
+                p.participant.vars['prio2'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
+        print(f"prio2 in models: {p.participant.vars['prio2']}")
 
 
     # METHOD: =================================================================================== #
@@ -80,36 +103,36 @@ class Subsession(BaseSubsession):
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
         table_nr_tds_decisions = Constants.nr_courses + 2
-        table_nr_tds_priorities = Constants.nr_courses + 1
+        table_nr_tds_prio2 = Constants.nr_courses + 1
         player_prefs = [p.participant.vars['player_prefs'] for p in players]
         last_player_per_group = [i[-1] for i in self.get_group_matrix()]
-        player_valuations = [p.participant.vars['valuations'] for p in players]
-        player_priorities = [p.participant.vars['priorities'] for p in players]
+        player_val2 = [p.participant.vars['val2'] for p in players]
+        player_prio2 = [p.participant.vars['prio2'] for p in players]
         types = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
-        valuations = [i for i in Constants.valuations]
+        val2 = [i for i in Constants.val2]
         capacities = [i for i in Constants.capacities]
         decisions = zip(players, player_prefs)
-        successful = [p.participant.vars['successful'] for p in players]
-        successful_with_id = zip(players, successful)
-        valuations_all_types = zip(types, valuations)
-        priorities_all_players = zip(players, player_priorities)
+        success2 = [p.participant.vars['success2'] for p in players]
+        success2_with_id = zip(players, success2)
+        val2_all_types = zip(types, val2)
+        prio2_all_players = zip(players, player_prio2)
 
-        data_all = zip(players, player_valuations, player_prefs, successful)
+        data_all = zip(players, player_val2, player_prefs, success2)
 
         return {
             'indices': indices,
             'players': players,
             'table_nr_tds_decisions': table_nr_tds_decisions,
-            'table_nr_tds_priorities': table_nr_tds_priorities,
+            'table_nr_tds_prio2': table_nr_tds_prio2,
             'player_prefs': player_prefs,
             'last_player_per_group': last_player_per_group,
-            'player_priorities': player_priorities,
+            'player_prio2': player_prio2,
             'capacities': capacities,
             'decisions': decisions,
-            'successful': successful,
-            'successful_with_id': successful_with_id,
-            'valuations_all_types': valuations_all_types,
-            'priorities_all_players': priorities_all_players,
+            'success2': success2,
+            'success2_with_id': success2_with_id,
+            'val2_all_types': val2_all_types,
+            'prio2_all_players': prio2_all_players,
 
             'data_all': data_all
         }
@@ -120,6 +143,11 @@ class Group(BaseGroup):
     # METHOD: =================================================================================== #
     # GET ALLOCATION (EXECUTED AFTER ALL PLAYERS SUBMITTED DECISION.HTML ======================== #
     # =========================================================================================== #
+
+    def deep_copy_priorities(self, original):
+        # Manually create a deep copy of a list of lists
+        return [list(sublist) for sublist in original]
+
     def get_allocation(self):
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
         players = self.get_players()
@@ -145,7 +173,12 @@ class Group(BaseGroup):
 
         player_resource = [[] for p in players]
         seats_left = Constants.capacities.copy()
-        priorities_left = Constants.priorities.copy()
+        prio2_left = self.deep_copy_priorities(Constants.prio2)
+        print(f"priorities left first time: {prio2_left}")
+        #prio2_left = Constants.prio2.copy()
+        #print(f"priorities left first time: {prio2_left}")
+
+        #(Constants.prio2.copy())
 
         # IMPLEMENTATION OF THE TTC MECHANISM =================================================== #
         while size_counter <= len(players_in_round) - 1:
@@ -166,17 +199,18 @@ class Group(BaseGroup):
                                                1] == p.id_in_group])
             top_prefs_in_round = list(chain.from_iterable(top_prefs_in_round))
             print(f"top_preferences_in_round: {top_prefs_in_round}")
-            # DETERMINE THE TOP PRIORITIES IN THIS ROUND ======================================== #
-            top_priorities_in_round = []
-            for i, j in zip(indices, priorities_left):
+            # DETERMINE THE TOP prio2 IN THIS ROUND ======================================== #
+            top_prio2_in_round = []
+            print(f"prio2 left: {prio2_left}")
+            for i, j in zip(indices, prio2_left):
                 if seats_left[i - 1] > 0:
-                    top_priorities_in_round.append([i, j[0]])
-                    print(f"top_priorities_in_round: {top_priorities_in_round}")
+                    top_prio2_in_round.append([i, j[0]])
+                    print(f"top_prio2_in_round: {top_prio2_in_round}")
             # MAKE AN EMPTY LIST THAT CATCHES ALL FOUND CYCLES AND APPEND ALL CYCLES ============ #
             cycles_check = []
 
             for i in top_prefs_in_round:
-                j = next(j for j in top_priorities_in_round if j[0] == i[1])
+                j = next(j for j in top_prio2_in_round if j[0] == i[1])
                 cycles_check.append([i, j])
                 print(f"cycles: {cycles_check}")
             # IF A CYCLE IS LARGER THAN 1 WE NEED TO APPEND MORE THAN 2 ITEMS TO THE CYCLE ====== #
@@ -185,7 +219,7 @@ class Group(BaseGroup):
                 while m < size_counter - 1:
                     for i in cycles_check:
                         j = next(j for j in top_prefs_in_round if j[0] == i[-1][1])
-                        k = next(k for k in top_priorities_in_round if k[0] == j[-1])
+                        k = next(k for k in top_prio2_in_round if k[0] == j[-1])
                         cycles_check[cycles_check.index(i)].append(j)
                         cycles_check[cycles_check.index(i)].append(k)
                     m += 1
@@ -200,9 +234,9 @@ class Group(BaseGroup):
                     seats_left[i - 1] -= 1
 
                 for i in cycles_found:
-                    for j in priorities_left:
+                    for j in prio2_left:
                         j.remove(i[0][0])
-                        print(f"priorities left: {priorities_left}")
+                        print(f"prio2 left: {prio2_left}")
                     all_prefs = [k for k in all_prefs if not i[0][0] == k[1]]
 
                     if seats_left[(i[0][1] - 1)] < 1:
@@ -238,10 +272,10 @@ class Group(BaseGroup):
             print(f"Player {p.id_in_group} is matched with resource: {p.participant.vars['player_resource']}")
             # Assuming the second element in player_resource is the course number
             matched_course = p.participant.vars['player_resource'][1]
-            p.payoff = p.participant.vars['valuations'][matched_course - 1]
-            p.participant.vars['successful'][matched_course - 1] = True
+            p.payoff = p.participant.vars['val2'][matched_course - 1]
+            p.participant.vars['success2'][matched_course - 1] = True
             print(
-                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. Successful: {p.participant.vars['successful'][matched_course - 1]}")
+                f"  Matched with Course {matched_course}. Payoff: {p.payoff}. success2: {p.participant.vars['success2'][matched_course - 1]}")
 
 
 class Player(BasePlayer):
@@ -265,3 +299,5 @@ class Player(BasePlayer):
     for j in range(1, Constants.nr_courses + 1):
         locals()['pref_c' + str(j)] = models.IntegerField()
     del j
+
+    group_membership = models.IntegerField()

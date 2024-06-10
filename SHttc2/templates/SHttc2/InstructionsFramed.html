@@ -41,7 +41,7 @@
         participants, you are to submit preferences over a selection of schools. You can choose over
         {{ nr_courses }} schools in total. Also, each school has a different capacity of participants. However,
         not only the members of your group submit their preferences for the schools, but also the schools have
-        priorities over the members of your group.
+        prio2 over the members of your group.
     {% endblocktrans %}
 </p>
 
@@ -78,14 +78,14 @@
                 <br/>({% trans "You are"  %} {{ player.role }})
                 {% endif %}
             </th>
-            {% for i in valuations %}
+            {% for i in val2 %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
-        {% if Constants.show_priorities %}
+        {% if Constants.show_prio2 %}
         <tr>
-            <th>{% trans "Schools' priorities<br/>(... out of" %} {{ players_per_group }})</th>
-            {% for i in priorities %}
+            <th>{% trans "Schools' prio2<br/>(... out of" %} {{ players_per_group }})</th>
+            {% for i in prio2 %}
             <td>{{ i }}</td>
             {% endfor %}
         </tr>
@@ -113,7 +113,7 @@
         assigned to the schools they point to. The capacities of all schools in the cycle are reduced by one.
         All participant that were assigned in this step and all schools with depleted capacities are removed.
         The procedure continues with the remaining participant and schools. The procedure terminates when no more
-        cycles are found. In other words, the mechanism at hands trades preferences and priorities between schools and
+        cycles are found. In other words, the mechanism at hands trades preferences and prio2 between schools and
         participants.
     {% endblocktrans %}
 </p>
@@ -127,7 +127,7 @@
     {% blocktrans trimmed %}
         Suppose that there are <b>eight</b> participants and <b>four</b> schools. Schools 1 and 2 have a capacity of
         <b>two</b> participants each. Schools 3 and 4 have a capacity of <b>three</b> participants each. Further suppose
-        that the participants' preferences and the schools' priorities are as follows:
+        that the participants' preferences and the schools' prio2 are as follows:
     {% endblocktrans %}
 </p>
 

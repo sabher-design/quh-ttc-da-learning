@@ -29,7 +29,7 @@ class Constants(BaseConstants):
     #   players 3 and 4 are Type2.                                                                  #
 
     val1_t1 = [13, 18, 8, 3]
-    val1_t2 = [13, 3, 18, 8]
+    val1_t2 = [13, 18, 3, 8]
     val1_t3 = [13, 18, 8, 3]
     val1_t4 = [8, 18, 13, 3]
 
@@ -51,10 +51,10 @@ class Constants(BaseConstants):
     #prio1_r3 = [1, 2, 3, 4]
     #prio1_r4 = [1, 2, 3, 4]
 
-    prio1_r1 = [3, 1, 4, 2]
-    prio1_r2 = [2, 3, 1, 4]
-    prio1_r3 = [1, 3, 2, 4]
-    prio1_r4 = [4, 1, 2, 3]
+    prio1_r1 = [1, 2, 4, 3] 
+    prio1_r2 = [2, 3, 4, 1]
+    prio1_r3 = [3, 4, 2, 1]
+    prio1_r4 = [4, 3, 2, 1]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]

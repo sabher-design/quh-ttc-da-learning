@@ -8,8 +8,8 @@ from otree.api import *
 # METHOD: =================================================================================== #
 # DEFINE VARIABLES USED IN ALL TEMPLATES ==================================================== #
 # =========================================================================================== #
-
-print(f"valuations SHttc2: {Constants.valuations}")
+print(f"val2 SHttc2: {Constants.val2}")
+print(f"prio2 SHttc2: {Constants.prio2}")
 
 
 def vars_for_all_templates(self):
@@ -17,10 +17,10 @@ def vars_for_all_templates(self):
         'nr_courses': Constants.nr_courses,
         'players_per_group': Constants.players_per_group,
         'indices': [j for j in range(1, Constants.nr_courses + 1)],
-        'valuations': self.participant.vars['valuations'],
-        'valuations_others': zip(self.participant.vars['other_types_names'],
-                                 self.participant.vars['valuations_others']),
-        'priorities': self.participant.vars['priorities'],
+        'val2': self.participant.vars['val2'],
+        'val2_others': zip(self.participant.vars['other_types_names'],
+                                 self.participant.vars['val2_others']),
+        'prio2': self.participant.vars['prio2'],
         'capacities': Constants.capacities
     }
 
@@ -56,11 +56,11 @@ class Decision(Page):
                 'form_fields': form_fields,
                 'nr_courses': Constants.nr_courses,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'valuations': self.participant.vars['valuations'],
-                'valuations_others': zip(self.participant.vars['other_types_names'],
-                                     self.participant.vars['valuations_others']),
+                'val2': self.participant.vars['val2'],
+                'val2_others': zip(self.participant.vars['other_types_names'],
+                                     self.participant.vars['val2_others']),
                 'players_per_group': Constants.players_per_group,
-                'priorities': self.participant.vars['priorities'],
+                'prio2': self.participant.vars['prio2'],
                 'capacities': Constants.capacities,
                 'player.role': self.participant.vars['role']
                 }
@@ -107,13 +107,13 @@ class Results(Page):
     # =========================================================================================== #
     def vars_for_template(self):
         player_prefs = [i[0] for i in self.participant.vars['player_prefs']]
-        successful = [i for i in self.participant.vars['successful']]
+        success2 = [i for i in self.participant.vars['success2']]
 
         return {
                 'player_prefs': player_prefs,
-                'successful': successful,
+                'success2': success2,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'valuations': self.participant.vars['valuations']
+                'val2': self.participant.vars['val2']
                 }
 
 
@@ -127,16 +127,16 @@ page_sequence = [
     Results,
 ]
 
-if Constants.application_framing:
-    if Constants.instructions:
-        page_sequence.insert(0, InstructionsFramed)
+#if Constants.application_framing:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, InstructionsFramed)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)
 
-else:
-    if Constants.instructions:
-        page_sequence.insert(0, Instructions)
+#else:
+ #   if Constants.instructions:
+  #      page_sequence.insert(0, Instructions)
 
-    if Constants.results:
-        page_sequence.insert(-1, Results)
+   # if Constants.results:
+    #    page_sequence.insert(-1, Results)
