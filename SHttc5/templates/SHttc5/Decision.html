@@ -1,0 +1,214 @@
+{# ============================================================================================= #}
+{# LOAD PACKAGES =============================================================================== #}
+{# ============================================================================================= #}
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% load i18n %}
+
+
+{# ============================================================================================= #}
+{# LOAD STYLESHEET ============================================================================= #}
+{# ============================================================================================= #}
+{% block styles %}
+
+    <link href="{% static 'SHttc5/css/style.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+{# ============================================================================================= #}
+{# PAGE HEADING ================================================================================ #}
+{# ============================================================================================= #}
+{% block title %}
+
+    {% trans "Ihre Entscheidungen" %}
+
+{% endblock %}
+
+
+{# ============================================================================================= #}
+{# PAGE CONTENT ================================================================================ #}
+{# ============================================================================================= #}
+{% block content %}
+
+<script type="text/javascript">
+    var typeMapping = {
+        'Type 1': '<b><span style="color: rgb(13,50,176);">blau</span></b>',
+        'Type 2': '<b><span style="color: rgb(241,196,15);">gelb</span></b>',
+        'Type 3': '<b><span style="color:rgb(230,126,34);">orange</span></b>',
+        'Type 4': '<b><span style="color:rebeccapurple;">lila</span></b>'
+        // Continue mapping as needed
+    };
+</script>
+
+
+{% if Constants.application_framing %}
+<p class="justify">
+    {% blocktrans trimmed %}
+        Sie sind ein Schüler oder eine Schülerin mit der <b>Farbe</b> <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>.
+        <br>
+        <br>
+        Die folgende Tabelle zeigt Ihnen die Werte, die die Schulen für Sie haben.
+        Bitte geben Sie die Reihenfolge an, mit der Sie sich bei den {{ nr_courses }} Schulen <b>A</b> bis <b>D</b> bewerben,
+        indem Sie bei der Schule, bei der Sie sich zuerst bewerben möchten, eine 1 eintragen, bei der Schule, bei der Sie
+        sich als Zweites bewerben möchten, eine 2 eintragen, usw.
+        (Ihre Präferenzliste).
+
+    {% endblocktrans %}
+</p>
+
+{% else %}
+<p class="justify">
+    {% blocktrans trimmed %}
+        Please state your preferences for all {{ nr_courses }} resources in the following form.
+        Please note that the preferences must be a unique for each resource and run from 1 to {{ nr_courses }}.
+    {% endblocktrans %}
+</p>
+{% endif %}
+
+<div>
+    <table class="dec-table">
+        <thead>
+        <tr>
+            <th>Schule</th>
+            <td>
+                <b>A</b>
+            </td>
+            <td>
+                <b>B</b>
+            </td>
+            <td>
+                <b>C</b>
+            </td>
+            <td>
+                <b>D</b>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th>
+                {% trans "Wert der Schule" %}
+                {% if Constants.show_types and Constants.nr_types > 1 %}
+                <br/>({% trans "Sie sind Schüler:in"  %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ player.role }}'])</script></span>)
+                {% endif %}
+            </th>
+            {% for i in val5 %}
+            <td>{{ i|c }}</td>
+            {% endfor %}
+        </tr>
+        {% if Constants.show_prio5 %}
+        <tr>
+            {% if Constants.application_framing %}
+            <th>{% trans "Schools' prio5<br/>(... out of" %} {{ players_per_group }})</th>
+            {% else %}
+            <th>{% trans "Resources' prio5<br/>(... out of" %} {{ players_per_group }})</th>
+            {% endif %}
+            {% for i in prio5 %}
+            <td>{{ i }}</td>
+            {% endfor %}
+        </tr>
+        {% endif %}
+        {% if Constants.show_capacities %}
+        <tr>
+            <th>{% trans "Capacities" %}</th>
+            {% for i in capacities %}
+            <td>{{ i }}</td>
+            {% endfor %}
+        </tr>
+        {% endif %}
+        <tr>
+            <th>{% trans "Ihre Präferenzliste" %}</th>
+            {% for i in form_fields %}
+            <td><input class="pref-form" id="{{ i }}" type="number" name="{{ i }}" value="" maxlength="3">
+            </td>
+            {% endfor %}
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+{% if Constants.show_val5 and Constants.show_types and Constants.nr_types > 1 %}
+<p class="justify">
+    {% blocktrans trimmed %}
+        <br>
+        Zusätzlich können Sie hier die Werte der Schulen der anderen Schüler:innen aus Ihrer Gruppe sehen:
+        <!-- In addition, you know the val5 of the other Types: -->
+    {% endblocktrans %}
+</p>
+
+<div>
+    <table class="dec-table">
+        <thead>
+        <tr>
+            <th>Schule</th>
+            <td>
+                <b>A</b>
+            </td>
+            <td>
+                <b>B</b>
+            </td>
+            <td>
+                <b>C</b>
+            </td>
+            <td>
+                <b>D</b>
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+            {% for type, val5 in val5_others %}
+
+            <tr>
+                <th>{% trans "Wert der Schule<br/>für Schüler:in" %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ type }}'])</script></span></th>
+                {% for v in val5 %}
+                <td>{{ v|c }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<br>
+<br>
+<p> Bitte klicken Sie auf 'Weiter', um Ihre Präferenzliste an die zentrale Zulassungsstelle zu übermitteln. </p>
+{% endif %}
+<br/>
+{% if Constants.confirm_button %}
+
+<div>
+    <button id="button" class="btn btn-primary btn-large"  type="button" onclick="showhide()">Next</button>
+
+    <br/><br/>
+
+    <div id="confirm_next" style="display: none">
+        {% trans "Möchten Sie Ihre Präferenzliste an die zentrale Zulassungsstelle schicken?" %}
+
+        <br/><br/>
+
+        <button id="button_confirm" class="btn btn-primary btn-large" >{% trans "Yes" %}</button>
+    </div>
+</div>
+
+{% else %}
+{% next_button %}
+
+{% endif %}
+
+{% endblock %}
+
+
+{# ============================================================================================= #}
+{# JAVASCRIPTS ================================================================================= #}
+{# ============================================================================================= #}
+{% block scripts %}
+
+<script>
+     function showhide()
+     {
+           var div = document.getElementById("confirm_next");
+            div.style.display = "block";
+     }
+</script>
+
+{% endblock %}

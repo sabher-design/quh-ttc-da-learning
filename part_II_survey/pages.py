@@ -72,10 +72,13 @@ class SurveyDemographics(Page):
     form_fields = ['gender', 'age', 'studying_currently', 'study_field', 'current_occupation', 'semester', 'math_grade',
                    'abi_grade']
 
+class Payoff(Page):
+    form_model = 'player'
+
 
 #page_sequence = [SurveyEconPrefsLoss]
 
-page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics]
+page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics, Payoff]
 
 
 # class LossAversion(Page):

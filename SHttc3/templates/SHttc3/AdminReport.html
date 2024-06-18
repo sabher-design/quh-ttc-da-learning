@@ -183,12 +183,12 @@
             </tr>
             </thead>
             <tbody>
-            {% for p, success in successful_with_id %}
+            {% for p, success3 in successful_with_id %}
             <tr>
                 <td>{{ p.id_in_subsession }}</td>
                 <td>{{ p.id_in_group }}</td>
 
-                {% for b in success %}
+                {% for b in success3 %}
                 <td>{% if b == True %} X {% else %} {% endif %}</td>
                 {% endfor %}
             </tr>

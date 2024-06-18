@@ -2,18 +2,20 @@ from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=0)
 SESSION_CONFIGS = [
     dict(
-        name='SH_ttc',
-        num_demo_participants=16,
+        name='SH_exp',
+        display_name="SH_ttc",
+        num_demo_participants=12,
         #app_sequence=['SHttc_test', 'SHttc_test2']
        # app_sequence=['part_0_intro', 'part_I_ttc', 'part_I_da']
-        app_sequence=['SHttc2']
-
-    )#,
-    #dict(
-     #   name='SH_da',
-      #  num_demo_participants=16,
-       # app_sequene=['part_0_intro', 'part_I_da', 'SHda', 'SHda1', 'part_II_survey']
-    #)
+        app_sequence=['SHttc1', "SHttc2", "SHttc3"]
+        #app_sequence = ['SHda1', 'SHda2', 'SHda3']
+    ),
+    dict(
+        name='SH_da',
+        display_name="SH_da",
+        num_demo_participants=12,
+        app_sequence=['SHda1', 'SHda2', 'SHda3']
+    )
 ]
 # session1 app_sequence=['SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17'
 # 'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8']
@@ -22,7 +24,8 @@ SESSION_CONFIGS = [
 # 'SHttc11', 'SHttc1', 'SHttc17', 'SHttc13', 'SHttc2', 'SHttc3', 'SHttc14', 'SHttc8', 'SHttc10', 'SHttc18']
 
 LANGUAGE_CODE = 'de'
-LANGUAGE = 'de'
+#LANGUAGE = 'de'
+
 REAL_WORLD_CURRENCY_CODE = 'EUR'
 #REAL_WORLD_CURRENCY_DECIMAL_PLACES = True
 USE_POINTS = True

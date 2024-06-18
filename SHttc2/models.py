@@ -41,8 +41,12 @@ class Subsession(BaseSubsession):
         # Debugging: Print number of players
         print(f"Number of players: {num_players}")
 
-        group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
-        self.set_group_matrix(group_matrix)
+        # Randomly shuffle players and form new groups of 4
+        self.group_randomly(fixed_id_in_group=True)
+
+        #group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
+        #elf.set_group_matrix(group_matrix)
+
 
         for group in self.get_groups():
             players_in_group = group.get_players()

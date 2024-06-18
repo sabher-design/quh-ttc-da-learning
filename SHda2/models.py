@@ -36,6 +36,12 @@ class Subsession(BaseSubsession):
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
 
+        # Randomly shuffle players and form new groups of 4
+        self.group_randomly(fixed_id_in_group=True)
+
+        # group_matrix = [players[i:i + 4] for i in range(0, num_players, 4)]
+        # elf.set_group_matrix(group_matrix)
+
         for p in players:
             p.participant.vars['role'] = p.role()  # This stores the result of p.role() in participant.vars
         print(f"Player {p.id_in_group}'s role: {p.participant.vars['role']}")

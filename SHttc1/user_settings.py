@@ -32,8 +32,6 @@ class Constants(BaseConstants):
     val1_t2 = [13, 18, 3, 8]
     val1_t3 = [13, 18, 8, 3]
     val1_t4 = [8, 18, 13, 3]
-
-
 # Set vectors for multiple types in the following way:
 # valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
 # valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
