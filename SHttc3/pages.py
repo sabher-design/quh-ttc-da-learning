@@ -105,16 +105,43 @@ class Results(Page):
     # METHOD: =================================================================================== #
     # CREATE VARIABLES TO DISPLAY ON RESULTS.HTML =============================================== #
     # =========================================================================================== #
+
+    def before_next_page(self):
+        # Store the original payoff
+        base_payoff = float(self.player.payoff)
+
+        # Calculate half of the payoff, formatted to two decimal places
+        half_payoff = base_payoff / 2
+
+        # Calculate the final payoff with show-up fee, formatted to two decimal places
+        final_payoff = half_payoff + 4
+
+        # Store the payoff in participant vars to make it accessible in later apps/pages
+        self.participant.vars['SHttc3_payoff'] = "{:.0f}".format(base_payoff)
+        self.participant.vars['SHttc3_payoff_half'] = "{:.2f}".format(half_payoff)
+        self.participant.vars['SHttc3_payoff_final'] = "{:.2f}".format(final_payoff)
+
     def vars_for_template(self):
         player_prefs = [i[0] for i in self.participant.vars['player_prefs']]
         success3 = [i for i in self.participant.vars['success3']]
+        #base_payoff = self.participant.vars.get('SHttc3_payoff', 0)
+        # Calculate half the payoff
+        #half_payoff = base_payoff / 2
+
+        # Calculate the total including a fixed show-up fee (e.g., +4)
+        #total_payoff_with_showup = half_payoff + 4
 
         return {
                 'player_prefs': player_prefs,
                 'success3': success3,
                 'indices': [j for j in range(1, Constants.nr_courses + 1)],
-                'val3': self.participant.vars['val3']
-                }
+                'val3': self.participant.vars['val3'],
+                #'base_payoff': base_payoff,  # Original payoff
+                #'half_payoff': half_payoff,  # Payoff divided by 2
+               # 'total_payoff_with_showup': total_payoff_with_showup
+        }
+
+
 
 
 class Thanks(Page):

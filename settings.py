@@ -1,20 +1,26 @@
 from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=0)
 SESSION_CONFIGS = [
-    dict(
-        name='SH_exp',
-        display_name="SH_ttc",
-        num_demo_participants=12,
+    #dict(
+     #   name='SH_exp',
+      #  display_name="SH_ttc",
+       # num_demo_participants=12,
         #app_sequence=['SHttc_test', 'SHttc_test2']
        # app_sequence=['part_0_intro', 'part_I_ttc', 'part_I_da']
-        app_sequence=['SHttc1', "SHttc2", "SHttc3"]
+       # app_sequence=['SHttc1', "SHttc2", "SHttc3"]
         #app_sequence = ['SHda1', 'SHda2', 'SHda3']
-    ),
+   # ),
+    #dict(
+     #   name='SH_da',
+      #  display_name="SH_da",
+       # num_demo_participants=12,
+        #app_sequence=['SHda1', 'SHda2', 'SHda3']
+    #),
     dict(
-        name='SH_da',
-        display_name="SH_da",
+        name='test',
+        display_name="test",
         num_demo_participants=12,
-        app_sequence=['SHda1', 'SHda2', 'SHda3']
+        app_sequence=['SHttc11', 'SHttc3', 'SHttc16', 'part_II_survey']
     )
 ]
 # session1 app_sequence=['SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17'
@@ -23,15 +29,21 @@ SESSION_CONFIGS = [
 # session2 app_sequence=['SHttc7', 'SHttc12', 'SHttc19', 'SHttc15', 'SHttc9', 'SHttc5', 'SHttc4', 'SHttc6', 'SHttc20', 'SHttc16'
 # 'SHttc11', 'SHttc1', 'SHttc17', 'SHttc13', 'SHttc2', 'SHttc3', 'SHttc14', 'SHttc8', 'SHttc10', 'SHttc18']
 
+# session3 app_sequence=['SHttc20', 'SHttc9', 'SHttc7', 'SHttc16', 'SHttc13', 'SHttc3', 'SHttc4', 'SHttc5', 'SHttc12', 'SHttc15'
+# 'SHttc18', 'SHttc10', 'SHttc11', 'SHttc19', 'SHttc14', 'SHttc2', 'SHttc8', 'SHttc17', 'SHttc1', 'SHttc6']
+
+# session4 app_sequence=['SHttc5', 'SHttc2', 'SHttc8', 'SHttc1', 'SHttc19', 'SHttc11', 'SHttc16', 'SHttc12', 'SHttc10', 'SHttc14'
+# 'SHttc9', 'SHttc18', 'SHttc7', 'SHttc13', 'SHttc15', 'SHttc20', 'SHttc3', 'SHttc4', 'SHttc6', 'SHttc17']
+
 LANGUAGE_CODE = 'de'
 #LANGUAGE = 'de'
 
 REAL_WORLD_CURRENCY_CODE = 'EUR'
-#REAL_WORLD_CURRENCY_DECIMAL_PLACES = True
+REAL_WORLD_CURRENCY_DECIMAL_PLACES = True
 USE_POINTS = True
 POINTS_CUSTOM_NAME = 'ECU'
 DEMO_PAGE_INTRO_HTML = ''
-#POINTS_DECIMAL_PLACES = False
+POINTS_DECIMAL_PLACES = False
 PARTICIPANT_FIELDS = []
 #SESSION_FIELDS = []
 #ROOMS = []

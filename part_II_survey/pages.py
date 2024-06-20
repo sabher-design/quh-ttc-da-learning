@@ -66,20 +66,25 @@ class SurveyEconPrefsRisk(Page):
     form_model = 'player'
     form_fields = ['risk']
 
+class CognitiveReflectionTest(Page):
+    form_model = 'player'
+    form_fields = ['crt_bat', 'crt_widget', 'crt_lake']
+
 
 class SurveyDemographics(Page):
     form_model = 'player'
     form_fields = ['gender', 'age', 'studying_currently', 'study_field', 'current_occupation', 'semester', 'math_grade',
                    'abi_grade']
 
+
 class Payoff(Page):
     form_model = 'player'
 
 
-#page_sequence = [SurveyEconPrefsLoss]
+#page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk,
+                # CognitiveReflectionTest, SurveyDemographics, Payoff]
 
-page_sequence = [SurveyStart, SurveyStrategies, SurveyMechanism, SurveyTrust, SurveyEconPrefsLoss, SurveyEconPrefsRisk, SurveyDemographics, Payoff]
-
+page_sequence = [Payoff]
 
 # class LossAversion(Page):
 # form_model = 'player'

@@ -4,12 +4,17 @@
 
 {% block content %}
 
-{% formfields %}
+<p>
 Vielen Dank für Ihre Teilnahme an dem Experiment und der Umfrage!
-    <br>
-Für die Auszahlung wurde Runde 11 zufällig ausgewählt. Ihre Auszahlung aus Runde 11 beträgt XX. Zusammen mit dem show-up
-fee ergibt sich eine Auszahlung von XX.
 
+    <br>
+    <br>
+
+Für die Auszahlung wurde Runde 11 zufällig ausgewählt. Ihre Auszahlung aus Runde 11 beträgt {{ participant.vars.SHttc3_payoff }} ECU,
+das entspricht {{ participant.vars.SHttc3_payoff_half }} €.
+Zusammen mit dem show-up fee ergibt sich eine Auszahlung von {{ participant.vars.SHttc3_payoff_final }} €.
+</p>
 
 {% endblock %}
+
 

@@ -119,15 +119,14 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
         label='''10. Im Allgemeinen habe ich Vertrauen in Bildungsbehörden.'''
     )
-
+    crt_bat = models.IntegerField(label='11. Ein Schläger und ein Ball kosten insgesamt 1,10€. Der Schläger kostet 1€ mehr als der Ball. Wie viel kostet der Ball?')
+    crt_widget = models.IntegerField(label='12. Wenn 5 Maschinen 5 Minuten brauchen um 5 Produkte herzustellen, wie lange benötigen dann 100 Maschinen, um 100 Produkte herzustellen?')
+    crt_lake = models.IntegerField(label='13. In einem See wachsen Seerosen, die sich jeden Tag verdoppeln. Wenn es 48 Tage dauert, bis der ganze See bedeckt ist, wie lange dauert es, bis die Seerosen die Hälfte des Sees bedecken?')
     gender = models.StringField(choices=[['female', 'Weiblich'], ['male', 'Männlich'], ['diverse', 'Divers'],
                                          ['no_gender', 'Ich identifiziere mich mit keinem Geschlecht']],
                                 label='Mit welchem Geschlecht identifizieren Sie sich?',
                                 widget=widgets.RadioSelect)
     age = models.IntegerField(label='Wie alt sind Sie?', max=125, min=13)
-    # crt_bat = models.IntegerField(label='A bat and a ball cost 22 dollars in total The bat costs 20 dollars more than the ball How many dollars does the ball cost')
-    # crt_widget = models.IntegerField(label='If it takes 5 machines 5 minutes to make 5 widgets how many minutes would it take 100 machines to make 100 widgets')
-    # crt_lake = models.IntegerField(label='In a lake there is a patch of lily pads Every day the patch doubles in size If it takes 48 days for the patch to cover the entire lake how many days would it take for the patch to cover half of the lake')
     studying_currently = models.StringField(
         label="Studieren Sie derzeit oder haben Sie ein Studium abgeschlossen?",
         widget=widgets.RadioSelect,
@@ -153,8 +152,9 @@ class Player(BasePlayer):
              "Sozial- oder Kulturwissenschaften (inkl. z. B. Politikwissenschaft, Anthropologie, Geschichte)"],
             ['Economic sciences',
              "Wirtschaftswissenschaften (BWL, VWL, Wirtschaftsingenieurwesen, Wirtschaftsmathematik)"],
-            ['Other', "Anderer Studiengang"]
-        ]
+            ['Other', "Anderer Studiengang"],
+        ],
+        blank=True
     )
     current_occupation = models.StringField(
         label="Welcher Beschäftigung gehen Sie derzeit nach?",
@@ -167,7 +167,8 @@ class Player(BasePlayer):
             ['Apprentice', "Ich absolviere eine Ausbildung."],
             ['Sabbatical', "Ich mache ein Sabbatical."],
             ['Other', "Sonstiges."],
-        ]
+        ],
+        blank=True
     )
     # subject = models.LongStringField(label='In welchem Studienfach sind Sie (hauptsächlich) eingeschrieben?')
     semester = models.StringField(choices=[['semester_1', '1. Fachsemester'], ['semester_2', '2. Fachsemester'],
@@ -180,6 +181,7 @@ class Player(BasePlayer):
                                            ['semester_15', '15. Fachsemester'], ['semester_16', '16. Fachsemester'],
                                            ['semester_17', '17. Fachsemester'], ['semester_18', '18. Fachsemester'],
                                            ['semester_19', '19. Fachsemester'], ['semester_20', '20. Fachsemester']],
+                                    blank=True,
                                   label='In welchem Fachsemester sind Sie eingeschrieben?')
     math_grade = models.FloatField(label='Was war Ihre letzte Mathenote?')
     abi_grade = models.FloatField(label='Mit welcher Note haben Sie Ihr Abitur abgeschlossen?')

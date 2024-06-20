@@ -1,14 +1,19 @@
-{{ extends 'global/Page.html' }}
-{{ block title }}Survey{{ endblock }}
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Teil II - Umfrage{% endblock %}
 
-{{ block content }}
+{% block content %}
 
 <p>
-    Please answer the following questions.
+    Bitte beantworten Sie die folgenden Fragen:
 </p>
 
-{{ formfields }}
+<br>
 
-{{ next_button }}
 
-{{ endblock }}
+{% formfields %}
+
+
+{% next_button %}
+
+{% endblock %}
