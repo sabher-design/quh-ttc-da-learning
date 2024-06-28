@@ -40,9 +40,9 @@ class Constants(BaseConstants):
     #   resource. The length of each vector has to be equal to the number of players specified      #
     #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
     prio1_r1 = [1, 2, 4, 3]
-    prio1_r2 = [2, 3, 4, 1]
-    prio1_r3 = [3, 4, 2, 1]
-    prio1_r4 = [4, 3, 2, 1]
+    prio1_r2 = [2, 1, 4, 3]
+    prio1_r3 = [3, 1, 2, 4]
+    prio1_r4 = [4, 1, 2, 3]
 
     #   Set vectors for multiple resources in the following way:
     #       prio1_r2 = [1, 2]

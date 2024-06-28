@@ -1,0 +1,98 @@
+{% extends 'global/Page.html' %}
+{% load otree_tags %}
+{% load otree %}
+{% block title %}Teil II - Umfrage: Demographische Angaben{% endblock %}
+
+{% block content %}
+
+{# Studying/Occupation #}
+<div class="questionnaire_header">
+    <div class="questionnaire_subheader">
+    </div>
+    <div>
+        {% formfield player.gender %}
+        {% formfield player.age %}
+        {% formfield player.studying_currently %}
+        <div id="field_of_study" style="display: none;">
+            {% formfield player.study_field %}
+        </div>
+        <div id="occupation" style="display: none;">
+            {% formfield player.current_occupation %}
+        </div>
+        {% formfield player.math_grade %}
+        {% formfield player.abi_grade %}
+        <div id="semester" style="display: none;">
+            {% formfield player.semester %}
+        </div>
+    </div>
+</div>
+
+{% next_button %}
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        document.getElementById('id_studying_currently_0').onchange = function () {
+            showOccupation();
+        };
+        document.getElementById('id_studying_currently_1').onchange = function () {
+            showOccupation();
+        };
+        document.getElementById('id_studying_currently_2').onchange = function () {
+            showOccupation();
+        };
+        document.getElementById('id_studying_currently_3').onchange = function () {
+            showOccupation();
+        };
+
+// Function to show/hide occupation fields
+        function showOccupation() {
+            if (document.getElementById('id_studying_currently_0').checked || document.getElementById('id_studying_currently_1').checked) {
+                document.body.querySelector("option[value='Student']").style.display = "block";
+                if (document.getElementById('id_studying_currently_1').checked) {
+                    document.body.querySelector("label[for='id_study_field']").innerHTML = "In welchem Fachgebiet promovieren Sie?";
+                    document.getElementById('semester').style.display = "none";
+                    document.getElementById('id_semester').value = "";
+                } else {
+                    document.body.querySelector("label[for='id_study_field']").innerHTML = "In welchem Studiengang studieren Sie?";
+                    document.body.querySelector("label[for='id_semester']").innerHTML = "In welchem Fachsemester sind Sie eingeschrieben?";
+                    document.getElementById('semester').style.display = "block";
+                    document.getElementById('id_semester').value = "";
+                }
+                document.getElementById('field_of_study').style.display = "block";
+                document.getElementById('id_study_field').value = "";
+                //document.getElementById('semester').style.display = "block";
+                //document.getElementById('id_semester').value = "";
+                document.getElementById('occupation').style.display = "none";
+                document.getElementById('id_current_occupation').value = "Student";
+            } else if (document.getElementById('id_studying_currently_2').checked) {
+                document.body.querySelector("option[value='Student']").style.display = "block";
+                document.body.querySelector("label[for='id_study_field']").innerHTML = "Welchen Studiengang haben Sie studiert?";
+                document.getElementById('field_of_study').style.display = "block";
+                document.getElementById('id_study_field').value = "";
+                document.getElementById('semester').style.display = "none";
+                document.getElementById('id_semester').value = "";
+                document.getElementById('occupation').style.display = "block";
+                document.getElementById('id_current_occupation').value = "";
+            } else if (document.getElementById('id_studying_currently_3').checked) {
+                document.getElementById('field_of_study').style.display = "none";
+                document.getElementById('id_study_field').value = "Other";
+                document.getElementById('semester').style.display = "none";
+                document.getElementById('id_semester').value = "";
+                document.getElementById('occupation').style.display = "block";
+                document.getElementById('id_current_occupation').value = "";
+                document.body.querySelector("option[value='Student']").style.display = "none";
+            }
+        }
+    })
+
+</script>
+
+
+
+{% endblock %}

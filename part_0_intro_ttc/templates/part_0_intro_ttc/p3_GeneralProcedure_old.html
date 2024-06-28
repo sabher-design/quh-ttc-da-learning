@@ -1,0 +1,129 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Ablauf erster Teil des Experiments und Bezahlung{% endblock %}
+
+{% block content %}
+
+    <p>Zu Beginn des Experiments werden Ihnen und den anderen Schüler:innen eine Farbe (<b><span style="color: rgb(13,50,176);">blau</span></b>,
+        <b><span style="color: rgb(241,196,15);">gelb</span></b>, <b><span style="color:rgb(230,126,34);">orange</span></b>
+        oder <b><span style="color:rebeccapurple;">lila</span></b>)
+    zugeteilt. In jeder Runde werden Sie einer Gruppe mit drei weiteren
+    Schüler:innen zugeteilt, wobei sich die Zusammensetzung der Gruppe in jeder Runde ändert. Sie spielen also in jeder
+    Runde mit drei anderen Schüler:innen zusammen.</p>
+
+    <p> Sie und die anderen drei Schüler:innen konkurrieren um Schulplätze. Es gibt vier Schulen (<b>A</b>, <b>B</b>,
+    <b>C</b>, <b>D</b>) mit jeweils genau einem freien Platz. Die Schulen unterscheiden sich darin, welchen Wert sie für Sie haben. Je höher der Wert
+    der Schule, desto höher Ihre potenzielle Auszahlung. Zu Beginn jeder Runde sehen Sie und die anderen Schüler:innen
+    die Werte der Schulen für alle Gruppenmitglieder in einer Tabelle. Die Werte der Schulen ändern sich in jeder Runde.</p>
+
+    <p>Ein Beispiel für eine Werte-Tabelle könnte wie folgt sein: </p>
+
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+                border: none;
+            }
+
+            th, td {
+                padding: 8px;
+                text-align: left;
+                vertical-align: middle;
+                border: 1px solid grey;
+            }
+
+            .center-header {
+                text-align: center;
+            }
+
+            tr:first-child td:first-child {
+                border-right: none;
+            }
+
+            tr th:first-child, tr td:first-child {
+                 border-left: none;
+            }
+
+            tr th:last-child, tr td:last-child {
+                border-right: none;
+            }
+
+    /* Remove top and bottom borders from the first and last row */
+            tr:first-child th, tr:first-child td {
+                border-top: none;
+            }
+
+            tr:last-child th, tr:last-child td {
+                border-bottom: none;
+            }
+
+        </style>
+
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td></td>
+                <th colspan="4" class="center-header">Schule </th>
+
+            </tr>
+            <tr>
+                <td><b>Schüler:in</b></td>
+                <td><b>A</b></td>
+                <td><b>B</b></td>
+                <td><b>C</b></td>
+                <td><b>D</b></td>
+            </tr>
+            <tr>
+
+                <td><b><span style="color: rgb(13,50,176);">blau</span></b></td>
+                <td>18</td>
+                <td>13</td>
+                <td>8</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><b><span style="color: rgb(241,196,15);">gelb</span></b></td>
+                <td>8</td>
+                <td>18</td>
+                <td>3</td>
+                <td>13</td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rgb(230,126,34);">orange</span></b></td>
+                <td>18</td>
+                <td>13</td>
+                <td>8</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td><b><span style="color:rebeccapurple;">lila</span></b></td>
+                <td>18</td>
+                <td>3</td>
+                <td>8</td>
+                <td>13</td>
+            </tr>
+        </table>
+    </body>
+
+    <br>
+
+    <p>Die Tabelle wird wie folgt gelesen: Wenn Sie beispielsweise der Farbe <b><span style="color:rebeccapurple;">lila</span></b> zugeordnet wurden, erhalten Sie die
+    höchste Auszahlung, wenn Sie der Schule <b>A</b> zugeordnet werden, die zweithöchste Auszahlung, wenn Sie der Schule <b>D</b>
+    zugeordnet werden, die dritthöchste Auszahlung an Schule <b>C</b> und die geringste Auszahlung an Schule <b>B</b>.</p>
+
+    <p><i>Auszahlung</i></p>
+
+    <p>Ihre Auszahlung ergibt sich dadurch, welcher Schule Sie nach einer Zulassungsrunde zugeteilt wurden. <b>Das bedeutet,
+    dass Ihre Entscheidung einen direkten Einfluss auf Ihre Auszahlung hat.</b> Nach jeder der 20 Runden erhalten Sie
+    Rückmeldung darüber, welcher Schule Sie und die anderen Schüler:innen in Ihrer Gruppe zugeteilt wurden.</p>
+
+    <p>Wenn Sie also beispielsweise der Farbe <b><span style="color:rebeccapurple;">lila</span></b> zugeordnet wurden und das
+    Zuteilungsverfahren Sie in der Runde, die für Ihre Auszahlung zufällig ausgweählt wurde, zu Schule <b>C</b> zuordnet,
+    erhalten Sie 8 ECU.</p>
+
+
+    {% next_button %}
+
+{% endblock %}

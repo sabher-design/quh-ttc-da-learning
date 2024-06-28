@@ -1,0 +1,26 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Danke, dass Sie an dem Experiment teilnehmen.{% endblock %}
+
+
+{% block content %}
+
+    <p>Dieses Experiment besteht aus zwei Teilen. Im ersten Teil simulieren wir ein Verfahren, bei dem Schüler:innen
+    Plätze an Schule zugeteilt werden. Sie entscheiden in der Rolle eines Schülers oder einer Schülerin. Der Ablauf und
+    das Zuteilungsverfahren werden nachfolgend beschrieben. Der zweite Teil besteht aus einer Umfrage.</p>
+
+    <p>Ihre Auszahlung hängt von Ihren Entscheidungen und den Entscheidungen der anderen Teilnehmenden im ersten
+    Teil des Experiments ab. Der erste Teil des Experiments besteht aus 20 Runden. Das bedeutet, dass Sie 20 Entscheidungen
+    zu treffen haben. <b>Nach dem Experiment wird eine Runde zufällig für die Auszahlung ausgewählt.</b> Die
+    Auszahlungen werden während des Experiments in ECU (Experimental Currency Units) angegeben. Am Ende des
+    Experiments konvertieren wir die verdienten ECU in € mit der folgenden Rate: <b>1 ECU entspricht 0,50€</b>.</p>
+
+    <p>Bitte beachten Sie, dass Sie für die Teilnahme an dem Experiment nur bezahlt werden, wenn Sie beide Teile des
+    Experiments abgeschlossen haben.</p>
+
+    <p>Kommunizieren Sie nicht mit anderen Teilnehmenden während des Experiments. Wenn Sie zu irgendeinem Zeitpunkt
+    eine Frage haben, heben Sie die Hand und die Experimentator:innen werden Ihnen helfen. </p>
+
+    {% next_button %}
+
+{% endblock %}

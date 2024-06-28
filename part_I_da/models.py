@@ -6,6 +6,7 @@ class Constants(BaseConstants):
     name_in_url = 'part_I_da'
     players_per_group = None
     num_rounds = 1
+    timer_seconds = 300
 class Subsession(BaseSubsession):
     pass
 class Group(BaseGroup):
@@ -15,6 +16,7 @@ class Player(BasePlayer):
 
     ctrq1_da = models.IntegerField(label='1. Wie viele Schüler:innen bewerben sich für einen Schulplatz?', min=0)
     ctrq2_da = models.IntegerField(label='2. Sobald alle Schüler:innen an einer Schule zugelassen wurden, wie viele Plätze bleiben übrig?', min=0)
+    time_left = models.IntegerField(initial=Constants.timer_seconds)
     ctrq3_da_blue = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
     ctrq3_da_yellow = models.StringField(choices=['A', 'B', 'C', 'D'], label='')
     ctrq3_da_orange = models.StringField(choices=['A', 'B', 'C', 'D'], label='')

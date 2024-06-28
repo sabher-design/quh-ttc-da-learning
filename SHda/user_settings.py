@@ -25,8 +25,8 @@ class Constants(BaseConstants):
     #   players 3 and 4 are Type2.                                                                  #
     valuations_t1 = [18, 13, 8, 3]
     valuations_t2 = [8, 18, 3, 13]
-    valuations_t3 = [13, 18, 8, 3]
-    valuations_t4 = [18, 8, 13, 3]
+    valuations_t3 = [18, 13, 8, 3]
+    valuations_t4 = [18, 3, 8, 13]
     #   Set vectors for multiple types in the following way:
     #       valuations_t2 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]
     #       valuations_t3 = [85, 2, 2, 80, 50, 80, 80, 30, 80, 80]

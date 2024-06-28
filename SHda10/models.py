@@ -5,7 +5,7 @@ from otree.api import *
 
 from itertools import chain
 
-from SHda9.user_settings import *
+from SHda10.user_settings import *
 
 author = 'Benjamin Pichl'
 
@@ -31,7 +31,7 @@ class Subsession(BaseSubsession):
     # =========================================================================================== #
     def creating_session(self):
         # CREATE INDICES FOR MOST IMPORTANT VARS ================================================ #
-        print(f"Starting session for SHda9 {self.__class__.__name__}")
+        print(f"Starting session for SHda10 {self.__class__.__name__}")
 
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()

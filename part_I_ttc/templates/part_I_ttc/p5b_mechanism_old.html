@@ -1,0 +1,85 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>In jeder Runde werden die Zulassungen durch das gleiche Verfahren bestimmt. Dieses Verfahren läuft wie folgt ab:</p>
+
+    <p>Nachdem alle Präferenzlisten an die zentrale Zulassungsstelle übermittelt wurden, werden Ihnen und den anderen drei
+    Mitgliedern in Ihrer Gruppe nach dem Zufallsprinzip eine Schule (A bis D) zugewiesen, an der Sie vorläufig zugelassen werden.
+    Eine vorläufige Zulassung bedeutet, dass der Platz an der Schule noch nicht final belegt ist. Jede:r Schüler:in hat die gleichen
+    Chancen auf jede vorläufige Schule und an jeder Schule wird nur ein:e Schüler:in vorläufig zugelassen.</p>
+
+    <p>Die Schulen wiederum erstellen eine Reihenfolge, in der sie die Schüler:innen priorisieren. Jede:r Schüler:in hat
+    die höchste Priorität an der Schule, an der er oder sie vorläufig zugelassen wurde. Die Reihenfolge der weiteren
+    Schüler:innen wird durch eine Lotterie bestimmt. Jede:r Schüler:in hat die gleichen Chancen auf jede Nummer.
+    Schüler:innen mit einer niedrigeren Lotterienummer werden gegenüber Schüler:innen mit einer höheren Lotterienummer bevorzugt.
+    Die vorläufige Zuteilung der Schulen und die Lotterienummern werden in jeder der 20 Runden neu ausgelost und werden
+    nicht bekannt gegeben.</p>
+
+    <p>Die Zulassung an den Schulen funktioniert wie folgt:</p>
+
+    <ul>
+    <li>Nach der vorläufigen Zuteilung der Schulen sind alle Plätze noch zum Tausch verfügbar.</li>
+    <li>Jede:r Schüler:in bewirbt sich zuerst bei der Schule, die auf der Präferenzliste an erster Stelle steht.</li>
+    <li>Eine Schule kann nicht mehr Schüler:innen annehmen, als sie Plätze hat. Jede Schule hat genau einen Platz.
+        <ul>
+            <li>Wenn die Bewerbung an die Schule geschickt wird, an der der Schüler oder die Schülerin bereits vorläufig
+            zugelassen wurde, dann wird die vorläufige Zulassung zu einer endgültigen Zulassung. Der oder die Schüler:in
+            und die entsprechende Schule werden aus dem weiteren Verfahren herausgenommen und es wird mit der nächsten
+            Bewerbung fortgefahren.</li>
+            <li>Wenn die Bewerbung an eine andere Schule geschickt wird, dann wird die Präferenzliste des Gruppenmitglieds
+            betrachtet, das der Schule vorläufig zugeteilt wurde. Wenn der oder die Schüler:in die Schule präferiert,
+            die dem Gruppenmitglied vorläufig zugeteilt wurde, das sich nun auf die andere Schule bewirbt, dann entsteht
+            ein Tausch zu gegenseitigem Vorteil, der alle betroffenen Schüler:innen besserstellt. In diesem Fall wird
+            der Tausch abgeschlossen und die Schüler:innen werden aus dem weiteren Verfahren herausgenommen.</li>
+            <li>In gleicher Weise werden Tauschmöglichkeiten ermittelt, die mehr als zwei Schüler:innen besser
+            stellen. Wann immer ein Zyklus an Bewerbungen gefunden wird, der alle betroffenen Schüler:innen besserstellt,
+            wird der Tausch abgeschlossen und die Schüler:innen und ihre zugeteilten Schulen werden aus dem weiteren
+            Verfahren herausgenommen.</li>
+        </ul>
+    </ul>
+    <p>Das Zulassungsverfahren wird so lange nach diesen Regeln fortgesetzt, bis jede:r Schüler:in vorläufig an einer
+    Schule zugelassen wurde und keine weiteren Tauschmöglichkeiten zum beiderseitigem Vorteil bestehen.
+    Sobald dies der Fall ist, wird das Zulassungsverfahren beendet.</p>
+
+    <p>Sie erhalten nach jeder Runde eine Rückmeldung über die endgültige Zulassung der vier Schüler:innen an den vier
+    Schulen.</p>
+
+
+    <li>Beginnend mit dem oder der Schüler:in mit der niedrigsten Lotterienummer, wird eine Bewerbung an die Schule geschickt,
+    die auf der Präferenzliste an erster Stelle steht.</li>
+        <ul>
+            <li> </li>
+            <li>Wenn die Bewerbung an eine andere Schule geschickt wird, dann wird das Gruppenmitglied, das der Schule vorläufig
+            zugeteilt wurde, an den Anfang der Warteschlange vor den oder die Schüler:in mit der niedrigsten Lotterienummer
+            gesetzt.</li>
+        </ul>
+    <li>Wann immer die Warteschlange verändert wird, wird das Zulassungsverfahren in gleicher Weise fortgesetzt: Für den
+    oder die Schüler:in an der ersten Stelle der Warteschlange wird eine Bewerbung an die Schule geschickt, die auf der
+    Präferenzliste an erster Stelle steht.</li>
+        <ul>
+            <li>Wenn die Bewerbung an die Schule geschickt wird, an der der oder die Schüler:in bereits vorläufig zugelassen
+            wurde, wird die vorläufige Zulassung zu einer endgültigen Zulassung. Das Zulassungsverfahren fährt mit der nächsten
+            Bewerbung fort.</li>
+            <li>Wenn die Bewerbung an eine andere Schule geschickt wird, dann wird das Gruppenmitglied, das der Schule vorläufig
+            zugeteilt wurde, an den Anfang der Warteschlange gesetzt. Auf diese Weise wird jedem Schüler und jeder Schülerin
+            basierend auf seiner oder ihrer Präferenzliste eine Zuteilung garantiert, die mindestens so gut ist wie die durch
+            Zufall vorab bestimmte Zuteilung.</li>
+        </ul>
+    <li>Ein Tausch zum beiderseitigem Vorteil wird erreicht, wenn ein Zyklus an Bewerbungen gefunden wird, der alle betroffenen
+    Schüler:innen besserstellt. In diesem Fall wird der Tausch abgeschlossen und die Schüler:innen und ihre zugeteilten
+    Schulen werden aus dem weiteren Verfahren herausgenommen.</li>
+    </ul>
+
+    <p>Das Zulassungsverfahren wird so lange nach diesen Regeln fortgesetzt, bis jede:r Schüler:in vorläufig an einer
+    Schule zugelassen wurde und keine weiteren Tauschmöglichkeiten zum beiderseitigem Vorteil bestehen.
+    Sobald dies der Fall ist, wird das Zulassungsverfahren beendet.</p>
+
+    <p>Sie erhalten nach jeder Runde eine Rückmeldung über die endgültige Zulassung der vier Schüler:innen an den vier
+    Schulen.</p>
+
+    {% next_button %}
+
+{% endblock %}

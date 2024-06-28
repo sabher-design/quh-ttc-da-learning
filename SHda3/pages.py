@@ -102,6 +102,22 @@ class Results(Page):
     # METHOD: =================================================================================== #
     # CREATE VARIABLES TO DISPLAY ON RESULTS.HTML =============================================== #
     # =========================================================================================== #
+    def before_next_page(self):
+        # Store the original payoff
+        base_payoff = float(self.player.payoff)
+
+        # Calculate half of the payoff, formatted to two decimal places
+        half_payoff = base_payoff / 2
+
+        # Calculate the final payoff with show-up fee, formatted to two decimal places
+        final_payoff = half_payoff + 4
+
+        # Store the payoff in participant vars to make it accessible in later apps/pages
+        self.participant.vars['SHda3_payoff'] = "{:.0f}".format(base_payoff)
+        self.participant.vars['SHda3_payoff_half'] = "{:.2f}".format(half_payoff)
+        self.participant.vars['SHda3_payoff_final'] = "{:.2f}".format(final_payoff)
+
+
     def vars_for_template(self):
         player_prefs = [i for i in self.participant.vars['player_prefs']]
         success3 = [i for i in self.participant.vars['success3']]

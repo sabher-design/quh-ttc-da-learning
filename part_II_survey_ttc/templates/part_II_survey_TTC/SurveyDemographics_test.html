@@ -1,0 +1,46 @@
+{% extends 'global/Page.html' %}
+{% load otree %}  {# Update this line if needed #}
+
+{% block title %}Teil II - Umfrage: Demographische Angaben{% endblock %}
+
+{% block content %}
+<div class="questionnaire_header">
+    <div class="questionnaire_subheader">
+        <b>Studium und Beruf</b>
+    </div>
+    <div>
+        {% formfield player.gender %}
+        {% formfield player.age %}
+        {% formfield player.studying_currently %}
+        <div id="field_of_study" style="display: none;">
+            {% formfield player.study_field %}
+        </div>
+        <div id="occupation" style="display: none;">
+            {% formfield player.current_occupation %}
+        </div>
+        {% formfield player.math_grade %}
+        {% formfield player.abi_grade %}
+        <div id="semester" style="display: none;">
+            {% formfield player.semester %}
+        </div>
+    </div>
+</div>
+
+{% next_button %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let zeroRadio = document.getElementById('id_studying_currently_0');
+        let oneRadio = document.getElementById('id_studying_currently_1');
+        let twoRadio = document.getElementById('id_studying_currently_2');
+        let threeRadio = document.getElementById('id_studying_currently_3');
+
+        function showSelection() {
+            let selectionStudy = document.getElementById('study_field');
+            let selectionOccupation = document.getElementById('')
+        }
+    });
+</script>
+{% endblock %}

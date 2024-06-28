@@ -1,0 +1,23 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Teil II - Umfrage: Vertrauen{% endblock %}
+
+{% block content %}
+
+<p>
+    Bitte geben Sie bei den folgenden Fragen Ihre persönliche Einschätzung auf der Skala an, wobei der Wert 0 bedeutet:
+    "beschreibt mich überhaupt nicht" und der Wert 10 bedeutet: "beschreibt mich perfekt".
+</p>
+
+<br>
+
+<p>
+    Wie gut treffen die folgenden Aussagen auf Sie als Person zu?
+</p>
+
+{% formfields %}
+
+
+{% next_button %}
+
+{% endblock %}

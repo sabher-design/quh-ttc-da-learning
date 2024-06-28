@@ -1,0 +1,42 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Zulassungsverfahren{% endblock %}
+
+{% block content %}
+
+    <p>In jeder Runde werden die Zulassungen durch das gleiche Verfahren bestimmt. Dieses Verfahren läuft wie folgt ab:</p>
+
+    <p>Nachdem alle Präferenzlisten an die zentrale Zulassungsstelle übermittelt wurden, werden Ihnen und den anderen
+    drei Mitgliedern in Ihrer Gruppe nach dem Zufallsprinzip eine Lotterienummer (1 bis 4) zugewiesen. Jede:r
+    Schüler:in hat die gleichen Chancen auf jede Nummer. Bei der Zuteilung der Schüler:innen auf die Schulen werden die
+    Schüler:innen mit einer niedrigeren Lotterienummer gegenüber den Schüler:innen mit einer höheren Lotterienummer
+    bevorzugt behandelt. Die Lotterienummern werden in jeder der 20 Runden neu ausgelost. </p>
+
+    <p>Die Zulassung an den Schulen funktioniert wie folgt:</p>
+
+    <ul>
+    <li>Jede:r Schüler:in bewirbt sich zuerst bei der Schule, die auf der Präferenzliste an erster Stelle steht.</li>
+    <li>Eine Schule kann nicht mehr Schüler:innen annehmen, als sie Plätze hat. Jede Schule hat genau einen Platz. Wenn
+    sich an einer Schule nur ein:e
+    Schüler:in bewirbt, wird diese:r Schüler:in vorläufig zugelassen. Eine vorläufige Zulassung bedeutet, dass der Platz
+    an der Schule noch nicht final belegt ist. Wenn sich mehr Schüler:innen an einer Schule bewerben, lässt die Schule
+    vorläufig den Schüler oder die Schülerin mit der niedrigsten Lotterienummer zu. Die Schüler:innen, die keinen Platz
+    erhalten, werden an der jeweiligen Schule endgültig abgelehnt.</li>
+    <li>Wenn ein:e Schüler:in an einer Schule abgelehnt wurde, bewirbt er oder sie sich bei der nächsten Schule auf der
+    Präferenzliste.</li>
+    <li>Wann immer eine Schule neue Bewerbungen erhält, werden alle Bewerbungen neu betrachtet. Wenn sich mehr Schüler:innen
+    an einer Schule bewerben, lässt die Schule wieder vorläufig den Schüler oder die Schülerin mit der niedrigsten
+    Lotterienummer zu. Die Schüler:innen, die keinen Platz erhalten, werden an der jeweiligen Schule endgültig abgelehnt.</li>
+    <li>...</li>
+    </ul>
+
+    <p>Das Zulassungsverfahren wird so lange nach diesen Regeln fortgesetzt, bis jede:r Schüler:in vorläufig an einer
+    Schule zugelassen wurde und keine Bewerbung mehr abgelehnt wird. Sobald dies der Fall ist, wird die vorläufige
+    Zulassung der Schüler:innen zu einer endgültigen Zulassung und das Zulassungsverfahren wird beendet.</p>
+
+    <p>Sie erhalten nach jeder Runde eine Rückmeldung über die endgültige Zulassung der vier Schüler:innen an den vier
+    Schulen.</p>
+
+    {% next_button %}
+
+{% endblock %}

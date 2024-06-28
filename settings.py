@@ -1,28 +1,40 @@
 from os import environ
 SESSION_CONFIG_DEFAULTS = dict(real_world_currency_per_point=1, participation_fee=0)
 SESSION_CONFIGS = [
-    #dict(
-     #   name='SH_exp',
-      #  display_name="SH_ttc",
-       # num_demo_participants=12,
-        #app_sequence=['SHttc_test', 'SHttc_test2']
-       # app_sequence=['part_0_intro', 'part_I_ttc', 'part_I_da']
-       # app_sequence=['SHttc1', "SHttc2", "SHttc3"]
-        #app_sequence = ['SHda1', 'SHda2', 'SHda3']
-   # ),
-    #dict(
-     #   name='SH_da',
-      #  display_name="SH_da",
-       # num_demo_participants=12,
-        #app_sequence=['SHda1', 'SHda2', 'SHda3']
-    #),
     dict(
-        name='test',
-        display_name="test",
+        name='SH_ttc_test',
+        display_name="SH_t_test",
         num_demo_participants=12,
-        app_sequence=['SHttc11', 'SHttc3', 'SHttc16', 'part_II_survey']
+        # app sequence test:
+        app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'part_II_survey_ttc']
+    ),
+    dict(
+        name='SH_da_test',
+        display_name="SH_d_test",
+        num_demo_participants=16,
+        # app sequence test:
+        # app sequence session 1:
+        app_sequence=['part_0_intro_da', 'part_I_da', 'part_II_survey_da']
+    ),
+    dict(
+        name='SH_ttc',
+        display_name="SH_t",
+        num_demo_participants=12,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17',
+        'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8', 'part_II_survey_ttc']
+    ),
+    dict(
+        name='SH_da',
+        display_name="SH_d",
+        num_demo_participants=16,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_da', 'part_I_da', 'SHda11', 'SHda7', 'SHda1', 'SHda12', 'SHda19', 'SHda14', 'SHda9', 'SHda5', 'SHda13', 'SHda17',
+        'SHda3', 'SHda15', 'SHda20', 'SHda4', 'SHda10', 'SHda16', 'SHda18', 'SHda6', 'SHda2', 'SHda8', 'part_II_survey_da']
     )
 ]
+
+
 # session1 app_sequence=['SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17'
 # 'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8']
 
@@ -57,5 +69,4 @@ SECRET_KEY = '3=&13do*ayi(=fc0a_t1!*n&pwa$q1myi!q0cdit+pk-9-_7t('
 
 # if an app is included in SESSION_CONFIGS, you don't need to list it here
 INSTALLED_APPS = ['otree']
-
 

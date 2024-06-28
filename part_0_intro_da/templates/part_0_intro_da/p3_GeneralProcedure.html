@@ -1,0 +1,43 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% load static %}
+{% block title %}Ablauf erster Teil des Experiments und Bezahlung{% endblock %}
+
+{% block content %}
+
+    <p>Zu Beginn des Experiments werden Ihnen und den anderen Schüler:innen eine Farbe (<b><span style="color: rgb(13,50,176);">blau</span></b>,
+        <b><span style="color: rgb(241,196,15);">gelb</span></b>, <b><span style="color:rgb(230,126,34);">orange</span></b>
+        oder <b><span style="color:rebeccapurple;">lila</span></b>)
+    zugeteilt. In jeder Runde werden Sie einer Gruppe mit drei weiteren
+    Schüler:innen zugeteilt, wobei sich die Zusammensetzung der Gruppe in jeder Runde ändert. </p>
+
+    <p> Sie und die anderen drei Schüler:innen konkurrieren um Schulplätze. Es gibt vier Schulen (<b>A</b>, <b>B</b>,
+        <b>C</b>, <b>D</b>) mit jeweils genau <b>einem freien Platz</b>. Die Schulen unterscheiden sich darin, welchen Wert sie für Sie haben. Je höher der Wert
+    der Schule, desto höher Ihre potenzielle Auszahlung. Zu Beginn jeder Runde sehen Sie und die anderen Schüler:innen
+    die Werte der Schulen für alle Gruppenmitglieder in einer Tabelle. Die Werte der Schulen ändern sich in jeder Runde.</p>
+
+    <p>Ein Beispiel für eine Werte-Tabelle könnte wie folgt sein: </p>
+
+        <img src="{% static 'part_0_intro_da/screenshot_table.png' %}" alt="Example Image">
+
+    <br>
+    <br>
+
+    <p>Die Tabelle wird wie folgt gelesen: Wenn Sie beispielsweise der Farbe <b><span style="color:rebeccapurple;">lila</span></b> zugeordnet wurden, erhalten Sie die
+    höchste Auszahlung, wenn Sie der Schule <b>A</b> zugeordnet werden, die zweithöchste Auszahlung, wenn Sie der Schule <b>D</b>
+    zugeordnet werden, die dritthöchste Auszahlung an Schule <b>C</b> und die geringste Auszahlung an Schule <b>B</b>.</p>
+
+    <p><i>Auszahlung</i></p>
+
+    <p>Ihre Auszahlung ergibt sich dadurch, welcher Schule Sie nach einer Zulassungsrunde zugeteilt wurden. <b>Das bedeutet,
+    dass Ihre Entscheidung einen direkten Einfluss auf Ihre Auszahlung hat.</b> Nach jeder der 20 Runden erhalten Sie
+    Rückmeldung darüber, welcher Schule Sie zugeteilt wurden.</p>
+
+    <p>Wenn Sie also beispielsweise der Farbe <b><span style="color:rebeccapurple;">lila</span></b> zugeordnet wurden und das
+    Zuteilungsverfahren Sie in der Runde, die für Ihre Auszahlung zufällig ausgewählt wurde, zu Schule <b>C</b> zuordnet,
+    erhalten Sie 8 ECU.</p>
+
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Teil II: Umfrage{% endblock %}
+
+{% block content %}
+
+{% formfields %}
+Vielen Dank für Ihre Teilnahme am ersten Teil des Experiments. Im zweiten Teil bitten wir Sie, einige Fragen zu beantworten.
+Im Anschluss wird eine der 20 Runden aus dem ersten Teil zufällig ausgewählt und Sie erhalten Ihre finale Auszahlung für
+die Teilnahme an diesem Experiment, die sich aus dem show-up fee und der Auszahlung aus der ausgewählten Runde zusammensetzt.
+
+<br>
+    <br>
+
+{% next_button %}
+
+{% endblock %}

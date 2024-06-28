@@ -1,0 +1,33 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Entscheidung{% endblock %}
+
+{% block content %}
+
+    <p>In jeder Runde treffen Sie eine Entscheidung darüber, in welcher Reihenfolge Sie sich an den Schulen bewerben
+    möchten. Das heißt, Sie erstellen eine Präferenzliste über die Schulen. Sie müssen alle vier Schulen in der
+    Präferenzliste auflisten. Sie und alle anderen Mitglieder Ihrer Gruppe schicken die Präferenzlisten an eine zentrale
+    Zulassungsstelle.</p>
+
+        <p style="font-size: 20px;"><b>Beispiel:</b></p>
+
+        <img src="{% static 'part_I_intro_ttc/screenshot_exampledec.png' %}" alt="Example Image">
+
+    <br>
+    <br>
+
+    Sobald Sie und alle anderen Mitglieder in Ihrer Gruppe die Präferenzlisten an die zentrale Zulassungsstelle übermittelt
+    haben, werden die Zulassungen ermittelt. Wie genau die Zulassungen ermittelt werden, wird auf den folgenden Seiten
+    erklärt. Für dieses Beispiel gilt:
+
+    <br>
+    <br>
+
+    <p>Sie erhalten 18 ECU, wenn Sie einen Platz an Schule <b>A</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 3 ECU, wenn Sie einen Platz an Schule <b>B</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 8 ECU, wenn Sie einen Platz an Schule <b>C</b> zugeteilt bekommen.</p>
+    <p>Sie erhalten 13 ECU, wenn Sie einen Platz an Schule <b>D</b> zugeteilt bekommen.</p>
+
+    {% next_button %}
+
+{% endblock %}

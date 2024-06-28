@@ -1,0 +1,16 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Teil II - Umfrage: Risiko{% endblock %}
+
+{% block content %}
+
+<p>
+    Bitte geben Sie bei der folgenden Frage Ihre persönliche Einschätzung auf der Skala an, wobei der Wert 0 bedeutet:
+    "nicht bereit, Risiken einzugehen" und der Wert 10 bedeutet: "voll und ganz bereit, Risiken einzugehen".
+</p>
+
+{% formfields %}
+
+{% next_button %}
+
+{% endblock %}

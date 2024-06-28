@@ -125,4 +125,22 @@
     <br>
 
     {% next_button %}
+
+
+    <script>
+        (function() {
+            var seconds = {{ timeout_seconds }};
+            function updateTimer() {
+                var timer = document.getElementById('timer');
+                timer.innerHTML = seconds + " seconds remaining";
+                if (seconds > 0) {
+                    seconds--;
+                    setTimeout(updateTimer, 1000);
+                } else {
+                    document.forms[0].submit();  // Auto-submit the form when the timer runs out
+                }
+            }
+            updateTimer();
+        })();
+    </script>
 {% endblock %}

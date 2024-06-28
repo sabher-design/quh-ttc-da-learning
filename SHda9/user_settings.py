@@ -39,9 +39,9 @@ class Constants(BaseConstants):
     #   resources over the players have to be specified. Please assign a priority vector for every  #
     #   resource. The length of each vector has to be equal to the number of players specified      #
     #   above. The structure is [<Player with Priority 1>, <Player with Priority 2>, ...]           #
-    prio9_r1 = [1, 4, 2, 3]
+    prio9_r1 = [1, 3, 4, 2]
     prio9_r2 = [2, 3, 4, 1]
-    prio9_r3 = [3, 2, 4, 1]
+    prio9_r3 = [3, 4, 2, 1]
     prio9_r4 = [4, 3, 2, 1]
 
     #   Set vectors for multiple resources in the following way:

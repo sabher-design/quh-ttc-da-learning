@@ -1,0 +1,38 @@
+{% extends 'global/Page.html' %}
+{% load otree %}
+{% block title %}Teil II - Umfrage: Münzwurf{% endblock %}
+
+{% block content %}
+<p>In der folgenden Tabelle werden hypothetische Münzwürfe mit unterschiedlichen Auszahlungen dargestellt. Die
+Auszahlungen unterscheiden sich darin, welchen Eurobetrag Sie verlieren würden, wenn die Münze Kopf zeigt. Geben Sie bitte
+für jede Zeile der Tabelle an, ob Sie die Münze werfen würden oder nicht.</p>
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>Ich möchte die Münze nicht werfen.</th>
+        <th>Ich möchte die Münze werfen.</th>
+    </tr>
+
+    {% for field in form %}
+    <tr>
+        <td>Wenn die Münze Kopf zeigt, verlieren Sie <b>{{ field.label }}</b>; wenn die Münze Zahl zeigt, <b>gewinnen Sie {{ Constants.gain }}€ </b>.</td>
+        <!-- Render "not toss" option -->
+        <td style="text-align: center;">
+            <label>
+                <input type="radio" name="{{ field.html_name }}" value="0" required>
+            </label>
+        </td>
+        <!-- Render "toss" option -->
+        <td style="text-align: center;">
+            <label>
+                <input type="radio" name="{{ field.html_name }}" value="1">
+
+            </label>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% next_button %}
+{% endblock %}

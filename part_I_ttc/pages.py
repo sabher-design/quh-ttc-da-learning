@@ -20,6 +20,14 @@ class p7b_ctrq_1(Page):
 class p7b_ctrq_2(Page):
     form_model = 'player'
     form_fields = ['ctrq3_ttc_blue', 'ctrq3_ttc_yellow', 'ctrq3_ttc_orange', 'ctrq3_ttc_purple']
+    timeout_seconds = Constants.timer_seconds
+    def before_next_page(self):
+        self.player.time_left = self.timeout_seconds
+
+    def vars_for_template(self):
+        return {
+            'timeout_seconds': self.timeout_seconds
+        }
 
 
 class p7b_mc(Page):

@@ -49,10 +49,10 @@ class Constants(BaseConstants):
     #prio16_r3 = [1, 2, 3, 4]
     #prio16_r4 = [1, 2, 3, 4]
 
-    prio16_r1 = [4, 2, 3, 1]
-    prio16_r2 = [1, 2, 4, 3]
+    prio16_r1 = [4, 2, 1, 3]
+    prio16_r2 = [1, 4, 2, 3]
     prio16_r3 = [2, 4, 1, 3]
-    prio16_r4 = [3, 4, 1, 2]
+    prio16_r4 = [3, 4, 2, 1]
 
 # Set vectors for multiple resources in the following way:
 #       priorities_r2 = [1, 2]
