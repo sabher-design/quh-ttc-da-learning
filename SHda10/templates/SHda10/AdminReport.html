@@ -44,7 +44,7 @@
         <table class="instr-table">
             <thead>
             <tr>
-                <th colspan="{{ Constants.nr_courses }}">Resource val9:</th>
+                <th colspan="{{ Constants.nr_courses }}">Resource val10:</th>
             </tr>
             <tr>
                 {% for i in indices %}
@@ -53,7 +53,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for type, val9 in val9_all_types %}
+            {% for type, val10 in val10_all_types %}
             <tr>
                 <td colspan="{{ Constants.nr_courses }}"><b>{{ type }} -
                     Player(s):</b>
@@ -63,7 +63,7 @@
                 </td>
             </tr>
             <tr>
-                {% for v in val9 %}
+                {% for v in val10 %}
                 <td>{{ v }}</td>
                 {% endfor %}
             </tr>
@@ -182,12 +182,12 @@
             </tr>
             </thead>
             <tbody>
-            {% for p, success9 in success9_with_id %}
+            {% for p, success10 in success10_with_id %}
             <tr>
                 <td>{{ p.id_in_subsession }}</td>
                 <td>{{ p.id_in_group }}</td>
 
-                {% for b in success9 %}
+                {% for b in success10 %}
                 <td>{% if b == True %} X {% else %} {% endif %}</td>
                 {% endfor %}
             </tr>
@@ -221,12 +221,12 @@
             {% endfor %}
 
             {% for i in indices %}
-            <th>success9_r{{ i }}</th>
+            <th>success10_r{{ i }}</th>
             {% endfor %}
         </tr>
     </thead>
     <tbody>
-        {% for p, val9, prefs, success9 in data_all %}
+        {% for p, val10, prefs, success10 in data_all %}
         <tr>
             <td>{{ p.id_in_subsession }}</td>
 
@@ -234,7 +234,7 @@
 
             <td>{{ p.role }}</td>
 
-            {% for v in val9 %}
+            {% for v in val10 %}
             <td>{{ v }}</td>
             {% endfor %}
 
@@ -242,7 +242,7 @@
             <td>{{ b }}</td>
             {% endfor %}
 
-            {% for b in success9 %}
+            {% for b in success10 %}
             <td>{{ b }}</td>
             {% endfor %}
         </tr>

@@ -185,7 +185,7 @@ class Group(BaseGroup):
         #(Constants.prio2.copy())
 
         # IMPLEMENTATION OF THE TTC MECHANISM =================================================== #
-        while size_counter <= len(players_in_round) - 1:
+        while size_counter <= len(players_in_round) +10:
 
             # DETERMINE WHICH PLAYERS ARE PLAYING IN THIS ROUND ================================= #
             players_in_round = []
@@ -220,7 +220,7 @@ class Group(BaseGroup):
             # IF A CYCLE IS LARGER THAN 1 WE NEED TO APPEND MORE THAN 2 ITEMS TO THE CYCLE ====== #
             if size_counter > 1:
                 m = 0
-                while m < size_counter - 1:
+                while m < size_counter:
                     for i in cycles_check:
                         j = next(j for j in top_prefs_in_round if j[0] == i[-1][1])
                         k = next(k for k in top_prio2_in_round if k[0] == j[-1])

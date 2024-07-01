@@ -52,28 +52,28 @@ class Subsession(BaseSubsession):
         for p in players:
             p.participant.vars['form_fields_plus_index'] = list(zip(indices, form_fields))
             p.participant.vars['player_prefs'] = [None for n in indices]
-            p.participant.vars['success9'] = [False for n in indices]
+            p.participant.vars['success10'] = [False for n in indices]
 
-        # ALLOCATE THE CORRECT val9 VECTOR TO PLAYER (DEPENDING ON TYPE) ================== #
-        # AND GET OTHER PLAYERS' val9 AND TYPES TO DISPLAY IF DESIRED                       #
+        # ALLOCATE THE CORRECT val10 VECTOR TO PLAYER (DEPENDING ON TYPE) ================== #
+        # AND GET OTHER PLAYERS' val10 AND TYPES TO DISPLAY IF DESIRED                       #
         type_names = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
 
         for p in players:
-            p.participant.vars['val9_others'] = []
+            p.participant.vars['val10_others'] = []
             p.participant.vars['other_types_names'] = []
             for t in type_names:
                 if p.role() == t:
-                    p.participant.vars['val9'] = Constants.val9[type_names.index(t)]
+                    p.participant.vars['val10'] = Constants.val10[type_names.index(t)]
                 else:
                     if Constants.nr_types > 1:
-                        p.participant.vars['val9_others'].append(Constants.val9[type_names.index(t)])
+                        p.participant.vars['val10_others'].append(Constants.val10[type_names.index(t)])
                         p.participant.vars['other_types_names'] = [t for t in type_names if p.role() != t]
 
-        # ALLOCATE THE CORRECT prio9 VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
+        # ALLOCATE THE CORRECT prio10 VECTOR TO PLAYER (DEPENDING ON ID) ==================== #
         for p in players:
-            p.participant.vars['prio9'] = []
-            for i in Constants.prio9:
-                p.participant.vars['prio9'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
+            p.participant.vars['prio10'] = []
+            for i in Constants.prio10:
+                p.participant.vars['prio10'].extend([(i.index(j) + 1) for j in i if j == p.id_in_group])
 
     # METHOD: =================================================================================== #
     # PREPARE ADMIN REPORT ====================================================================== #
@@ -82,36 +82,36 @@ class Subsession(BaseSubsession):
         indices = [j for j in range(1, Constants.nr_courses + 1)]
         players = self.get_players()
         table_nr_tds_decisions = Constants.nr_courses + 2
-        table_nr_tds_prio9 = Constants.nr_courses + 1
+        table_nr_tds_prio10 = Constants.nr_courses + 1
         player_prefs = [p.participant.vars['player_prefs'] for p in players]
         last_player_per_group = [i[-1] for i in self.get_group_matrix()]
-        player_val9 = [p.participant.vars['val9'] for p in players]
-        player_prio9 = [p.participant.vars['prio9'] for p in players]
+        player_val10 = [p.participant.vars['val10'] for p in players]
+        player_prio10 = [p.participant.vars['prio10'] for p in players]
         types = ['Type ' + str(i) for i in range(1, Constants.nr_types + 1)]
-        val9 = [i for i in Constants.val9]
+        val10 = [i for i in Constants.val10]
         capacities = [i for i in Constants.capacities]
         decisions = zip(players, player_prefs)
-        success9 = [p.participant.vars['success9'] for p in players]
-        success9_with_id = zip(players, success9)
-        val9_all_types = zip(types, val9)
-        prio9_all_players = zip(players, player_prio9)
+        success10 = [p.participant.vars['success10'] for p in players]
+        success10_with_id = zip(players, success10)
+        val10_all_types = zip(types, val10)
+        prio10_all_players = zip(players, player_prio10)
 
-        data_all = zip(players, player_val9, player_prefs, success9)
+        data_all = zip(players, player_val10, player_prefs, success10)
 
         return {
             'indices': indices,
             'players': players,
             'table_nr_tds_decisions': table_nr_tds_decisions,
-            'table_nr_tds_prio9': table_nr_tds_prio9,
+            'table_nr_tds_prio10': table_nr_tds_prio10,
             'player_prefs': player_prefs,
             'last_player_per_group': last_player_per_group,
-            'player_prio9': player_prio9,
+            'player_prio10': player_prio10,
             'capacities': capacities,
             'decisions': decisions,
-            'success9': success9,
-            'success9_with_id': success9_with_id,
-            'val9_all_types': val9_all_types,
-            'prio9_all_players': prio9_all_players,
+            'success10': success10,
+            'success10_with_id': success10_with_id,
+            'val10_all_types': val10_all_types,
+            'prio10_all_players': prio10_all_players,
 
             'data_all': data_all
         }
@@ -210,7 +210,7 @@ class Group(BaseGroup):
                         if iteritem[3] == n:
                             attendants[n - 1].append(iteritem)
 
-                    # Sort and then trim the attendants list for each school based on prio9
+                    # Sort and then trim the attendants list for each school based on prio10
                     for n in indices:
                         # Sort attendants based on the school's preference for students
                         attendants[n - 1].sort(key=lambda sublist: sublist[1], reverse=False)
@@ -235,7 +235,7 @@ class Group(BaseGroup):
                 for n in indices:
                     attendants[n - 1] = attendants[n - 1][0:Constants.capacities[n - 1]]
                     print(f"Attendants after Step 02: {attendants}")
-        # ASSIGN A RESOURCE TO EACH SUBJECT AND CREATE A DUMMY VARIABLE FOR success9 PREFS IN = #
+        # ASSIGN A RESOURCE TO EACH SUBJECT AND CREATE A DUMMY VARIABLE FOR success10 PREFS IN = #
         # ORDER TO NICELY DISPLAY IT ON RESULTS.HTML.                                             #
         all_attendants_flat = list(chain.from_iterable(attendants))
         for p in players:
@@ -255,8 +255,8 @@ class Group(BaseGroup):
         for p in players:
             for n in indices:
                 if n in p.participant.vars['player_resource']:
-                    p.payoff += p.participant.vars['val9'][n - 1]
-                    p.participant.vars['success9'][n - 1] = True
+                    p.payoff += p.participant.vars['val10'][n - 1]
+                    p.participant.vars['success10'][n - 1] = True
 
 
 class Player(BasePlayer):
@@ -289,7 +289,7 @@ class Player(BasePlayer):
 
         self.participant.vars['prepared_list'] = []
 
-        for i in Constants.prio9:
+        for i in Constants.prio10:
             self.participant.vars['prepared_list'].append([(i.index(j) + 1) for j in i if j == self.id_in_group])
 
         for i in self.participant.vars['prepared_list']:

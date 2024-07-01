@@ -78,14 +78,14 @@
                 <br/>({% trans "You are"  %} {{ player.role }})
                 {% endif %}
             </th>
-            {% for i in val9 %}
+            {% for i in val10 %}
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
-        {% if Constants.show_prio9 %}
+        {% if Constants.show_prio10 %}
         <tr>
             <th>{% trans "Resources' priorities<br/>(... out of" %} {{ players_per_group }})</th>
-            {% for i in prio9 %}
+            {% for i in prio10 %}
             <td>{{ i }}</td>
             {% endfor %}
         </tr>

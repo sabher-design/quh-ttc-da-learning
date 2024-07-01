@@ -102,7 +102,7 @@ class Player(BasePlayer):
     trust_mechanism = models.IntegerField(
         choices=list(range(11)),
         widget=widgets.RadioSelectHorizontal,
-        label='''7. Ich bin davon überzeugt, dass das Zuteilungs-Verfahren aus dem ersten Teil gut funktioniert.'''
+        label='''7. Ich bin davon überzeugt, dass das Zulassungsverfahren aus dem ersten Teil gut funktioniert.'''
     )
     trust_institutions_gvmnt = models.IntegerField(
         choices=list(range(11)),
@@ -119,14 +119,17 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
         label='''10. Im Allgemeinen habe ich Vertrauen in Bildungsbehörden.'''
     )
-    crt_bat = models.IntegerField(label='11. Ein Schläger und ein Ball kosten insgesamt 1,10€. Der Schläger kostet 1€ mehr als der Ball. Wie viel kostet der Ball?')
-    crt_widget = models.IntegerField(label='12. Wenn 5 Maschinen 5 Minuten brauchen um 5 Produkte herzustellen, wie lange benötigen dann 100 Maschinen, um 100 Produkte herzustellen?')
-    crt_lake = models.IntegerField(label='13. In einem See wachsen Seerosen, die sich jeden Tag verdoppeln. Wenn es 48 Tage dauert, bis der ganze See bedeckt ist, wie lange dauert es, bis die Seerosen die Hälfte des Sees bedecken?')
+    crt_bat = models.DecimalField(max_digits=4, decimal_places=2,
+                                  label='11. Ein Schläger und ein Ball kosten insgesamt 1,10€. Der Schläger kostet 1€ mehr als der Ball. Wie viel kostet der Ball?')
+    crt_widget = models.DecimalField(max_digits=4, decimal_places=2,
+                                     label='12. Wenn 5 Maschinen 5 Minuten brauchen um 5 Produkte herzustellen, wie lange benötigen dann 100 Maschinen, um 100 Produkte herzustellen?')
+    crt_lake = models.DecimalField(max_digits=4, decimal_places=2,
+                                   label='13. In einem See wachsen Seerosen, die sich jeden Tag verdoppeln. Wenn es 48 Tage dauert, bis der ganze See bedeckt ist, wie lange dauert es, bis die Seerosen die Hälfte des Sees bedecken?')
     gender = models.StringField(choices=[['female', 'Weiblich'], ['male', 'Männlich'], ['diverse', 'Divers'],
                                          ['no_gender', 'Ich identifiziere mich mit keinem Geschlecht']],
                                 label='Mit welchem Geschlecht identifizieren Sie sich?',
                                 widget=widgets.RadioSelect)
-    age = models.IntegerField(label='Wie alt sind Sie?', max=125, min=13)
+    age = models.IntegerField(label='Wie alt sind Sie?', max=125, min=16)
     studying_currently = models.StringField(
         label="Studieren Sie derzeit oder haben Sie ein Studium abgeschlossen?",
         widget=widgets.RadioSelect,

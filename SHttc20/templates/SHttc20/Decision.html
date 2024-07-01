@@ -97,7 +97,7 @@
             <td>{{ i|c }}</td>
             {% endfor %}
         </tr>
-        {% if Constants.show_prio18 %}
+        {% if Constants.show_prio20 %}
         <tr>
             {% if Constants.application_framing %}
             <th>{% trans "Schools' prio20<br/>(... out of" %} {{ players_per_group }})</th>
@@ -128,7 +128,7 @@
     </table>
 </div>
 
-{% if Constants.show_val18 and Constants.show_types and Constants.nr_types > 1 %}
+{% if Constants.show_val20 and Constants.show_types and Constants.nr_types > 1 %}
 <p class="justify">
     {% blocktrans trimmed %}
         <br>
@@ -157,7 +157,7 @@
         </tr>
         </thead>
         <tbody>
-            {% for type, val20 in val18_others %}
+            {% for type, val20 in val20_others %}
 
             <tr>
                 <th>{% trans "Wert der Schule<br/>für Schüler:in" %} <span id="playerTypeLabel"> <script>document.write(typeMapping['{{ type }}'])</script></span></th>

@@ -4,7 +4,7 @@ SESSION_CONFIGS = [
     dict(
         name='SH_ttc_test',
         display_name="SH_t_test",
-        num_demo_participants=12,
+        num_demo_participants=4,
         # app sequence test:
         app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'part_II_survey_ttc']
     ),

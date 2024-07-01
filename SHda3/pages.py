@@ -110,7 +110,7 @@ class Results(Page):
         half_payoff = base_payoff / 2
 
         # Calculate the final payoff with show-up fee, formatted to two decimal places
-        final_payoff = half_payoff + 4
+        final_payoff = half_payoff + 6
 
         # Store the payoff in participant vars to make it accessible in later apps/pages
         self.participant.vars['SHda3_payoff'] = "{:.0f}".format(base_payoff)
