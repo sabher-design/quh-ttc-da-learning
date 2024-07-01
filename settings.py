@@ -4,7 +4,7 @@ SESSION_CONFIGS = [
     dict(
         name='SH_ttc_test',
         display_name="SH_t_test",
-        num_demo_participants=4,
+        num_demo_participants=12,
         # app sequence test:
         app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'part_II_survey_ttc']
     ),
@@ -17,7 +17,7 @@ SESSION_CONFIGS = [
         app_sequence=['part_0_intro_da', 'part_I_da', 'part_II_survey_da']
     ),
     dict(
-        name='SH_ttc',
+        name='SH_ttc_labtest',
         display_name="SH_t",
         num_demo_participants=12,
         # app sequence session 1:
@@ -25,7 +25,39 @@ SESSION_CONFIGS = [
         'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8', 'part_II_survey_ttc']
     ),
     dict(
-        name='SH_da',
+        name='SH_da_labtest',
+        display_name="SH_d",
+        num_demo_participants=16,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_da', 'part_I_da', 'SHda11', 'SHda7', 'SHda1', 'SHda12', 'SHda19', 'SHda14', 'SHda9', 'SHda5', 'SHda13', 'SHda17',
+        'SHda3', 'SHda15', 'SHda20', 'SHda4', 'SHda10', 'SHda16', 'SHda18', 'SHda6', 'SHda2', 'SHda8', 'part_II_survey_da']
+    ),
+    dict(
+        name='SH_ttc_addtest1',
+        display_name="SH_t",
+        num_demo_participants=12,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17',
+        'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8', 'part_II_survey_ttc']
+    ),
+    dict(
+        name='SH_da_addtest1',
+        display_name="SH_d",
+        num_demo_participants=16,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_da', 'part_I_da', 'SHda11', 'SHda7', 'SHda1', 'SHda12', 'SHda19', 'SHda14', 'SHda9', 'SHda5', 'SHda13', 'SHda17',
+        'SHda3', 'SHda15', 'SHda20', 'SHda4', 'SHda10', 'SHda16', 'SHda18', 'SHda6', 'SHda2', 'SHda8', 'part_II_survey_da']
+    ),
+    dict(
+        name='SH_ttc_addtest2',
+        display_name="SH_t",
+        num_demo_participants=12,
+        # app sequence session 1:
+        app_sequence=['part_0_intro_ttc', 'part_I_ttc', 'SHttc11', 'SHttc7', 'SHttc1', 'SHttc12', 'SHttc19', 'SHttc14', 'SHttc9', 'SHttc5', 'SHttc13', 'SHttc17',
+        'SHttc3', 'SHttc15', 'SHttc20', 'SHttc4', 'SHttc10', 'SHttc16', 'SHttc18', 'SHttc6', 'SHttc2', 'SHttc8', 'part_II_survey_ttc']
+    ),
+    dict(
+        name='SH_da_addtest2',
         display_name="SH_d",
         num_demo_participants=16,
         # app sequence session 1:
