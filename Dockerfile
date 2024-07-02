@@ -1,4 +1,4 @@
-FROM python:3.7.3-alpine
+FROM python:3.7.9-alpine
 
 RUN apk add --no-cache --update \
     python3 python3-dev g++ \
